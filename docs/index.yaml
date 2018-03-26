@@ -1,0 +1,78 @@
+apiVersion: v1
+entries:
+  cert-manager:
+  - appVersion: 0.2.3
+    created: 2018-03-26T16:15:08.729513275+01:00
+    description: A Helm chart for cert-manager
+    digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
+    home: https://github.com/jetstack/cert-manager
+    keywords:
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    maintainers:
+    - email: james@jetstack.io
+      name: munnerz
+    name: cert-manager
+    sources:
+    - https://github.com/jetstack/cert-manager
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/cert-manager-0.2.4.tgz
+    version: 0.2.4
+  jenkins:
+  - appVersion: "2.107"
+    created: 2018-03-26T16:15:08.730664543+01:00
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
+    digest: 7d9313739aea4d5a0c29ff7b6bf752288f475fdcd142e66b7d14e8ee2b6d08c6
+    home: https://jenkins.io/
+    icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
+    maintainers:
+    - email: lachlan.evenson@microsoft.com
+      name: lachie83
+    - email: viglesias@google.com
+      name: viglesiasce
+    name: jenkins
+    sources:
+    - https://github.com/jenkinsci/jenkins
+    - https://github.com/jenkinsci/docker-jnlp-slave
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/jenkins-0.14.3.tgz
+    version: 0.14.3
+  nexus:
+  - apiVersion: v1
+    appVersion: 3.9.0
+    created: 2018-03-26T16:15:08.731188773+01:00
+    description: The Nexus Repository Manager server
+    digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
+    name: nexus
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/nexus-0.1.0.tgz
+    version: 0.1.0
+  nginx-ingress:
+  - appVersion: 0.11.0
+    created: 2018-03-26T16:15:08.732238281+01:00
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
+    digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
+    engine: gotpl
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    maintainers:
+    - email: jack.zampolin@gmail.com
+      name: jackzampolin
+    - email: mgoodness@gmail.com
+      name: mgoodness
+    - email: chance.zibolski@coreos.com
+      name: chancez
+    name: nginx-ingress
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.11.2.tgz
+    version: 0.11.2
+generated: 2018-03-26T16:15:08.728822613+01:00
