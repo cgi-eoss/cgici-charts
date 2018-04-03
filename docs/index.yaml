@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   cert-manager:
   - appVersion: 0.2.3
-    created: 2018-04-03T10:30:54.041732353+01:00
+    created: 2018-04-03T10:47:59.833916295+01:00
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -20,9 +20,45 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-0.2.4.tgz
     version: 0.2.4
+  dex:
+  - apiVersion: v1
+    appVersion: 2.9.0
+    created: 2018-04-03T10:47:59.834683146+01:00
+    description: Dex federated authentication service
+    digest: cf1f4300cbd404896417e75e7781fac41d9f46e23db2dc940b92673499b78fe9
+    icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
+    maintainers:
+    - email: aaron@roydhouse.com
+      name: Aaron Roydhouse
+    - email: nbadger@mintel.com
+      name: Nick Badger
+    name: dex
+    sources:
+    - https://github.com/coreos/dex
+    - https://github.com/mintel/dex-k8s-authenticator/tree/master/charts/dex
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/dex-0.2.2.tgz
+    version: 0.2.2
+  dex-k8s-authenticator:
+  - apiVersion: v1
+    appVersion: v0.1.0
+    created: 2018-04-03T10:47:59.835276443+01:00
+    description: Authenticator for using Dex with Kubernetes
+    digest: 79db79977bf0f34841995be1c7b32b60d243218d3c5501e99515db26b0494461
+    maintainers:
+    - email: aaron@roydhouse.com
+      name: Aaron Roydhouse
+    - email: nbadger@mintel.com
+      name: Nick Badger
+    name: dex-k8s-authenticator
+    sources:
+    - https://github.com/mintel/dex-k8s-authenticator
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/dex-k8s-authenticator-0.1.2.tgz
+    version: 0.1.2
   jenkins:
   - appVersion: "2.107"
-    created: 2018-04-03T10:30:54.043293235+01:00
+    created: 2018-04-03T10:47:59.836561931+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -41,10 +77,29 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.14.3.tgz
     version: 0.14.3
+  kubernetes-dashboard:
+  - appVersion: 1.8.3
+    created: 2018-04-03T10:47:59.837284223+01:00
+    description: General-purpose web UI for Kubernetes clusters
+    digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
+    home: https://github.com/kubernetes/dashboard
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
+    keywords:
+    - kubernetes
+    - dashboard
+    maintainers:
+    - email: Kevin.Fox@pnnl.gov
+      name: kfox1111
+    name: kubernetes-dashboard
+    sources:
+    - https://github.com/kubernetes/dashboard
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/kubernetes-dashboard-0.6.3.tgz
+    version: 0.6.3
   nexus:
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-04-03T10:30:54.044031347+01:00
+    created: 2018-04-03T10:47:59.837909297+01:00
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -53,7 +108,7 @@ entries:
     version: 0.1.0
   nginx-ingress:
   - appVersion: 0.12.0
-    created: 2018-04-03T10:30:54.046734286+01:00
+    created: 2018-04-03T10:47:59.840490261+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
@@ -77,7 +132,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.12.2.tgz
     version: 0.12.2
   - appVersion: 0.11.0
-    created: 2018-04-03T10:30:54.045543892+01:00
+    created: 2018-04-03T10:47:59.839165173+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
@@ -99,4 +154,4 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.11.2.tgz
     version: 0.11.2
-generated: 2018-04-03T10:30:54.04075675+01:00
+generated: 2018-04-03T10:47:59.833257976+01:00
