@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   cert-manager:
   - appVersion: 0.2.3
-    created: 2018-04-04T15:00:32.236749601+01:00
+    created: 2018-04-04T15:08:07.222044343+01:00
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -23,7 +23,7 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: 2018-04-04T15:00:32.237362186+01:00
+    created: 2018-04-04T15:08:07.223007677+01:00
     description: Dex federated authentication service
     digest: cf1f4300cbd404896417e75e7781fac41d9f46e23db2dc940b92673499b78fe9
     icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
@@ -42,7 +42,7 @@ entries:
   dex-k8s-authenticator:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: 2018-04-04T15:00:32.237821467+01:00
+    created: 2018-04-04T15:08:07.223750449+01:00
     description: Authenticator for using Dex with Kubernetes
     digest: 79db79977bf0f34841995be1c7b32b60d243218d3c5501e99515db26b0494461
     maintainers:
@@ -59,7 +59,16 @@ entries:
   gerrit:
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-04T15:00:32.239289058+01:00
+    created: 2018-04-04T15:08:07.226702401+01:00
+    description: Gerrit Code Review
+    digest: b4e9448abec76319c3249193301f6f46bb7fc5e4232e552e5f4256b6448020fe
+    name: gerrit
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/gerrit-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v1
+    appVersion: "2.15"
+    created: 2018-04-04T15:08:07.226115517+01:00
     description: Gerrit Code Review
     digest: 2e3e50e0de07e28e27401fd69767c1f64fbb31eafb0c7ea9845219df7225514f
     name: gerrit
@@ -68,7 +77,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-04T15:00:32.238906743+01:00
+    created: 2018-04-04T15:08:07.225469336+01:00
     description: Gerrit Code Review
     digest: 0e380612cf0fb19d1ce5851e513dc6d0adb3278101b8bc52f5cd8b25f35cb95b
     name: gerrit
@@ -77,7 +86,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-04T15:00:32.238551037+01:00
+    created: 2018-04-04T15:08:07.224881055+01:00
     description: Gerrit Code Review
     digest: fb5af4332a507524908ffc280ca77dac505f05f4a4a8caf364d843cef6cf6b1f
     name: gerrit
@@ -86,7 +95,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-04T15:00:32.238198405+01:00
+    created: 2018-04-04T15:08:07.224325739+01:00
     description: Gerrit Code Review
     digest: fb5e951608730a918e90b4e2ebe59b81a60a5ab69d94f8cf98ac486293a5833a
     name: gerrit
@@ -95,7 +104,7 @@ entries:
     version: 0.1.0
   jenkins:
   - appVersion: "2.107"
-    created: 2018-04-04T15:00:32.240317343+01:00
+    created: 2018-04-04T15:08:07.228324137+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -116,7 +125,7 @@ entries:
     version: 0.14.3
   kubernetes-dashboard:
   - appVersion: 1.8.3
-    created: 2018-04-04T15:00:32.240891026+01:00
+    created: 2018-04-04T15:08:07.22919514+01:00
     description: General-purpose web UI for Kubernetes clusters
     digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
     home: https://github.com/kubernetes/dashboard
@@ -136,7 +145,7 @@ entries:
   nexus:
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-04-04T15:00:32.241896332+01:00
+    created: 2018-04-04T15:08:07.230214627+01:00
     description: The Nexus Repository Manager server
     digest: bf7a5a1ed5840dcb4d7eba1cfc402347124b783cb582de23b8ac968ec19bd66f
     name: nexus
@@ -145,7 +154,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-04-04T15:00:32.241386136+01:00
+    created: 2018-04-04T15:08:07.229697655+01:00
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -154,7 +163,7 @@ entries:
     version: 0.1.0
   nginx-ingress:
   - appVersion: 0.12.0
-    created: 2018-04-04T15:00:32.243932438+01:00
+    created: 2018-04-04T15:08:07.232944131+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
@@ -178,7 +187,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.12.2.tgz
     version: 0.12.2
   - appVersion: 0.11.0
-    created: 2018-04-04T15:00:32.242915118+01:00
+    created: 2018-04-04T15:08:07.231779372+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
@@ -200,4 +209,4 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.11.2.tgz
     version: 0.11.2
-generated: 2018-04-04T15:00:32.236090153+01:00
+generated: 2018-04-04T15:08:07.221128153+01:00

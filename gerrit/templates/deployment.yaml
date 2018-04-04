@@ -29,6 +29,8 @@ spec:
           env:
             - name: CANONICAL_WEB_URL
               value: {{ .Values.service.canonicalWebUrl }}
+          command: ["/var/gerrit/bin/gerrit.sh"]
+          args: ["run"]
           ports:
             - name: http
               containerPort: {{ .Values.service.internalPort }}
