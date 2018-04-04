@@ -8,6 +8,7 @@ PACKAGES=(
     'cert-manager'
     'dex'
     'dex-k8s-authenticator'
+    'gerrit'
     'jenkins'
     'kubernetes-dashboard'
     'nexus'

@@ -1,0 +1,83 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "gerrit.fullname" . }}
+  labels:
+    app: {{ template "gerrit.name" . }}
+    chart: {{ template "gerrit.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "gerrit.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "gerrit.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.internalPort }}
+              protocol: TCP
+            - name: ssh
+              containerPort: {{ .Values.service.internalSshPort }}
+              protocol: TCP
+          volumeMounts:
+            - name: gerrit-root
+              subPath: etc
+              mountPath: /var/gerrit/etc
+            - name: gerrit-root
+              subPath: git
+              mountPath: /var/gerrit/git
+            - name: gerrit-root
+              subPath: index
+              mountPath: /var/gerrit/index
+            - name: gerrit-root
+              subPath: cache
+              mountPath: /var/gerrit/cache
+            - name: gerrit-root
+              subPath: db
+              mountPath: /var/gerrit/db
+{{- if .Values.service.healthProbes }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.service.healthProbesTimeout }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.service.healthProbesTimeout }}
+{{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: gerrit-root
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "gerrit.fullname" .) }}
+        {{- else }}
+          emptyDir: {}
+        {{- end -}}
+

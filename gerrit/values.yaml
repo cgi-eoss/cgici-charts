@@ -1,26 +1,22 @@
-# Default values for nexus.
+# Default values for gerrit.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 replicaCount: 1
 
 image:
-  repository: cgici/nexus
-  tag: 3.9.0
+  repository: gerritcodereview/gerrit
+  tag: 2.15
   pullPolicy: IfNotPresent
 
 service:
-  name: nexus
+  name: gerrit
   type: ClusterIP
-  externalPort: 8081
-  internalPort: 8081
+  externalPort: 8080
+  internalPort: 8080
   healthProbes: true
   healthProbesTimeout: 60
-  additionalPorts: []
-  #  additionalPorts:
-  #    - name: repo
-  #      internalPort: 12345
-  #      externalPort: 12345
-
+  externalSshPort: 29418
+  internalSshPort: 29418
 
 ingress:
   enabled: false
@@ -29,28 +25,19 @@ ingress:
   # Ingress hostnames
   # One of hosts or rules be provided if Ingress is enabled
   #hosts:
-  #  - nexus.example.com
-
-  # Additional ingress rules; note that ingress can only manage 80/443 so
-  # aliasing to different Nexus backend ports must be done via hostname:443
-  # NOTE: Remember to define the backend port in "service.additionalPorts"
-  #
-  #additionalRules:
-  #  - host: other.nexus.example.com
-  #    paths:
-  #      - servicePort: 12345
+  #  - gerrit.example.com
 
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  
+
+  path: /
+
   #tls:
     # Secrets must be manually created in the namespace.
-    # - secretName: nexus-tls
+    # - secretName: gerrit-tls
     #   hosts:
-    #     - nexus.example.com
-    #     - other.nexus.example.com
+    #     - gerrit.example.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -64,15 +51,19 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
 persistence:
   enabled: true
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
   annotations: {}
   accessMode: ReadWriteOnce
   size: 10Gi
-  volumes: []
-  #  - name: nothing
-  #    emptyDir: {}
-  mounts: []
-  #  - mountPath: /var/nothing
-  #    name: nothing
-  #    readOnly: true
+
