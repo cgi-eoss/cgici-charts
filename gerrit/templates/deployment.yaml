@@ -52,6 +52,12 @@ spec:
             - name: gerrit-root
               subPath: etc
               mountPath: /var/gerrit/etc
+            - name: gerrit-root
+              subPath: lib
+              mountPath: /var/gerrit/lib
+            - name: gerrit-root
+              subPath: plugins
+              mountPath: /var/gerrit/plugins
 {{- if .Values.service.healthProbes }}
           livenessProbe:
             httpGet:
