@@ -17,6 +17,9 @@ service:
   healthProbesTimeout: 60
   externalSshPort: 29418
   internalSshPort: 29418
+  # Default ownership matching the service user inside the gerritcodereview/gerrit image
+  runAsUser: 1000
+  fsGroup: 1000
 
 ingress:
   enabled: false
