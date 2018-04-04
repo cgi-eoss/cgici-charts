@@ -26,6 +26,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CANONICAL_WEB_URL
+              value: {{ .Values.service.canonicalWebUrl }}
           ports:
             - name: http
               containerPort: {{ .Values.service.internalPort }}
@@ -34,9 +37,6 @@ spec:
               containerPort: {{ .Values.service.internalSshPort }}
               protocol: TCP
           volumeMounts:
-            - name: gerrit-root
-              subPath: etc
-              mountPath: /var/gerrit/etc
             - name: gerrit-root
               subPath: git
               mountPath: /var/gerrit/git
@@ -49,6 +49,9 @@ spec:
             - name: gerrit-root
               subPath: db
               mountPath: /var/gerrit/db
+            - name: gerrit-root
+              subPath: etc
+              mountPath: /var/gerrit/etc
 {{- if .Values.service.healthProbes }}
           livenessProbe:
             httpGet:
