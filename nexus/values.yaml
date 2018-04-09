@@ -5,7 +5,7 @@ replicaCount: 1
 
 image:
   repository: cgici/nexus
-  tag: 3.9.0
+  tag: 3.10.0
   pullPolicy: IfNotPresent
 
 service:
