@@ -10,9 +10,11 @@ PACKAGES=(
     'dex-k8s-authenticator'
     'gerrit'
     'jenkins'
+    'kube-prometheus'
     'kubernetes-dashboard'
     'nexus'
     'nginx-ingress'
+    'prometheus-operator'
 )
 
 for pkg in ${PACKAGES[@]}; do
