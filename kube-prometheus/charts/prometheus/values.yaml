@@ -27,6 +27,17 @@ externalUrl: ""
 ##
 selfServiceMonitor: true
 
+## Change "prometheus" label value on all resources, .Release.Name by default
+##
+prometheusLabelValue: ""
+
+## Custom Labels to be added to ServiceMonitor
+##
+additionalSelfServiceMonitorLabels: {}
+##Custom Labels to be added to Prometheus Rules ConfigMap
+##
+additionalRulesConfigMapLabels: {}
+
 ## Prometheus container image
 ##
 image:
@@ -85,6 +96,12 @@ paused: false
 ##
 global:
   rbacEnable: true
+
+## serviceAccount to use by Prometheus
+##
+serviceAccount:
+  create: true
+  name: ""
 
 ## Number of Prometheus replicas desired
 ##
