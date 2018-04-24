@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   cert-manager:
   - appVersion: 0.2.3
-    created: 2018-04-18T12:13:12.691858902+01:00
+    created: 2018-04-24T12:48:02.130885608+01:00
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -23,7 +23,7 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: 2018-04-18T12:13:12.692476799+01:00
+    created: 2018-04-24T12:48:02.131738591+01:00
     description: Dex federated authentication service
     digest: cf1f4300cbd404896417e75e7781fac41d9f46e23db2dc940b92673499b78fe9
     icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
@@ -42,7 +42,7 @@ entries:
   dex-k8s-authenticator:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: 2018-04-18T12:13:12.692964998+01:00
+    created: 2018-04-24T12:48:02.132423883+01:00
     description: Authenticator for using Dex with Kubernetes
     digest: 79db79977bf0f34841995be1c7b32b60d243218d3c5501e99515db26b0494461
     maintainers:
@@ -59,7 +59,7 @@ entries:
   gerrit:
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2018-04-18T12:13:12.696712677+01:00
+    created: 2018-04-24T12:48:02.137449379+01:00
     description: Gerrit Code Review
     digest: ceb5835d4b3ae7be8cd07a66679035066dbfcd7c3caa4d9b30fc9d99318025d0
     name: gerrit
@@ -68,7 +68,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2018-04-18T12:13:12.696337064+01:00
+    created: 2018-04-24T12:48:02.136893296+01:00
     description: Gerrit Code Review
     digest: 53e18bf3002f7b78c1a3b3f70b5cb21b0cdc120ac2a3980cc798165807d5b779
     name: gerrit
@@ -77,7 +77,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-18T12:13:12.695736069+01:00
+    created: 2018-04-24T12:48:02.136126289+01:00
     description: Gerrit Code Review
     digest: b4e9448abec76319c3249193301f6f46bb7fc5e4232e552e5f4256b6448020fe
     name: gerrit
@@ -86,7 +86,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-18T12:13:12.695130884+01:00
+    created: 2018-04-24T12:48:02.135321706+01:00
     description: Gerrit Code Review
     digest: 2e3e50e0de07e28e27401fd69767c1f64fbb31eafb0c7ea9845219df7225514f
     name: gerrit
@@ -95,7 +95,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-18T12:13:12.694606018+01:00
+    created: 2018-04-24T12:48:02.134602681+01:00
     description: Gerrit Code Review
     digest: 0e380612cf0fb19d1ce5851e513dc6d0adb3278101b8bc52f5cd8b25f35cb95b
     name: gerrit
@@ -104,7 +104,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-18T12:13:12.694084504+01:00
+    created: 2018-04-24T12:48:02.133839026+01:00
     description: Gerrit Code Review
     digest: fb5af4332a507524908ffc280ca77dac505f05f4a4a8caf364d843cef6cf6b1f
     name: gerrit
@@ -113,7 +113,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-04-18T12:13:12.693522551+01:00
+    created: 2018-04-24T12:48:02.133145004+01:00
     description: Gerrit Code Review
     digest: fb5e951608730a918e90b4e2ebe59b81a60a5ab69d94f8cf98ac486293a5833a
     name: gerrit
@@ -122,7 +122,7 @@ entries:
     version: 0.1.0
   jenkins:
   - appVersion: "2.107"
-    created: 2018-04-18T12:13:12.697738035+01:00
+    created: 2018-04-24T12:48:02.139014474+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -143,10 +143,10 @@ entries:
     version: 0.14.3
   kube-prometheus:
   - apiVersion: v1
-    created: 2018-04-18T12:13:12.703586716+01:00
+    created: 2018-04-24T12:48:02.146867322+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
-    digest: dda0fe3ceffe140f7c2c9981744b334467196f8a94c242f130a4ad335d7f2309
+    digest: bb8d2f657c632b7b74a45de0f0963a92c6b4125b6b7a1e52eb73262432700a64
     engine: gotpl
     maintainers:
     - email: mgoodness@gmail.com
@@ -161,7 +161,7 @@ entries:
     version: 0.0.48
   kubernetes-dashboard:
   - appVersion: 1.8.3
-    created: 2018-04-18T12:13:12.704136656+01:00
+    created: 2018-04-24T12:48:02.147411533+01:00
     description: General-purpose web UI for Kubernetes clusters
     digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
     home: https://github.com/kubernetes/dashboard
@@ -181,7 +181,7 @@ entries:
   nexus:
   - apiVersion: v1
     appVersion: 3.10.0
-    created: 2018-04-18T12:13:12.705934752+01:00
+    created: 2018-04-24T12:48:02.149269475+01:00
     description: The Nexus Repository Manager server
     digest: cfb88c79682efe506851a808f0e8ea5d964104bd301c320d325e9139b5995671
     name: nexus
@@ -190,7 +190,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-04-18T12:13:12.705496141+01:00
+    created: 2018-04-24T12:48:02.148810333+01:00
     description: The Nexus Repository Manager server
     digest: bf7a5a1ed5840dcb4d7eba1cfc402347124b783cb582de23b8ac968ec19bd66f
     name: nexus
@@ -199,7 +199,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-04-18T12:13:12.704834662+01:00
+    created: 2018-04-24T12:48:02.148142501+01:00
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -207,8 +207,32 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nexus-0.1.0.tgz
     version: 0.1.0
   nginx-ingress:
+  - appVersion: 0.13.0
+    created: 2018-04-24T12:48:02.152488712+01:00
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
+    digest: 06c049f6731c0668f920b9546955aa5849b08f282ad0076d91f3cf69d02328df
+    engine: gotpl
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    maintainers:
+    - email: jack.zampolin@gmail.com
+      name: jackzampolin
+    - email: mgoodness@gmail.com
+      name: mgoodness
+    - email: chance.zibolski@coreos.com
+      name: chancez
+    name: nginx-ingress
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.17.1.tgz
+    version: 0.17.1
   - appVersion: 0.12.0
-    created: 2018-04-18T12:13:12.70804637+01:00
+    created: 2018-04-24T12:48:02.151476419+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
@@ -232,7 +256,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.12.2.tgz
     version: 0.12.2
   - appVersion: 0.11.0
-    created: 2018-04-18T12:13:12.707117884+01:00
+    created: 2018-04-24T12:48:02.150360341+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
@@ -256,7 +280,7 @@ entries:
     version: 0.11.2
   prometheus-operator:
   - apiVersion: v1
-    created: 2018-04-18T12:13:12.708525979+01:00
+    created: 2018-04-24T12:48:02.15297237+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: 404ee72040d31812c40fe6302aeac1e9e9e3158c8c98ea9489b2cc0108e2603d
@@ -272,4 +296,4 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.16.tgz
     version: 0.0.16
-generated: 2018-04-18T12:13:12.691195189+01:00
+generated: 2018-04-24T12:48:02.129940853+01:00
