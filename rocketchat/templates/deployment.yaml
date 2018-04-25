@@ -26,6 +26,17 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        {{ if .Values.admin.username }}
+        - name: ADMIN_USERNAME
+          value: {{ .Values.admin.username }}
+        - name: ADMIN_EMAIL
+          value: {{ .Values.admin.email}}
+        - name: ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "rocketchat.fullname" . }}
+              key: admin-password
+        {{ end }}
         - name: MONGO_URL
         {{ if .Values.mongodb.mongodbUsername }}
           valueFrom:
@@ -81,4 +92,4 @@ spec:
     {{- with .Values.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
-
+    {{- end }}

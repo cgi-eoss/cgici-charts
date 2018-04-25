@@ -36,6 +36,11 @@ config:
   WebRTC_Enable_Private: false
   WebRTC_Enable_Direct: false
 
+admin: {}
+#  username: admin
+#  password: <secret>
+#  email: admin@example.com
+
 ##
 ## MongoDB chart configuration
 ##

@@ -25,3 +25,6 @@ To expose Rocket.Chat via an Ingress you need to set host and enable ingress.
 
 helm install --set host=chat.yourdomain.com --set ingress.enabled=true stable/rocketchat
 {{- end -}}
+
+Get your '{{ .Values.admin.username }}' user password by running:
+  printf $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "rocketchat.fullname" . }} -o jsonpath="{.data.admin-password}" | base64 --decode);echo
