@@ -8,5 +8,5 @@ metadata:
     release: {{ .Release.Name }}
   name: {{ .Values.storage.storageclass.name }}
   annotations:
-    storageclass.kubernetes.io/is-default-class: {{ .Values.storage.storageclass.default }}
+    storageclass.kubernetes.io/is-default-class: {{ .Values.storage.storageclass.default | quote }}
 provisioner: {{ .Values.storage.provisioner.name }}
