@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "nfs-client-provisioner.name" . }}
+    chart: {{ template "nfs-client-provisioner.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "nfs-client-provisioner.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ template "nfs-client-provisioner.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: {{ .Values.storage.provisioner.name }}
+            - name: NFS_SERVER
+              value: {{ .Values.storage.provisioner.nfs.server }}
+            - name: NFS_PATH
+              value: {{ .Values.storage.provisioner.nfs.remotePath }}
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: {{ .Values.storage.provisioner.nfs.server }}
+            path: {{ .Values.storage.provisioner.nfs.remotePath }}
+      serviceAccountName: {{ template "nfs-client-provisioner.serviceAccountName" . }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+    {{- end }}

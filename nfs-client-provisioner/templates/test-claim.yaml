@@ -1,0 +1,19 @@
+{{- if .Values.test.enabled -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+    app: {{ template "nfs-client-provisioner.name" . }}
+    chart: {{ template "nfs-client-provisioner.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ .Values.test.pvc }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    volume.beta.kubernetes.io/storage-class: {{ .Values.storage.storageclass.name }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+{{- end -}}

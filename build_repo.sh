@@ -13,6 +13,7 @@ PACKAGES=(
     'kube-prometheus'
     'kubernetes-dashboard'
     'nexus'
+    'nfs-client-provisioner'
     'nginx-ingress'
     'prometheus-operator'
 )

@@ -1,0 +1,29 @@
+{{- if .Values.test.enabled -}}
+kind: Pod
+apiVersion: v1
+metadata:
+  labels:
+    app: {{ template "nfs-client-provisioner.name" . }}
+    chart: {{ template "nfs-client-provisioner.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ .Values.test.pod }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  containers:
+  - name: test-pod
+    image: gcr.io/google_containers/busybox:latest
+    command:
+      - "/bin/sh"
+    args:
+      - "-c"
+      - "touch /mnt/SUCCESS && exit 0 || exit 1"
+    volumeMounts:
+      - name: nfs-pvc
+        mountPath: "/mnt"
+  restartPolicy: "Never"
+  volumes:
+    - name: nfs-pvc
+      persistentVolumeClaim:
+        claimName: test-claim
+{{- end -}}
