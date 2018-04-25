@@ -16,6 +16,7 @@ PACKAGES=(
     'nfs-client-provisioner'
     'nginx-ingress'
     'prometheus-operator'
+    'rocketchat'
 )
 
 for pkg in ${PACKAGES[@]}; do
