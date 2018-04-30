@@ -1,0 +1,87 @@
+# Default values for bazel-cache.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+
+image:
+  repository: buchgr/bazel-remote-cache
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  name: bazel-cache
+  type: ClusterIP
+  externalPort: 9090
+  internalPort: 8080
+  healthProbes: true
+  healthProbesTimeout: 60
+  # Default ownership matching the service user inside the bazel-cachecodereview/bazel-cache image
+  runAsUser: 1000
+  fsGroup: 1000
+
+# Directory path where to store the cache contents. This flag is required.
+dir: /data
+
+# The maximum size of the remote cache in GiB. This flag is required. (default -1)
+max_size: 10
+
+# The port the HTTP server listens on (default 8080)
+port: 8080
+
+## Additional command line arguments to pass to bazel-cache
+## See https://github.com/buchgr/bazel-remote/ for possible arguments
+## E.g. to specify an .htpasswd file you can use
+## extraArgs:
+##   - "-htpasswd_file"
+##   - "/path/to/.htpasswd"
+extraArgs: []
+
+ingress:
+  enabled: false
+  # Used to create an Ingress record.
+
+  # Ingress hostnames
+  # One of hosts or rules be provided if Ingress is enabled
+  #hosts:
+  #  - bazel-cache.example.com
+
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+
+  path: /
+
+  #tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: bazel-cache-tls
+    #   hosts:
+    #     - bazel-cache.example.com
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+persistence:
+  enabled: true
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+  annotations: {}
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
