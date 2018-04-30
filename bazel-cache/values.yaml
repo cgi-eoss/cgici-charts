@@ -19,6 +19,35 @@ service:
   runAsUser: 1000
   fsGroup: 1000
 
+# Directory path where to store the cache contents. This flag is required.
+dir: /data
+
+# The maximum size of the remote cache in GiB. This flag is required. (default -1)
+max_size: 10
+
+# The port the HTTP server listens on (default 8080)
+port: 8080
+
+# Address to listen on. Listens on all network interfaces by default.
+#host: ""
+
+# Path to a .htpasswd file. This flag is optional. Please read https://httpd.apache.org/docs/2.4/programs/htpasswd.html.
+#htpasswd_file: ""
+
+# Bool specifying whether or not to start the server with tls.  If true, server_cert and server_key flags are required.
+#tls_enabled: false
+
+# Path to a PEM encoded certificate file.  Required if tls_enabled is set to true.
+#tls_cert_file: ""
+
+#tls_key_file: ""
+
+## Additional command line arguments to pass to nginx-ingress-controller
+## E.g. to specify the default SSL certificate you can use
+## extraArgs:
+##   default-ssl-certificate: "<namespace>/<secret_name>"
+extraArgs: {}
+
 ingress:
   enabled: false
   # Used to create an Ingress record.

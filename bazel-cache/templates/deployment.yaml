@@ -26,6 +26,21 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - -dir
+            - "{{ .Values.dir }}"
+            - -max_size
+            - "{{ .Values.max_size }}"
+            - -port
+            - "{{ .Values.port }}"
+          {{- range $key, $value := .Values.extraArgs }}
+            {{- if $value }}
+            - -{{ $key }}
+            - "{{ $value }}"
+            {{- else }}
+            - -{{ $key }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.internalPort }}
