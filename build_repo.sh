@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-
+set -eux
 SCRIPT=$(readlink -e "$0")
 CHART_BASE=$(dirname "$SCRIPT")
 REPO_PATH=$(dirname "$SCRIPT")/docs
 REPO_URL='https://cgi-eoss.github.io/cgici-charts/'
 PACKAGES=(
+    'bazel-cache'
     'cert-manager'
     'dex'
     'dex-k8s-authenticator'
