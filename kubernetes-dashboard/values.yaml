@@ -16,7 +16,8 @@ labels: {}
 
 ## Additional container arguments
 ##
-# extraArgs:
+extraArgs:
+  - --token-ttl=86400  # 24 hours
 #   - --enable-insecure-login
 #   - --system-banner="Welcome to Kubernetes"
 
