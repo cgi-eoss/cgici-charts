@@ -21,8 +21,8 @@ MAINTAINER Sonatype <cloud-ops@sonatype.com>
 
 LABEL name="Nexus Repository Manager" \
       vendor=Sonatype \
-      version="3.10.0-04" \
-      release="3.10.0" \
+      version="3.11.0-01" \
+      release="3.11.0" \
       url="https://sonatype.com" \
       summary="The Nexus Repository Manager server \
           with universal support for popular component formats." \
@@ -40,18 +40,14 @@ LABEL name="Nexus Repository Manager" \
       io.openshift.expose-services="8081:8081" \
       io.openshift.tags="Sonatype,Nexus,Repository Manager"
 
-ARG NEXUS_VERSION=3.10.0-04
+ARG NEXUS_VERSION=3.11.0-01
 ARG NEXUS_DOWNLOAD_URL=https://download.sonatype.com/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz
-ARG NEXUS_DOWNLOAD_SHA256_HASH=8f3137471cdb002b6cf9d1874bbddb6ad280d4d7a492e363cfc5f54fbd45b5d9
+ARG NEXUS_DOWNLOAD_SHA256_HASH=b1b0f164d85a8014744525f02f90f349fae94e1dbc5fb9f17644c0e26ae4ea45
 
-ENV JAVA_HOME=/opt/java \
-    JAVA_VERSION_MAJOR=8 \
-    JAVA_VERSION_MINOR=162 \
-    JAVA_VERSION_BUILD=12 \
-    JAVA_DOWNLOAD_HASH=0da788060d494f5095bf8624735fa2f1
+ARG JAVA_URL=https://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/server-jre-8u172-linux-x64.tar.gz
+ARG JAVA_DOWNLOAD_SHA256_HASH=3d0a5db2300423a1fd6ee25c229dbd5320d79204c73844337f5b6a082d58541f
 
-ENV JAVA_URL=http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${JAVA_DOWNLOAD_HASH}/server-jre-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz \
-    JAVA_DOWNLOAD_SHA256_HASH=6942684acb6001748a01fc090a18f52ebd8cbfcf7be27ec6131981906bfa8b53
+ENV JAVA_HOME=/opt/java
 
 # configure nexus runtime
 ENV SONATYPE_DIR=/opt/sonatype
