@@ -2,6 +2,7 @@
 
 | Name | Source | Notes |
 | ---- | ------ | ----- |
+| `bazel-cache` | CGI | <ul><li>Docker image used from `buchgr/bazel-remote`</li></ul> |
 | `cert-manager` | [official](https://github.com/kubernetes/charts/tree/master/stable/cert-manager) | unchanged |
 | `dex` | Mintel [dex-k8s-authenticator](https://github.com/mintel/dex-k8s-authenticator/tree/master/charts) | unchanged |
 | `dex-k8s-authenticator` | Mintel [dex-k8s-authenticator](https://github.com/mintel/dex-k8s-authenticator/tree/master/charts) | unchanged |
