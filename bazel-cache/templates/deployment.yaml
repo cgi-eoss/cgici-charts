@@ -27,12 +27,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            - -dir
-            - "{{ .Values.dir }}"
-            - -max_size
-            - "{{ .Values.max_size }}"
-            - -port
-            - "{{ .Values.port }}"
+            - "--dir={{ .Values.dir }}"
+            - "--max_size={{ .Values.max_size }}"
+            - "--port={{ .Values.service.internalPort }}"
 {{- if .Values.extraArgs }}
 {{ toYaml .Values.extraArgs | indent 12 }}
 {{- end }}
@@ -43,7 +40,7 @@ spec:
           volumeMounts:
             - name: bazel-cache-root
               subPath: data
-              mountPath: /data
+              mountPath: {{ .Values.dir }}
 {{- if .Values.service.healthProbes }}
           livenessProbe:
             tcpSocket:

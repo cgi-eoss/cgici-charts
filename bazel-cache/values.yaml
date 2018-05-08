@@ -15,25 +15,22 @@ service:
   internalPort: 8080
   healthProbes: true
   healthProbesTimeout: 60
-  # Default ownership matching the service user inside the bazel-cachecodereview/bazel-cache image
+  # Default ownership matching the service user inside the buchgr/bazel-remote-cache image
   runAsUser: 1000
   fsGroup: 1000
 
 # Directory path where to store the cache contents. This flag is required.
 dir: /data
 
-# The maximum size of the remote cache in GiB. This flag is required. (default -1)
+# The maximum size of the remote cache in GiB. This flag is required.
+# Ensure that the persistent volume claim is sufficiently large to hold this.
 max_size: 10
-
-# The port the HTTP server listens on (default 8080)
-port: 8080
 
 ## Additional command line arguments to pass to bazel-cache
 ## See https://github.com/buchgr/bazel-remote/ for possible arguments
 ## E.g. to specify an .htpasswd file you can use
 ## extraArgs:
-##   - "-htpasswd_file"
-##   - "/path/to/.htpasswd"
+##   - "--htpasswd_file=/path/to/.htpasswd"
 extraArgs: []
 
 ingress:
@@ -42,20 +39,20 @@ ingress:
 
   # Ingress hostnames
   # One of hosts or rules be provided if Ingress is enabled
-  #hosts:
-  #  - bazel-cache.example.com
+  # hosts:
+  #   - bazel-cache.example.com
 
-  annotations:
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  # annotations:
+  #   kubernetes.io/ingress.class: nginx
+  #   kubernetes.io/tls-acme: "true"
 
-  path: /
+  # path: /
 
-  #tls:
-    # Secrets must be manually created in the namespace.
-    # - secretName: bazel-cache-tls
-    #   hosts:
-    #     - bazel-cache.example.com
+  # tls:
+  # Secrets must be manually created in the namespace.
+  #   - secretName: bazel-cache-tls
+  #     hosts:
+  #       - bazel-cache.example.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
