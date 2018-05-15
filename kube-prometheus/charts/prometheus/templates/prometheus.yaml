@@ -5,12 +5,16 @@ metadata:
     app: {{ template "prometheus.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     heritage: {{ .Release.Service }}
-    prometheus: {{ .Values.prometheusLabelValue | default .Release.Name | quote }}
+    {{ if empty .Values.prometheusLabelValue -}}
+    prometheus: {{ template "prometheus.fullname" . }}
+    {{- else -}}
+    prometheus: {{ .Values.prometheusLabelValue }}
+    {{- end }}
     release: {{ .Release.Name }}
 {{- if .Values.labels }}
 {{ toYaml .Values.labels | indent 4 }}
 {{- end }}
-  name: {{ .Release.Name }}
+  name: {{ template "prometheus.fullname" . }}
 spec:
 {{- if .Values.alertingEndpoints }}
   alerting:
@@ -30,8 +34,8 @@ spec:
 {{- end }}
 {{- if .Values.externalUrl }}
   externalUrl: "{{ .Values.externalUrl }}"
-{{- else if .Values.ingress.fqdn }}
-  externalUrl: http://{{ .Values.ingress.fqdn }}{{ .Values.routePrefix }}
+{{- else if .Values.ingress.enabled }}
+  externalUrl: "http://{{ index .Values.ingress.hosts 0 }}{{ .Values.routePrefix }}"
 {{- else }}
   externalUrl: http://{{ template "prometheus.fullname" . }}.{{ .Release.Namespace }}:9090
 {{- end }}
@@ -59,10 +63,10 @@ spec:
 {{- else if .Values.serviceMonitorsSelector }}
   serviceMonitorSelector:
 {{ toYaml .Values.serviceMonitorsSelector | indent 4 }}
-{{- else }}
-  serviceMonitorSelector:
-    matchLabels:
-      prometheus: {{ .Values.prometheusLabelValue | default .Release.Name | quote }}
+{{- else if .Values.prometheusLabelValue }}
+   serviceMonitorSelector:
+     matchLabels:
+      prometheus: {{ .Values.prometheusLabelValue }}
 {{- end }}
 {{- if .Values.remoteRead }}
   remoteRead:
@@ -111,3 +115,9 @@ spec:
   tolerations:
 {{ toYaml .Values.tolerations | indent 4 }}
 {{- end }}
+{{- if .Values.additionalScrapeConfigs }}
+  additionalScrapeConfigs:
+    name: prometheus-{{ .Release.Name }}-additional-scrape-configs
+    key: additional-scrape-configs.yaml
+{{- end }}
+
