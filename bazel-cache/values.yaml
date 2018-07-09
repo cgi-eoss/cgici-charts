@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: buchgr/bazel-remote-cache
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   name: bazel-cache
