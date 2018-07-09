@@ -3,16 +3,35 @@ entries:
   bazel-cache:
   - apiVersion: v1
     appVersion: latest
-    created: 2018-06-18T12:19:03.274184982+01:00
+    created: 2018-07-09T12:30:18.495381507+01:00
     description: Bazel Remote Cache
-    digest: 404f51385f642cc2bc92d88f87fbdce044664846b7a89231fc5f98031a019efa
+    digest: 09ae4793d49e95893001b6b2d2294df0152c2d6b7f46a7cde421eef55f6dec8e
     name: bazel-cache
     urls:
     - https://cgi-eoss.github.io/cgici-charts/bazel-cache-0.1.0.tgz
     version: 0.1.0
   cert-manager:
+  - appVersion: v0.3.2
+    created: 2018-07-09T12:30:18.497814475+01:00
+    description: A Helm chart for cert-manager
+    digest: 23c3e5b143c869d7ceab0de71eeb0229f5dec3f820098958a85cf27acdc11884
+    home: https://github.com/jetstack/cert-manager
+    keywords:
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    maintainers:
+    - email: james@jetstack.io
+      name: munnerz
+    name: cert-manager
+    sources:
+    - https://github.com/jetstack/cert-manager
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/cert-manager-v0.3.4.tgz
+    version: v0.3.4
   - appVersion: 0.2.4
-    created: 2018-06-18T12:19:03.275575013+01:00
+    created: 2018-07-09T12:30:18.497092792+01:00
     description: A Helm chart for cert-manager
     digest: 7900b2961156e36ef19e8b36fb6c27328d0f26b63e102f50f96eecd53d785a8a
     home: https://github.com/jetstack/cert-manager
@@ -31,7 +50,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-0.2.9.tgz
     version: 0.2.9
   - appVersion: 0.2.3
-    created: 2018-06-18T12:19:03.274776699+01:00
+    created: 2018-07-09T12:30:18.496268998+01:00
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -52,7 +71,7 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: 2018-06-18T12:19:03.276469083+01:00
+    created: 2018-07-09T12:30:18.498568985+01:00
     description: Dex federated authentication service
     digest: cf1f4300cbd404896417e75e7781fac41d9f46e23db2dc940b92673499b78fe9
     icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
@@ -71,7 +90,7 @@ entries:
   dex-k8s-authenticator:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: 2018-06-18T12:19:03.277150689+01:00
+    created: 2018-07-09T12:30:18.49917515+01:00
     description: Authenticator for using Dex with Kubernetes
     digest: 79db79977bf0f34841995be1c7b32b60d243218d3c5501e99515db26b0494461
     maintainers:
@@ -88,7 +107,7 @@ entries:
   gerrit:
   - apiVersion: v1
     appVersion: 2.15.2
-    created: 2018-06-18T12:19:03.281658407+01:00
+    created: 2018-07-09T12:30:18.504224283+01:00
     description: Gerrit Code Review
     digest: 5f56aef32b3d32d9b42bd278badd046eeef395c945f49f48b1a4bded527cc5aa
     name: gerrit
@@ -97,7 +116,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2018-06-18T12:19:03.281100215+01:00
+    created: 2018-07-09T12:30:18.503791678+01:00
     description: Gerrit Code Review
     digest: ceb5835d4b3ae7be8cd07a66679035066dbfcd7c3caa4d9b30fc9d99318025d0
     name: gerrit
@@ -106,7 +125,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2018-06-18T12:19:03.280540208+01:00
+    created: 2018-07-09T12:30:18.503124192+01:00
     description: Gerrit Code Review
     digest: 53e18bf3002f7b78c1a3b3f70b5cb21b0cdc120ac2a3980cc798165807d5b779
     name: gerrit
@@ -115,7 +134,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-06-18T12:19:03.279932846+01:00
+    created: 2018-07-09T12:30:18.502474166+01:00
     description: Gerrit Code Review
     digest: b4e9448abec76319c3249193301f6f46bb7fc5e4232e552e5f4256b6448020fe
     name: gerrit
@@ -124,7 +143,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-06-18T12:19:03.279395049+01:00
+    created: 2018-07-09T12:30:18.501834687+01:00
     description: Gerrit Code Review
     digest: 2e3e50e0de07e28e27401fd69767c1f64fbb31eafb0c7ea9845219df7225514f
     name: gerrit
@@ -133,7 +152,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-06-18T12:19:03.278852642+01:00
+    created: 2018-07-09T12:30:18.501110978+01:00
     description: Gerrit Code Review
     digest: 0e380612cf0fb19d1ce5851e513dc6d0adb3278101b8bc52f5cd8b25f35cb95b
     name: gerrit
@@ -142,7 +161,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-06-18T12:19:03.278323576+01:00
+    created: 2018-07-09T12:30:18.500473524+01:00
     description: Gerrit Code Review
     digest: fb5af4332a507524908ffc280ca77dac505f05f4a4a8caf364d843cef6cf6b1f
     name: gerrit
@@ -151,7 +170,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2018-06-18T12:19:03.277733675+01:00
+    created: 2018-07-09T12:30:18.499860655+01:00
     description: Gerrit Code Review
     digest: fb5e951608730a918e90b4e2ebe59b81a60a5ab69d94f8cf98ac486293a5833a
     name: gerrit
@@ -159,8 +178,28 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/gerrit-0.1.0.tgz
     version: 0.1.0
   jenkins:
+  - appVersion: 2.121.1
+    created: 2018-07-09T12:30:18.510711965+01:00
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
+    digest: e58ad3ad6e779581b8cffca146fb780cfb5a2fe786cb23443c62a207f6208fc6
+    home: https://jenkins.io/
+    icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
+    maintainers:
+    - email: lachlan.evenson@microsoft.com
+      name: lachie83
+    - email: viglesias@google.com
+      name: viglesiasce
+    name: jenkins
+    sources:
+    - https://github.com/jenkinsci/jenkins
+    - https://github.com/jenkinsci/docker-jnlp-slave
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/jenkins-0.16.6.tgz
+    version: 0.16.6
   - appVersion: "2.107"
-    created: 2018-06-18T12:19:03.285492062+01:00
+    created: 2018-07-09T12:30:18.509296115+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -180,7 +219,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.16.3.tgz
     version: 0.16.3
   - appVersion: "2.107"
-    created: 2018-06-18T12:19:03.284498465+01:00
+    created: 2018-07-09T12:30:18.507706008+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -200,7 +239,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.15.1.tgz
     version: 0.15.1
   - appVersion: "2.107"
-    created: 2018-06-18T12:19:03.283285557+01:00
+    created: 2018-07-09T12:30:18.505648933+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -221,7 +260,22 @@ entries:
     version: 0.14.3
   kube-prometheus:
   - apiVersion: v1
-    created: 2018-06-18T12:19:03.303568402+01:00
+    created: 2018-07-09T12:30:18.535541369+01:00
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
+    digest: 825ebabf23b5d335b291e75d03d3df7f303533abcfdb992ed7ecbae6aee20deb
+    engine: gotpl
+    maintainers:
+    - email: gianrubio@gmail.com
+      name: Giancarlo Rubio
+    name: kube-prometheus
+    sources:
+    - https://github.com/coreos/prometheus-operator
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.95.tgz
+    version: 0.0.95
+  - apiVersion: v1
+    created: 2018-07-09T12:30:18.528881734+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 74e9a38aa19f7c6367527d19dd62f33457878f7cf4a8ff0b0ba193f3ebb0cc74
@@ -236,7 +290,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.66.tgz
     version: 0.0.66
   - apiVersion: v1
-    created: 2018-06-18T12:19:03.296696053+01:00
+    created: 2018-07-09T12:30:18.523641442+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 57ed935c7a0b3203e68a542c3e055cd92321d170b097cbeab09ff6144d4432c9
@@ -253,7 +307,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.53.tgz
     version: 0.0.53
   - apiVersion: v1
-    created: 2018-06-18T12:19:03.290871989+01:00
+    created: 2018-07-09T12:30:18.519021073+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 0ae7068dcc30c2def8f952f404aea06ece5065958ab72b1b608db0d13c82670c
@@ -271,7 +325,7 @@ entries:
     version: 0.0.48
   kubernetes-dashboard:
   - appVersion: 1.8.3
-    created: 2018-06-18T12:19:03.3042579+01:00
+    created: 2018-07-09T12:30:18.536089983+01:00
     description: General-purpose web UI for Kubernetes clusters
     digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
     home: https://github.com/kubernetes/dashboard
@@ -291,7 +345,7 @@ entries:
   nexus:
   - apiVersion: v1
     appVersion: 3.12.1
-    created: 2018-06-18T12:19:03.306237133+01:00
+    created: 2018-07-09T12:30:18.538542367+01:00
     description: The Nexus Repository Manager server
     digest: dbe2e27c1182d7f3d43cec577623a5db23261ac7626602335d2cbd1e97eed7dd
     name: nexus
@@ -300,7 +354,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.10.0
-    created: 2018-06-18T12:19:03.305740544+01:00
+    created: 2018-07-09T12:30:18.538045995+01:00
     description: The Nexus Repository Manager server
     digest: 2de8f7fdb46b0c4e56676076cacf526c43a2260bde0767eb19d29423b5ab21fd
     name: nexus
@@ -309,7 +363,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-06-18T12:19:03.305258761+01:00
+    created: 2018-07-09T12:30:18.53739604+01:00
     description: The Nexus Repository Manager server
     digest: bf7a5a1ed5840dcb4d7eba1cfc402347124b783cb582de23b8ac968ec19bd66f
     name: nexus
@@ -318,7 +372,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2018-06-18T12:19:03.304760077+01:00
+    created: 2018-07-09T12:30:18.536755443+01:00
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -328,7 +382,7 @@ entries:
   nfs-client-provisioner:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-18T12:19:03.306932637+01:00
+    created: 2018-07-09T12:30:18.5393443+01:00
     description: A Helm chart for Kubernetes
     digest: 3502531d5c7439d115dbded32239ae97d013985f58ae093736bc77c8b17e048a
     name: nfs-client-provisioner
@@ -337,7 +391,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-18T12:19:03.306583139+01:00
+    created: 2018-07-09T12:30:18.539010033+01:00
     description: A Helm chart for Kubernetes
     digest: 5560b0933e98af761c0130c18e8a1615616bc60da67e86282aec337f2fc84e02
     name: nfs-client-provisioner
@@ -345,8 +399,32 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nfs-client-provisioner-0.1.0.tgz
     version: 0.1.0
   nginx-ingress:
+  - appVersion: 0.15.0
+    created: 2018-07-09T12:30:18.543780983+01:00
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
+    digest: 830493d9f39c229628df47e13c1fd4d79ad01ff4bbf15f115f53ad062dd885fc
+    engine: gotpl
+    home: https://github.com/kubernetes/ingress-nginx
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+    keywords:
+    - ingress
+    - nginx
+    maintainers:
+    - email: jack.zampolin@gmail.com
+      name: jackzampolin
+    - email: mgoodness@gmail.com
+      name: mgoodness
+    - email: chance.zibolski@coreos.com
+      name: chancez
+    name: nginx-ingress
+    sources:
+    - https://github.com/kubernetes/ingress-nginx
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.22.1.tgz
+    version: 0.22.1
   - appVersion: 0.13.0
-    created: 2018-06-18T12:19:03.311322878+01:00
+    created: 2018-07-09T12:30:18.542763167+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 06c049f6731c0668f920b9546955aa5849b08f282ad0076d91f3cf69d02328df
@@ -370,7 +448,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.17.1.tgz
     version: 0.17.1
   - appVersion: 0.12.0
-    created: 2018-06-18T12:19:03.309936479+01:00
+    created: 2018-07-09T12:30:18.541552165+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
@@ -394,7 +472,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.12.2.tgz
     version: 0.12.2
   - appVersion: 0.11.0
-    created: 2018-06-18T12:19:03.308526612+01:00
+    created: 2018-07-09T12:30:18.540426232+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
@@ -418,8 +496,28 @@ entries:
     version: 0.11.2
   prometheus-operator:
   - apiVersion: v1
+    appVersion: 0.20.0
+    created: 2018-07-09T12:30:18.546477188+01:00
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
+    digest: e7243df69ed22c47360994b91fccb000c4bc0d86d56772960ba074e9e7b75198
+    engine: gotpl
+    home: https://github.com/coreos/prometheus-operator
+    keywords:
+    - operator
+    - prometheus
+    maintainers:
+    - email: gianrubio@gmail.com
+      name: Giancarlo Rubio
+    name: prometheus-operator
+    sources:
+    - https://github.com/coreos/prometheus-operator
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.27.tgz
+    version: 0.0.27
+  - apiVersion: v1
     appVersion: 0.19.0
-    created: 2018-06-18T12:19:03.313524424+01:00
+    created: 2018-07-09T12:30:18.545923406+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: d88306ea4d12ef3e8096a273c394156040cf7f0071a7d2a576ca1535f72c1b5a
@@ -438,7 +536,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.24.tgz
     version: 0.0.24
   - apiVersion: v1
-    created: 2018-06-18T12:19:03.312738611+01:00
+    created: 2018-07-09T12:30:18.545169455+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: acbb7ab23fcf3cc14a727ccda4af57a504f80b411388872becc2d88b439dd1c3
@@ -455,7 +553,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.17.tgz
     version: 0.0.17
   - apiVersion: v1
-    created: 2018-06-18T12:19:03.312034446+01:00
+    created: 2018-07-09T12:30:18.544499035+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: 404ee72040d31812c40fe6302aeac1e9e9e3158c8c98ea9489b2cc0108e2603d
@@ -473,7 +571,7 @@ entries:
     version: 0.0.16
   rocketchat:
   - appVersion: "0.56"
-    created: 2018-06-18T12:19:03.317431485+01:00
+    created: 2018-07-09T12:30:18.549914353+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 38b1214279db1e7f2ef553e91781304f9490e949a953553a6a4b40e53cc32510
@@ -501,7 +599,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.5.tgz
     version: 0.1.5
   - appVersion: "0.56"
-    created: 2018-06-18T12:19:03.316148804+01:00
+    created: 2018-07-09T12:30:18.548594537+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 3106900a754926adae28b36d522d57071923f734d34470dd8651738ad29d48ea
@@ -529,7 +627,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.4.tgz
     version: 0.1.4
   - appVersion: "0.56"
-    created: 2018-06-18T12:19:03.314848103+01:00
+    created: 2018-07-09T12:30:18.547509253+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 46cffc9b56457cff2771036a4f7cc96c7fb2b5acb5c0cf26efd54c82abe12e83
@@ -556,4 +654,4 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.3.tgz
     version: 0.1.3
-generated: 2018-06-18T12:19:03.273660595+01:00
+generated: 2018-07-09T12:30:18.493868716+01:00
