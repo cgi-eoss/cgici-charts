@@ -1,0 +1,12 @@
+{{ range $name, $data := .Values.manifests }}
+---
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ template "simple-manifests.name" $ }}
+    chart: {{ template "simple-manifests.chart" $ }}
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
+{{ toYaml $data | indent 0 -}}
+...
+{{- end -}}

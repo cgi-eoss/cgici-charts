@@ -18,6 +18,7 @@ PACKAGES=(
     'nginx-ingress'
     'prometheus-operator'
     'rocketchat'
+    'simple-manifests'
 )
 
 for pkg in ${PACKAGES[@]}; do

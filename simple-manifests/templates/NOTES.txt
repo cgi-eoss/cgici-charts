@@ -1,0 +1,4 @@
+Resources created in this release:
+{{ range $name, $data := .Values.manifests }}
+  * {{ $data.kind }}: {{ $name }}
+{{- end -}}
