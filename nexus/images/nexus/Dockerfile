@@ -18,8 +18,8 @@ MAINTAINER Sonatype <cloud-ops@sonatype.com>
 
 LABEL name="Nexus Repository Manager" \
       vendor=Sonatype \
-      version="3.12.1-01" \
-      release="3.12.1" \
+      version="3.13.0-01" \
+      release="3.13.0" \
       url="https://sonatype.com" \
       summary="The Nexus Repository Manager server \
           with universal support for popular component formats." \
@@ -37,12 +37,12 @@ LABEL name="Nexus Repository Manager" \
       io.openshift.expose-services="8081:8081" \
       io.openshift.tags="Sonatype,Nexus,Repository Manager"
 
-ARG NEXUS_VERSION=3.12.1-01
+ARG NEXUS_VERSION=3.13.0-01
 ARG NEXUS_DOWNLOAD_URL=https://download.sonatype.com/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz
-ARG NEXUS_DOWNLOAD_SHA256_HASH=6eb09810767ed1bfe33c995a2fa550b667189aa0ed99f002ce826436f60765ef
+ARG NEXUS_DOWNLOAD_SHA256_HASH=5d1890f45e95e2ca74e62247be6b439482d2fe4562a7ec8ae905c4bdba6954ce
 
-ARG JAVA_URL=https://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/server-jre-8u172-linux-x64.tar.gz
-ARG JAVA_DOWNLOAD_SHA256_HASH=3d0a5db2300423a1fd6ee25c229dbd5320d79204c73844337f5b6a082d58541f
+ARG JAVA_URL=http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-linux-x64.tar.gz
+ARG JAVA_DOWNLOAD_SHA256_HASH=0b26c7fcfad20029e6e0989e678efcd4a81f0fe502a478b4972215533867de1b
 
 ENV JAVA_HOME=/opt/java
 
@@ -54,7 +54,7 @@ ENV NEXUS_HOME=${SONATYPE_DIR}/nexus \
     SONATYPE_WORK=${SONATYPE_DIR}/sonatype-work \
     DOCKER_TYPE='rh-docker'
 
-ARG NEXUS_REPOSITORY_MANAGER_COOKBOOK_VERSION="release-0.5.20180420-205540.75aa3de"
+ARG NEXUS_REPOSITORY_MANAGER_COOKBOOK_VERSION="release-0.5.20180717-185554.2346ca8"
 ARG NEXUS_REPOSITORY_MANAGER_COOKBOOK_URL="https://github.com/sonatype/chef-nexus-repository-manager/releases/download/${NEXUS_REPOSITORY_MANAGER_COOKBOOK_VERSION}/chef-nexus-repository-manager.tar.gz"
 
 ADD solo.json.erb /var/chef/solo.json.erb
@@ -73,8 +73,6 @@ RUN curl -L https://www.getchef.com/chef/install.sh | bash \
     && rm -rf /var/cache/yum \
     && rm -rf /var/chef
 
-VOLUME ${NEXUS_DATA}
-
 # Install the github oauth plugin
 RUN yum install -y unzip && yum clean all &&\
  mkdir -p /opt/sonatype/nexus/system/com/larscheidschmitzhermes/ &&\
@@ -84,6 +82,8 @@ RUN yum install -y unzip && yum clean all &&\
 
 # Configure the github oauth plugin for our organisation
 RUN echo -e "github.api.url=https://api.github.com\ngithub.principal.cache.ttl=PT1M\ngithub.org=cgi-eoss" >/opt/sonatype/nexus/etc/githuboauth.properties
+
+VOLUME ${NEXUS_DATA}
 
 EXPOSE 8081
 USER nexus
