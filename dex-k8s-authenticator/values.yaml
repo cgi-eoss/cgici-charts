@@ -14,6 +14,7 @@ image:
 dexK8sAuthenticator:
   port: 5555
   debug: false
+  web_path_prefix: /
   #logoUrl: http://<path-to-your-logo.png>
   #tlsCert: /path/to/dex-client.crt
   #tlsKey: /path/to/dex-client.key
@@ -31,6 +32,10 @@ dexK8sAuthenticator:
 service:
   type: ClusterIP
   port: 5555
+
+  # For nodeport, specify the following:
+  #   type: NodePort
+  #   nodePort: <port-number>
 
 ingress:
   enabled: false
@@ -57,16 +62,27 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
-caCerts: 
+caCerts:
   enabled: false
   secrets: {}
-  # Array of Self Signed Certificates - single line base64 encoded 
+  # Array of Self Signed Certificates
   # cat CA.crt | base64 -w 0
-  # name should end in either .crt or .pem since it is the name with which it will be mounted on the filesysystem
+  #
+  #     name: The internal k8s name of the secret we create. It's also used in
+  #     the volumeMount name. It must respect the k8s naming convension (avoid
+  #     upper-case and '.' to be safe).
+  #
+  #     filename: The filename of the CA to be mounted. It must end in .crt for
+  #     update-ca-certificates to work
+  #
+  #     value: The base64 encoded value of the CA
+  #
   #secrets:
-  #- name: CA.crt
+  #- name: ca-cert1
+  #  filename: ca1.crt
   #  value: LS0tLS1......X2F
-  #- name: CA2.crt
+  #- name: ca-cert2
+  #  filename: ca2.crt
   #  value: DS1tFA1......X2F
 
 

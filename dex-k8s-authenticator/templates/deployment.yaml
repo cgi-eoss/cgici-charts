@@ -1,4 +1,10 @@
+{{- if semverCompare ">= 1.9-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: apps/v1
+{{- else if semverCompare ">= 1.8-0, <= 1.9-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: apps/v1beta2
+{{- else -}}
+apiVersion: apps/v1beta1
+{{- end }}
 kind: Deployment
 metadata:
   name: {{ template "dex-k8s-authenticator.fullname" . }}
@@ -33,11 +39,11 @@ spec:
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /
+            path: {{ template "dex-k8s-authenticator.healthCheckPath" . }}
             port: http
         readinessProbe:
           httpGet:
-            path: /
+            path: {{ template "dex-k8s-authenticator.healthCheckPath" . }}
             port: http
         volumeMounts:
         - name: config
@@ -47,7 +53,7 @@ spec:
 {{- range .Values.caCerts.secrets }}
         - name: {{ template "dex-k8s-authenticator.fullname" $ }}-{{ .name }}
           subPath: {{ .name }}
-          mountPath: /certs/{{ .name }}
+          mountPath: /certs/{{ .filename }}
 {{- end }}
 {{- end }}
         resources:
