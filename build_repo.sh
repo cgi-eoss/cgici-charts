@@ -19,6 +19,7 @@ PACKAGES=(
     'prometheus-operator'
     'rocketchat'
     'simple-manifests'
+    'spotify-docker-gc'
 )
 
 for pkg in ${PACKAGES[@]}; do
