@@ -9,6 +9,8 @@ PACKAGES=(
     'cert-manager'
     'dex'
     'dex-k8s-authenticator'
+	'elasticsearch'
+	'fluentd-elasticsearch'
     'gerrit'
     'jenkins'
     'kube-prometheus'
