@@ -9,6 +9,7 @@ PACKAGES=(
     'cert-manager'
     'dex'
     'dex-k8s-authenticator'
+    'elastic-stack'
 	'elasticsearch'
 	'fluentd-elasticsearch'
     'gerrit'

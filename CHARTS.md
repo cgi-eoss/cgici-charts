@@ -6,6 +6,7 @@
 | `cert-manager` | [official](https://github.com/kubernetes/charts/tree/master/stable/cert-manager) | unchanged |
 | `dex` | Mintel [dex-k8s-authenticator](https://github.com/mintel/dex-k8s-authenticator/tree/master/charts) | unchanged |
 | `dex-k8s-authenticator` | Mintel [dex-k8s-authenticator](https://github.com/mintel/dex-k8s-authenticator/tree/master/charts) | unchanged |
+| `elastic-stack` | [incubator](https://github.com/helm/charts/tree/master/incubator/elastic-stack) | unchanged |
 | `elasticsearch` | [incubator](https://github.com/helm/charts/tree/master/incubator/elasticsearch) | unchanged |
 | `fluentd-elasticsearch` | [official](https://github.com/helm/charts/tree/master/stable/fluentd-elasticsearch) | unchanged |
 | `gerrit` | CGI | |
