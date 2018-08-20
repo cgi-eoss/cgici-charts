@@ -16,6 +16,7 @@ PACKAGES=(
     'jenkins'
     'kube-prometheus'
     'kubernetes-dashboard'
+    'log-stack'
     'nexus'
     'nfs-client-provisioner'
     'nginx-ingress'
