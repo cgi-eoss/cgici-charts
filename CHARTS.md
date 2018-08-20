@@ -13,6 +13,7 @@
 | `jenkins` | [official](https://github.com/kubernetes/charts/tree/master/stable/jenkins) | unchanged |
 | `kube-prometheus` | CoreOS [prometheus-operator](https://github.com/coreos/prometheus-operator/tree/master/helm) | <ul><li>shuffled requirements into `./charts` dependencies</li><li>omitted `exporter-coredns` optional dep</li></ul> |
 | `kubernetes-dashboard` | [official](https://github.com/kubernetes/charts/tree/master/stable/kubernetes-dashboard) | unchanged |
+| `log-stack` | CGI | <ul><li>Collection of fluentd-elasticsearch, elasticsearch and kibana charts</li></ul> |
 | `nexus` | CGI | <ul><li>Docker image provided: extends official image with GitHub auth plugin</li></ul> |
 | `nfs-client-provisioner` | packaging of [`external-storage/nfs-client`](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client) | |
 | `nginx-ingress` | [official](https://github.com/kubernetes/charts/tree/master/stable/nginx-ingress) | unchanged |
