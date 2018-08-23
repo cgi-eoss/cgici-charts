@@ -45,6 +45,9 @@ spec:
               subPath: git
               mountPath: /var/gerrit/git
             - name: gerrit-root
+              subPath: data
+              mountPath: /var/gerrit/data
+            - name: gerrit-root
               subPath: index
               mountPath: /var/gerrit/index
             - name: gerrit-root

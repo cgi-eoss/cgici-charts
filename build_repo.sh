@@ -10,8 +10,8 @@ PACKAGES=(
     'dex'
     'dex-k8s-authenticator'
     'elastic-stack'
-	'elasticsearch'
-	'fluentd-elasticsearch'
+    'elasticsearch'
+    'fluentd-elasticsearch'
     'gerrit'
     'jenkins'
     'kube-prometheus'
@@ -27,7 +27,7 @@ PACKAGES=(
 )
 
 for pkg in ${PACKAGES[@]}; do
-    helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${pkg}"
+	helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${pkg}"
 done
 
 helm repo index ${REPO_PATH} --url ${REPO_URL}
