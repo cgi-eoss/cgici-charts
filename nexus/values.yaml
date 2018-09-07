@@ -8,6 +8,10 @@ image:
   tag: 3.13.0
   pullPolicy: IfNotPresent
 
+securityContext:
+  runAsUser: 200
+  fsGroup: 200
+
 service:
   name: nexus
   type: ClusterIP
@@ -68,7 +72,7 @@ persistence:
   enabled: true
   annotations: {}
   accessMode: ReadWriteOnce
-  size: 10Gi
+  size: 8Gi
   volumes: []
   #  - name: nothing
   #    emptyDir: {}
