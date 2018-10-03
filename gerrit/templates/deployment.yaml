@@ -24,13 +24,89 @@ spec:
       securityContext:
         runAsUser: {{ .Values.service.runAsUser }}
         fsGroup: {{ .Values.service.fsGroup }}
+      initContainers:
+        - name: {{ .Chart.Name }}-init-gerrit
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh"]
+          args: ["-c", "if [ ! -e /var/gerrit/etc/gerrit.config ]; then java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit --batch --install-all-plugins ; fi"]
+          volumeMounts:
+            - name: gerrit-root
+              subPath: git
+              mountPath: /var/gerrit/git
+            - name: gerrit-root
+              subPath: data
+              mountPath: /var/gerrit/data
+            - name: gerrit-root
+              subPath: index
+              mountPath: /var/gerrit/index
+            - name: gerrit-root
+              subPath: cache
+              mountPath: /var/gerrit/cache
+            - name: gerrit-root
+              subPath: db
+              mountPath: /var/gerrit/db
+            - name: gerrit-root
+              subPath: etc
+              mountPath: /var/gerrit/etc
+            - name: gerrit-root
+              subPath: lib
+              mountPath: /var/gerrit/lib
+            - name: gerrit-root
+              subPath: plugins
+              mountPath: /var/gerrit/plugins
+        - name: {{ .Chart.Name }}-init-config
+          image: {{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}
+          volumeMounts:
+            - name: gerrit-configs
+              mountPath: /configs
+            - name: gerrit-secrets
+              mountPath: /secrets
+            - name: gerrit-plugins
+              mountPath: /plugins
+            - name: gerrit-root
+              subPath: git
+              mountPath: /var/gerrit/git
+            - name: gerrit-root
+              subPath: data
+              mountPath: /var/gerrit/data
+            - name: gerrit-root
+              subPath: index
+              mountPath: /var/gerrit/index
+            - name: gerrit-root
+              subPath: cache
+              mountPath: /var/gerrit/cache
+            - name: gerrit-root
+              subPath: db
+              mountPath: /var/gerrit/db
+            - name: gerrit-root
+              subPath: etc
+              mountPath: /var/gerrit/etc
+            - name: gerrit-root
+              subPath: lib
+              mountPath: /var/gerrit/lib
+            - name: gerrit-root
+              subPath: plugins
+              mountPath: /var/gerrit/plugins
+          env:
+            - name: CURL_CMD
+              value: {{ .Values.init.curl }}
+            - name: DROP_TOKEN
+              value: {{ .Values.init.dropToken | quote }}
+            - name: GITCONFIG_FILE_BASE
+              value: /var/gerrit/etc
+            - name: PLUGINS_BASE
+              value: /var/gerrit
+            - name: CONFIGS_VOLUME
+              value: /configs
+            - name: SECRETS_VOLUME
+              value: /secrets
+            - name: PLUGINS_CONFIG
+              value: /plugins/plugins
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: CANONICAL_WEB_URL
-              value: {{ .Values.service.canonicalWebUrl }}
           command: ["/bin/sh"]
           args: ["-c", "java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit --batch --install-all-plugins && /var/gerrit/bin/gerrit.sh run"]
           ports:
@@ -98,5 +174,16 @@ spec:
             claimName: {{ .Values.persistence.existingClaim | default (include "gerrit.fullname" .) }}
         {{- else }}
           emptyDir: {}
-        {{- end -}}
-
+        {{- end }}
+        - name: gerrit-configs
+          configMap:
+            name: {{ include "gerrit.fullname" . }}
+        - name: gerrit-secrets
+          secret:
+            secretName: {{ include "gerrit.fullname" . }}
+        - name: gerrit-plugins
+          configMap:
+            name: {{ include "gerrit.fullname" . }}-plugins
+            items:
+              - key: plugins
+                path: plugins

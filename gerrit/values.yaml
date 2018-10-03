@@ -5,8 +5,16 @@ replicaCount: 1
 
 image:
   repository: gerritcodereview/gerrit
-  tag: 2.15.3
+  tag: 2.15.4
   pullPolicy: IfNotPresent
+
+init:
+  image:
+    repository: cgcici/gerrit-config-init
+    tag: latest
+    pullPolicy: Always
+  curl: "curl -sL"
+  dropToken: NUL
 
 service:
   name: gerrit
@@ -20,6 +28,20 @@ service:
   # Default ownership matching the service user inside the gerritcodereview/gerrit image
   runAsUser: 1000
   fsGroup: 1000
+
+configs:
+  gerrit.config: |
+    gerrit.basePath: git
+    cache.directory: cache
+    database.type: h2
+    database.database: db/ReviewDB
+    noteDb.changes.automigrate: true
+secrets: {}
+#  secure.config |
+#    foo.bar: baz
+plugins: {}
+#  plugins/myplugin.jar: http://example.com/myplugin.jar
+#  lib/extension.jar: http://example.com/extension.jar
 
 ingress:
   enabled: false

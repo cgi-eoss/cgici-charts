@@ -27,8 +27,12 @@ PACKAGES=(
     'spotify-docker-gc'
 )
 
-for pkg in ${PACKAGES[@]}; do
-	helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${pkg}"
-done
+if [ -n "${1:-}" ]; then
+    helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${1}"
+else
+    for pkg in ${PACKAGES[@]}; do
+        helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${pkg}"
+    done
+fi
 
 helm repo index ${REPO_PATH} --url ${REPO_URL}
