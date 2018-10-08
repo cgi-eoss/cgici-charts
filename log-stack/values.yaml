@@ -7,7 +7,16 @@ kibana:
   ingress:
     enabled: false
 
-fluentd-elasticsearch:
-  elasticsearch:
-    host: elasticsearch.namespace
-    port: 9200
+fluent-bit:
+  backend:
+    type: es
+    es:
+      host: elasticsearch.namespace
+      port: 9200
+
+elasticsearch-curator:
+  config:
+    elasticsearch:
+      hosts:
+        - elasticsearch.namespace
+      port: 9200
