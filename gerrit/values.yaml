@@ -10,7 +10,7 @@ image:
 
 init:
   image:
-    repository: cgcici/gerrit-config-init
+    repository: cgici/gerrit-config-init
     tag: latest
     pullPolicy: Always
   curl: "curl -sL"
