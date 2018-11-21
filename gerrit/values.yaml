@@ -5,10 +5,14 @@ replicaCount: 1
 
 image:
   repository: gerritcodereview/gerrit
-  tag: 2.15.4
+  tag: 2.16
   pullPolicy: IfNotPresent
 
 init:
+  # Extra commands to run inside the gerrit init container, for example to perform an offline reindex
+  extraCommands: []
+  #  - "java -jar /var/gerrit/bin/gerrit.war reindex --index projects -d /var/gerrit"
+  #  - "java -jar /var/gerrit/bin/gerrit.war reindex --index groups -d /var/gerrit"
   image:
     repository: cgici/gerrit-config-init
     tag: latest

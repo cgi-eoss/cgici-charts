@@ -29,7 +29,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh"]
-          args: ["-c", "if [ ! -e /var/gerrit/etc/gerrit.config ]; then java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit --batch --install-all-plugins ; fi"]
+          args: {{ template "gerrit.init.args" . }}
           volumeMounts:
             - name: gerrit-root
               subPath: git

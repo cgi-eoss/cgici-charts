@@ -30,3 +30,11 @@ Create chart name and version as used by the chart label.
 {{- define "gerrit.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Extra initialisation commands to run in the init container.
+{{- $extraArgs := .Values.init.extraCommands | default "" | (printf " && %s" (join " && " .Values.init.extraCommands)) -}}
+*/}}
+{{- define "gerrit.init.args" -}}
+["-c", "if [ ! -e /var/gerrit/etc/gerrit.config ]; then java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit --batch --install-all-plugins ; fi{{ range .Values.init.extraCommands }}{{ printf " && %s" . }}{{end}}"]
+{{- end -}}
