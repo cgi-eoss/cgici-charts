@@ -55,6 +55,10 @@ spec:
             - name: gerrit-root
               subPath: plugins
               mountPath: /var/gerrit/plugins
+            {{- if .Values.ssh.enabled }}
+            - name: gerrit-ssh
+              mountPath: /var/gerrit/.ssh
+            {{- end}}
         - name: {{ .Chart.Name }}-init-config
           image: {{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}
           volumeMounts:
@@ -88,6 +92,10 @@ spec:
             - name: gerrit-root
               subPath: plugins
               mountPath: /var/gerrit/plugins
+            {{- if .Values.ssh.enabled }}
+            - name: gerrit-ssh
+              mountPath: /var/gerrit/.ssh
+            {{- end}}
           env:
             - name: CURL_CMD
               value: {{ .Values.init.curl }}
@@ -141,6 +149,10 @@ spec:
             - name: gerrit-root
               subPath: plugins
               mountPath: /var/gerrit/plugins
+            {{- if .Values.ssh.enabled }}
+            - name: gerrit-ssh
+              mountPath: /var/gerrit/.ssh
+            {{- end}}
 {{- if .Values.service.healthProbes }}
           livenessProbe:
             httpGet:
@@ -187,3 +199,22 @@ spec:
             items:
               - key: plugins
                 path: plugins
+        {{- if .Values.ssh.enabled }}
+        - name: gerrit-ssh
+          secret:
+            secretName: {{ include "gerrit.fullname" . }}-ssh
+            # octal 0644 = 420, 0600 = 384
+            items:
+            - key: config
+              path: config
+              mode: 420
+            - key: id_rsa
+              path: id_rsa
+              mode: 384
+            - key: id_rsa.pub
+              path: id_rsa.pub
+              mode: 420
+            - key: known_hosts
+              path: known_hosts
+              mode: 420
+        {{- end}}

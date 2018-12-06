@@ -47,6 +47,14 @@ plugins: {}
 #  plugins/myplugin.jar: http://example.com/myplugin.jar
 #  lib/extension.jar: http://example.com/extension.jar
 
+ssh: {}
+#  enabled: true
+#  config: <file content>
+#  id_rsa: <file content>
+#  id_rsa.pub: <file content>
+#  known_hosts: <file content>
+
+
 ingress:
   enabled: false
   # Used to create an Ingress record.
