@@ -1,0 +1,218 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "taiga.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "taiga.name" . }}
+    helm.sh/chart: {{ include "taiga.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "taiga.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "taiga.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-init-taiga
+          image: "{{ .Values.taigaBackImage.repository }}:{{ .Values.taigaBackImage.tag }}"
+          imagePullPolicy: {{ .Values.taigaBackImage.pullPolicy }}
+          securityContext:
+            runAsUser: {{ .Values.securityContext.runAsUser }}
+            runAsGroup: {{ .Values.securityContext.fsGroup }}
+          command: ["/taiga/init.sh"]
+          env:
+            - name: TAIGA_HOSTNAME
+              value: {{ .Values.taigaHostname }}
+            - name: TAIGA_PROTOCOL
+              value: {{ .Values.taigaProtocol }}
+            - name: TAIGA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "taiga.fullname" . }}
+                  key: taiga-secret-key
+            {{- if .Values.taigaEventsEnabled }}
+            - name: TAIGA_RABBIT_URL
+              value: {{ template "taiga.rabbitmqUrl" . }}
+            - name: TAIGA_REDIS_URL
+              value: {{ template "taiga.redisUrl" . }}
+            {{- end }}
+            - name: TAIGA_ENABLE_EMAIL
+              value: {{ .Values.taigaEmailEnabled | quote }}
+            {{- if .Values.taigaEmailEnabled }}
+            - name: TAIGA_EMAIL_FROM
+              value: {{ .Values.taigaEmailFrom }}
+            - name: TAIGA_EMAIL_USE_TLS
+              value: {{ .Values.taigaEmailTls }}
+            - name: TAIGA_EMAIL_HOST
+              value: {{ .Values.taigaEmailHost }}
+            - name: TAIGA_EMAIL_PORT
+              value: {{ .Values.taigaEmailPort }}
+            - name: TAIGA_EMAIL_USER
+              value: {{ .Values.taigaEmailUser }}
+            - name: TAIGA_EMAIL_PORT
+              value: {{ .Values.taigaEmailPass }}
+            {{- end }}
+            - name: TAIGA_DB_HOST
+              value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
+            - name: TAIGA_DB_NAME
+              value: {{ .Values.postgresql.postgresqlDatabase }}
+            - name: TAIGA_DB_USER
+              value: {{ .Values.postgresql.postgresqlUsername }}
+            - name: TAIGA_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{- else }} {{ template "postgresql.fullname" .}} {{- end }}
+                  key: postgresql-password
+          volumeMounts:
+            - name: taiga
+              subPath: static
+              mountPath: /taiga/taiga-back/static
+            - name: taiga
+              subPath: media
+              mountPath: /taiga/taiga-back/media
+          resources:
+            {{- toYaml .Values.backResources | nindent 12 }}
+      containers:
+        - name: {{ .Chart.Name }}-back
+          image: "{{ .Values.taigaBackImage.repository }}:{{ .Values.taigaBackImage.tag }}"
+          imagePullPolicy: {{ .Values.taigaBackImage.pullPolicy }}
+          securityContext:
+            runAsUser: {{ .Values.securityContext.runAsUser }}
+            runAsGroup: {{ .Values.securityContext.fsGroup }}
+          command: ["/taiga/run.sh"]
+          ports:
+            - name: http-back
+              containerPort: 8001
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/v1/
+              port: http-back
+          readinessProbe:
+            httpGet:
+              path: /api/v1/
+              port: http-back
+          env:
+            - name: TAIGA_HOSTNAME
+              value: {{ .Values.taigaHostname }}
+            - name: TAIGA_PROTOCOL
+              value: {{ .Values.taigaProtocol }}
+            - name: TAIGA_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "taiga.fullname" . }}
+                  key: taiga-secret-key
+            {{- if .Values.taigaEventsEnabled }}
+            - name: TAIGA_RABBIT_URL
+              value: {{ template "taiga.rabbitmqUrl" . }}
+            - name: TAIGA_REDIS_URL
+              value: {{ template "taiga.redisUrl" . }}
+            {{- end }}
+            - name: TAIGA_ENABLE_EMAIL
+              value: {{ .Values.taigaEmailEnabled | quote }}
+                  {{- if .Values.taigaEmailEnabled }}
+            - name: TAIGA_EMAIL_FROM
+              value: {{ .Values.taigaEmailFrom }}
+            - name: TAIGA_EMAIL_USE_TLS
+              value: {{ .Values.taigaEmailTls }}
+            - name: TAIGA_EMAIL_HOST
+              value: {{ .Values.taigaEmailHost }}
+            - name: TAIGA_EMAIL_PORT
+              value: {{ .Values.taigaEmailPort }}
+            - name: TAIGA_EMAIL_USER
+              value: {{ .Values.taigaEmailUser }}
+            - name: TAIGA_EMAIL_PORT
+              value: {{ .Values.taigaEmailPass }}
+                  {{- end }}
+            - name: TAIGA_DB_HOST
+              value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
+            - name: TAIGA_DB_NAME
+              value: {{ .Values.postgresql.postgresqlDatabase }}
+            - name: TAIGA_DB_USER
+              value: {{ .Values.postgresql.postgresqlUsername }}
+            - name: TAIGA_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{- else }} {{ template "postgresql.fullname" .}} {{- end }}
+                  key: postgresql-password
+          volumeMounts:
+            - name: taiga
+              subPath: static
+              mountPath: /taiga/taiga-back/static
+            - name: taiga
+              subPath: media
+              mountPath: /taiga/taiga-back/media
+          resources:
+              {{- toYaml .Values.backResources | nindent 12 }}
+        - name: {{ .Chart.Name }}-front
+          image: "{{ .Values.taigaFrontImage.repository }}:{{ .Values.taigaFrontImage.tag }}"
+          imagePullPolicy: {{ .Values.taigaFrontImage.pullPolicy }}
+          ports:
+            - name: http-front
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http-front
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http-front
+          volumeMounts:
+            - name: taiga
+              subPath: static
+              mountPath: /usr/share/nginx/html/static
+            - name: taiga
+              subPath: media
+              mountPath: /usr/share/nginx/html/media
+            - name: taiga-configmaps
+              subPath: taiga-front-conf-json
+              mountPath: /usr/share/nginx/html/conf.json
+          resources:
+            {{- toYaml .Values.frontResources | nindent 12 }}
+        {{- if .Values.taigaEventsEnabled }}
+        - name: {{ .Chart.Name }}-events
+          image: "{{ .Values.taigaEventsImage.repository }}:{{ .Values.taigaEventsImage.tag }}"
+          imagePullPolicy: {{ .Values.taigaEventsImage.pullPolicy }}
+          ports:
+            - name: http-events
+              containerPort: 8888
+              protocol: TCP
+          volumeMounts:
+            - name: taiga-configmaps
+              subPath: taiga-events-config-json
+              mountPath: /taiga/taiga-events/config.json
+          resources:
+            {{- toYaml .Values.eventsResources | nindent 12 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - name: taiga
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "taiga.fullname" .) }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+        - name: taiga-configmaps
+          configMap:
+            name: {{ template "taiga.fullname" . }}-configuration

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "taiga.fullname" . }}-front
+  labels:
+    app.kubernetes.io/name: {{ include "taiga.name" . }}
+    helm.sh/chart: {{ include "taiga.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.taigaBackServiceType }}
+  ports:
+    - port: {{ .Values.taigaFrontServicePort }}
+      targetPort: http-front
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "taiga.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

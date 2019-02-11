@@ -1,0 +1,53 @@
+{{- $baseUrl := include "taiga.baseurl" . -}}
+{{- $rabbitmqUrl := include "taiga.rabbitmqUrl" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "taiga.fullname" . }}-configuration
+  labels:
+    app: {{ template "taiga.name" . }}
+    chart: {{ template "taiga.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+data:
+  taiga-front-conf-json: |
+{{- if .Values.taigaFrontConfJson }}
+{{ .Values.taigaFrontConfJson | indent 4 }}
+{{- else }}
+    {
+      "api": "{{ $baseUrl }}/api/v1/",
+      "eventsUrl": {{- if .Values.taigaEventsEnabled -}}"ws://{{ .Values.taigaHostname }}/events/"{{- else -}}null{{- end -}},
+      "eventsMaxMissedHeartbeats": 5,
+      "eventsHeartbeatIntervalTime": 60000,
+      "eventsReconnectTryInterval": 10000,
+      "debug": false,
+      "debugInfo": false,
+      "defaultLanguage": "en",
+      "themes": ["taiga"],
+      "defaultTheme": "taiga",
+      "publicRegisterEnabled": true,
+      "feedbackEnabled": true,
+      "supportUrl": "https://tree.taiga.io/support",
+      "privacyPolicyUrl": null,
+      "termsOfServiceUrl": null,
+      "GDPRUrl": null,
+      "maxUploadFileSize": null,
+      "contribPlugins": [],
+      "tribeHost": null,
+      "importers": [],
+      "gravatar": false,
+      "rtlLanguages": ["fa"]
+    }
+{{- end }}
+  taiga-events-config-json: |
+{{- if .Values.taigaEventsConfigJson }}
+{{ .Values.taigaEventsConfigJson | indent 4 }}
+{{- else }}
+    {
+      "url": "{{ $rabbitmqUrl }}",
+      "secret": "{{ .Values.taigaSecretKey }}",
+      "webSocketServer": {
+        "port": 8888
+      }
+    }
+{{- end }}
