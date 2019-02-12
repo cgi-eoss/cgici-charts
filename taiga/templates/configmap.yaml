@@ -1,4 +1,5 @@
 {{- $baseUrl := include "taiga.baseurl" . -}}
+{{- $websocketProtocol := include "taiga.websocketProtocol" . -}}
 {{- $rabbitmqUrl := include "taiga.rabbitmqUrl" . -}}
 apiVersion: v1
 kind: ConfigMap
@@ -16,7 +17,7 @@ data:
 {{- else }}
     {
       "api": "{{ $baseUrl }}/api/v1/",
-      "eventsUrl": {{- if .Values.taigaEventsEnabled -}}"ws://{{ .Values.taigaHostname }}/events/"{{- else -}}null{{- end -}},
+      "eventsUrl": {{- if .Values.taigaEventsEnabled -}}"{{ $websocketProtocol }}://{{ .Values.taigaHostname }}/events/"{{- else -}}null{{- end -}},
       "eventsMaxMissedHeartbeats": 5,
       "eventsHeartbeatIntervalTime": 60000,
       "eventsReconnectTryInterval": 10000,

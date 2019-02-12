@@ -46,6 +46,10 @@ Create taiga URL string
 {{- printf "%s://%s" .Values.taigaProtocol .Values.taigaHostname -}}
 {{- end -}}
 
+{{- define "taiga.websocketProtocol" -}}
+{{- if eq .Values.taigaProtocol "https" -}}wss{{- else -}}ws{{- end -}}
+{{- end -}}
+
 {{- define "taiga.rabbitmqUrl" -}}
 {{- printf "amqp://%s:%s@%s-%s:%d/" .Values.rabbitmq.rabbitmq.username .Values.rabbitmq.rabbitmq.password .Release.Name ("rabbitmq" | trunc 63 | trimSuffix "-") (int .Values.rabbitmq.service.port) -}}
 {{- end -}}
