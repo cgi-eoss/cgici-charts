@@ -25,6 +25,7 @@ PACKAGES=(
     'rocketchat'
     'simple-manifests'
     'spotify-docker-gc'
+	'taiga'
 )
 
 if [ -n "${1:-}" ]; then
