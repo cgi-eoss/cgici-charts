@@ -51,15 +51,20 @@ spec:
             - name: TAIGA_EMAIL_FROM
               value: {{ .Values.taigaEmailFrom }}
             - name: TAIGA_EMAIL_USE_TLS
-              value: {{ .Values.taigaEmailTls }}
+              value: {{ .Values.taigaEmailTls | quote }}
             - name: TAIGA_EMAIL_HOST
-              value: {{ .Values.taigaEmailHost }}
+              value: {{ .Values.taigaEmailHost | quote }}
             - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPort }}
+              value: {{ .Values.taigaEmailPort | quote }}
             - name: TAIGA_EMAIL_USER
-              value: {{ .Values.taigaEmailUser }}
-            - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPass }}
+              value: {{ .Values.taigaEmailUser | quote }}
+            {{- if .Values.taigaEmailPass }}
+            - name: TAIGA_EMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "taiga.fullname" . }}
+                  key: taiga-email-pass
+            {{- end }}
             {{- end }}
             - name: TAIGA_DB_HOST
               value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
@@ -123,16 +128,21 @@ spec:
             - name: TAIGA_EMAIL_FROM
               value: {{ .Values.taigaEmailFrom }}
             - name: TAIGA_EMAIL_USE_TLS
-              value: {{ .Values.taigaEmailTls }}
+              value: {{ .Values.taigaEmailTls | quote }}
             - name: TAIGA_EMAIL_HOST
-              value: {{ .Values.taigaEmailHost }}
+              value: {{ .Values.taigaEmailHost | quote }}
             - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPort }}
+              value: {{ .Values.taigaEmailPort | quote }}
             - name: TAIGA_EMAIL_USER
-              value: {{ .Values.taigaEmailUser }}
-            - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPass }}
-                  {{- end }}
+              value: {{ .Values.taigaEmailUser | quote }}
+            {{- if .Values.taigaEmailPass }}
+            - name: TAIGA_EMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "taiga.fullname" . }}
+                  key: taiga-email-pass
+            {{- end }}
+            {{- end }}
             - name: TAIGA_DB_HOST
               value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
             - name: TAIGA_DB_NAME
