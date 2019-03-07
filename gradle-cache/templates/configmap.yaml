@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "gradle-cache.fullname" . }}-configuration
+  labels:
+    app: {{ template "gradle-cache.name" . }}
+    chart: {{ template "gradle-cache.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+data:
+  gradle-cache-config-yaml: |
+{{ .Values.config | toYaml | indent 4 }}
