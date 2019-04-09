@@ -93,7 +93,7 @@ data:
 
     # Host settings
     HOST_IMAP: "imap.{{ .Release.Namespace }}.svc.cluster.local"
-    HOST_LMTP: "imap.{{ .Release.Namespace }}.svc.cluster.local"
+    HOST_LMTP: "imap.{{ .Release.Namespace }}.svc.cluster.local:2525"
     HOST_POP3: "imap.{{ .Release.Namespace }}.svc.cluster.local"
     HOST_SMTP: "smtp.{{ .Release.Namespace }}.svc.cluster.local"
     HOST_AUTHSMTP: "smtp.{{ .Release.Namespace }}.svc.cluster.local"
