@@ -1,0 +1,69 @@
+{{- if .Values.puppetdb.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: {{ template "puppetserver.fullname" . }}-puppetdb
+    labels:
+        app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+        helm.sh/chart: {{ include "puppetserver.chart" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+    docker-entrypoint.sh: |-
+        #!/bin/sh
+
+        set -e
+
+        chmod +x /docker-entrypoint.d/*.sh || true
+        # sync prevents aufs from sometimes returning EBUSY if you exec right after a chmod
+        sync
+        for f in /docker-entrypoint.d/*.sh; do
+            echo "Running $f"
+            "$f"
+        done
+
+        exec java $PUPPETDB_JAVA_ARGS -cp /puppetdb.jar \
+            clojure.main -m puppetlabs.puppetdb.core "$@" \
+            -c /etc/puppetlabs/puppetdb/conf.d/
+    20-wait-for-hosts.sh: |-
+        #!/bin/sh
+        #
+        # Wait on hosts to become available before proceeding
+        #
+        #
+        # Optional environment variables:
+        #   PUPPETDB_WAITFORHOST_SECONDS    Number of seconds to wait for host, defaults to 30
+        #   PUPPETDB_WAITFORHEALTH_SECONDS  Number of seconds to wait for health
+        #                                   checks of Consul / Puppetserver to succeed, defaults to 600
+
+        msg() {
+            echo "($0) $1"
+        }
+
+        error() {
+            msg "Error: $1"
+            exit 1
+        }
+
+        PUPPETDB_WAITFORHOST_SECONDS=${PUPPETDB_WAITFORHOST_SECONDS:-30}
+        PUPPETDB_WAITFORHEALTH_SECONDS=${PUPPETDB_WAITFORHEALTH_SECONDS:-600}
+        PUPPETSERVER_HOSTNAME="${PUPPETSERVER_HOSTNAME:-puppet}"
+        CONSUL_HOSTNAME="${CONSUL_HOSTNAME:-consul}"
+        CONSUL_PORT="${CONSUL_PORT:-8500}"
+
+        if [ "$USE_PUPPETSERVER" = true ]; then
+          HEALTH_COMMAND="curl --silent --fail --insecure 'https://${PUPPETSERVER_HOSTNAME}:8140/status/v1/simple' | grep -q '^running$'"
+        fi
+
+        if [ "$CONSUL_ENABLED" = "true" ]; then
+          # with Consul enabled, wait on Consul instead of Puppetserver
+          HEALTH_COMMAND="curl --silent --fail 'http://${CONSUL_HOSTNAME}:${CONSUL_PORT}/v1/health/checks/puppet' | grep -q '\\"\""state"\\\"":\\"\""running\\"\""'"
+        fi
+
+        if [ -n "$HEALTH_COMMAND" ]; then
+          /wtfc.sh --timeout=$PUPPETDB_WAITFORHEALTH_SECONDS --interval=1 --progress "$HEALTH_COMMAND"
+          if [ $? -ne 0 ]; then
+            error "Required health check failed"
+          fi
+        fi
+{{- end }}

@@ -1,0 +1,151 @@
+image:
+  repository: puppet/puppetserver
+  tag: 6.3.0
+  pullPolicy: IfNotPresent
+
+pupperwareAnalyticsEnabled: false
+
+# The hostname for the puppetserver instance. This sets the certname and server in puppet.conf.
+# Defaults to the Kubernetes service name.
+puppetserverHostname: null
+
+# Additional Java args to pass to the puppetserver process.
+puppetserverJavaArgs:
+  - -Xms512m
+  - -Xmx512m
+
+# The environment to get the status of in the healthcheck script.
+puppetHealthcheckEnvironment: 'production'
+
+# Alternate names to set in the puppetserver config and to be used in puppetserver certificate generation.
+# The puppetserverHostname will be prepended to this.
+#
+# IMPORTANT: This should include any public hostnames for the puppetserver, e.g. `serviceExternalDnsHostname` if set.
+#
+# WARNING: This only takes effect on the initial run.
+dnsAltNames: []
+
+# Whether or not to enable autosigning on the puppetserver instance.
+# Valid values match [true|false|/path/to/autosign.conf].
+autosign: false
+
+# The maximum number of JRuby instances allowed.
+puppetserverMaxActiveInstances: 1
+
+# The maximum number of HTTP requests a JRuby instance will handle in its lifetime. 0 disables instance flushing.
+puppetserverMaxRequestsPerInstance: 0
+
+# Whether or not this puppetserver instance has a running CA (Certificate Authority).
+caEnabled: true
+
+# The hostname for the puppetserver running the CA. Does nothing unless CA_ENABLED=false.
+caHostname: "puppet"
+
+resources:
+  requests:
+    cpu: 1000m
+    memory: 768Mi
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+serviceType: LoadBalancer
+servicePort: 8140
+#serviceExternalDnsHostname:
+
+# Extra config injection
+r10kYaml: {}
+ssh: {}
+
+persistence:
+  enabled: true
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  # storageClass:
+
+puppetdb:
+  # True if puppetdb (and postgresql) should be installed and configured
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: puppet/puppetdb
+    tag: '6.3.0'
+    pullPolicy: IfNotPresent
+
+  pupperwareAnalyticsEnabled: false
+
+  # Set to 'false' to skip acquiring SSL certificates from a Puppet Server.
+  usePuppetserver: true
+
+  # The value for the 'subname' field in puppetdb/conf.d/database.conf.
+  # Defaults to the postgresql pod url
+  puppetdbDatabaseConnection: null
+
+  # The user to connect to the postgres database as.
+  # Defaults to the postgresql.postgresqlUsername value.
+  puppetdbUser: null
+
+  # The user to connect to the postgres database as.
+  # Defaults to the secret value from the postgresql chart.
+  puppetdbPassword: null
+
+  # How long nodes should be preserved in puppetdb without receiving any updates (new catalogs, facts, or reports) before being marked expired.
+  puppetdbNodeTtl: '7d'
+
+  # Delete nodes that have been deactivated or expired for the specified amount of time.
+  puppetdbNodePurgeTtl: '14d'
+
+  # Automatically delete reports that are older than the specified amount of time.
+  puppetdbReportTtl: '14d'
+
+  # Additional Java args to pass to the puppetdb process.
+  puppetdbJavaArgs:
+    - -Djava.net.preferIPv4Stack=true
+    - -Xms256m
+    - -Xmx256m
+
+  # The hostname for the puppetserver instance. This determines where to request certificates from.
+  # Defaults to the Kubernetes service name.
+  puppetserverHostname: null
+
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 512Mi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  serviceType: ClusterIP
+  servicePortHttp: 8080
+  servicePortHttps: 8081
+
+  persistence:
+    enabled: true
+    ## A manually managed Persistent Volume and Claim
+    ## Requires persistence.enabled: true
+    ## If defined, PVC must be created manually before volume will be bound
+    # existingClaim:
+    annotations: {}
+    accessModes:
+      - ReadWriteOnce
+    size: 1Gi
+    # storageClass:
+
+postgresql:
+  postgresqlUsername: 'puppetdb'
+  #postgresqlPassword: 'puppetdb'
+  postgresqlDatabase: 'puppetdb'
+  # Specify the TCP port that PostgreSQL should use
+  service:
+    port: 5432
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 250m

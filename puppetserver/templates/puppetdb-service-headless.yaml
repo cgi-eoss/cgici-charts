@@ -1,0 +1,26 @@
+{{- if .Values.puppetdb.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "puppetserver.fullname" . }}-puppetdb-headless
+  labels:
+    app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+    helm.sh/chart: {{ include "puppetserver.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      port: {{ .Values.puppetdb.servicePortHttp }}
+      targetPort: http
+      protocol: TCP
+    - name: https
+      port: {{ .Values.puppetdb.servicePortHttps }}
+      targetPort: https
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

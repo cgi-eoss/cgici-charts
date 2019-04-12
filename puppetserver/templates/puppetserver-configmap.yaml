@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "puppetserver.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "puppetserver.name" . }}
+    helm.sh/chart: {{ include "puppetserver.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+{{- if .Values.r10kYaml }}
+  r10k.yaml: |-
+    {{- toYaml .Values.r10kYaml | nindent 4 }}
+{{- end }}

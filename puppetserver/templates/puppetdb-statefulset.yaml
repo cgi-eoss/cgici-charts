@@ -1,0 +1,156 @@
+{{- if .Values.puppetdb.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "puppetserver.fullname" . }}-puppetdb
+  labels:
+    app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+    helm.sh/chart: {{ include "puppetserver.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.puppetdb.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{- if .Values.puppetdb.image.pullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.puppetdb.image.pullSecrets }}
+      - name: {{ . }}
+      {{- end}}
+      {{- end }}
+      containers:
+      - name: {{ .Chart.Name }}-puppetdb
+        image: "{{ .Values.puppetdb.image.repository }}:{{ .Values.puppetdb.image.tag }}"
+        imagePullPolicy: {{ .Values.puppetdb.image.pullPolicy }}
+        env:
+        - name: PUPPERWARE_ANALYTICS_ENABLED
+          value: {{ .Values.puppetdb.pupperwareAnalyticsEnabled | quote }}
+        - name: PUPPERWARE_DISABLE_ANALYTICS
+          value: {{ not .Values.puppetdb.pupperwareAnalyticsEnabled | quote }}
+        - name: USE_PUPPETSERVER
+          value: {{ .Values.puppetdb.usePuppetserver | quote }}
+        - name: PUPPETDB_DATABASE_CONNECTION
+          value: {{ include "puppetserver.puppetdbDatabaseConnection" . }}
+        - name: PUPPETDB_USER
+          value: {{ .Values.puppetdb.puppetdbUser | default .Values.postgresql.postgresqlUsername | quote }}
+        - name: PUPPETDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              {{- if .Values.puppetdb.puppetdbPassword }}
+              name: {{ include "puppetserver.fullname" . }}-puppetdb
+              {{- else }}
+              name: {{ include "puppetserver.fullname" . }}-postgresql
+              {{- end }}
+              key: postgresql-password
+        - name: PUPPETDB_NODE_TTL
+          value: {{ .Values.puppetdb.puppetdbNodeTtl | quote }}
+        - name: PUPPETDB_NODE_PURGE_TTL
+          value: {{ .Values.puppetdb.puppetdbNodePurgeTtl | quote }}
+        - name: PUPPETDB_REPORT_TTL
+          value: {{ .Values.puppetdb.puppetdbReportTtl | quote }}
+        - name: PUPPETDB_JAVA_ARGS
+          value: {{ join " " .Values.puppetdb.puppetdbJavaArgs | quote }}
+        - name: PUPPETSERVER_HOSTNAME
+          value: {{ include "puppetserver.hostname" . }}
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        - name: https
+          containerPort: 8081
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /status/v1/services/puppetdb-status
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /status/v1/services/puppetdb-status
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 5
+        volumeMounts:
+        - name: data
+          subPath: ssl
+          mountPath: /etc/puppetlabs/puppet/ssl
+        - name: puppetdb-configmaps
+          subPath: 20-wait-for-hosts.sh
+          mountPath: /docker-entrypoint.d/20-wait-for-hosts.sh
+        - name: puppetdb-configmaps
+          subPath: docker-entrypoint.sh
+          mountPath: /docker-entrypoint.sh
+        resources:
+{{- toYaml .Values.resources | nindent 10 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: puppetdb-configmaps
+        projected:
+          sources:
+          - configMap:
+              name: {{ template "puppetserver.fullname" . }}-puppetdb
+              items:
+              - key: docker-entrypoint.sh
+                path: docker-entrypoint.sh
+                mode: 0755
+              - key: 20-wait-for-hosts.sh
+                path: 20-wait-for-hosts.sh
+                mode: 0755
+{{- if and .Values.puppetdb.persistence.enabled .Values.puppetdb.persistence.existingClaim }}
+      - name: data
+        persistentVolumeClaim:
+{{- with .Values.puppetdb.persistence.existingClaim }}
+          claimName: {{ tpl . $ }}
+{{- end }}
+{{- else if not .Values.puppetdb.persistence.enabled }}
+      - name: data
+        emptyDir: {}
+{{- else if and .Values.puppetdb.persistence.enabled (not .Values.puppetdb.persistence.existingClaim) }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      {{- with .Values.puppetdb.persistence.annotations }}
+        annotations:
+        {{- range $key, $value := . }}
+          {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      spec:
+        accessModes:
+        {{- range .Values.puppetdb.persistence.accessModes }}
+          - {{ . | quote }}
+        {{- end }}
+        resources:
+          requests:
+            storage: {{ .Values.puppetdb.persistence.size | quote }}
+      {{- if .Values.puppetdb.persistence.storageClass }}
+      {{- if (eq "-" .Values.puppetdb.persistence.storageClass) }}
+        storageClassName: ""
+      {{- else }}
+        storageClassName: "{{ .Values.puppetdb.persistence.storageClass }}"
+      {{- end }}
+      {{- end }}
+{{- end }}
+{{- end }}
