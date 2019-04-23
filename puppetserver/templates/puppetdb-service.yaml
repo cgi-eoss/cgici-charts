@@ -1,25 +1,30 @@
 {{- if .Values.puppetdb.enabled }}
+{{- $this := . -}}
+{{- range int .Values.puppetdb.replicaCount | until }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: puppetdb
+  name: {{ include "puppetserver.fullname" $this }}-puppetdb-{{ . }}
   labels:
-    app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
-    helm.sh/chart: {{ include "puppetserver.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ include "puppetserver.name" $this }}-puppetdb
+    helm.sh/chart: {{ include "puppetserver.chart" $this }}
+    app.kubernetes.io/instance: {{ $this.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $this.Release.Service }}
 spec:
-  type: {{ .Values.puppetdb.serviceType }}
+  type: {{ $this.Values.puppetdb.serviceType }}
   ports:
     - name: http
-      port: {{ .Values.puppetdb.servicePortHttp }}
+      port: {{ $this.Values.puppetdb.servicePortHttp }}
       targetPort: http
       protocol: TCP
     - name: https
-      port: {{ .Values.puppetdb.servicePortHttps }}
+      port: {{ $this.Values.puppetdb.servicePortHttps }}
       targetPort: https
       protocol: TCP
   selector:
-    app.kubernetes.io/name: {{ include "puppetserver.name" . }}-puppetdb
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ include "puppetserver.name" $this }}-puppetdb
+    app.kubernetes.io/instance: {{ $this.Release.Name }}
+    statefulset.kubernetes.io/pod-name: {{ include "puppetserver.fullname" $this }}-puppetdb-{{ . }}
 {{- end }}
+{{- end }}
+

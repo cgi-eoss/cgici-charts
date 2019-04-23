@@ -3,7 +3,7 @@ entries:
   bazel-cache:
   - apiVersion: v1
     appVersion: latest
-    created: 2019-04-23T10:51:23.3532262+01:00
+    created: 2019-04-23T12:18:03.610075722+01:00
     description: Bazel Remote Cache
     digest: 3d73122d9dd95f74eb1ed7369b33e85cc75f5459dec480cf786232949f856d04
     name: bazel-cache
@@ -12,7 +12,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: latest
-    created: 2019-04-23T10:51:23.353003683+01:00
+    created: 2019-04-23T12:18:03.609824356+01:00
     description: Bazel Remote Cache
     digest: 09ae4793d49e95893001b6b2d2294df0152c2d6b7f46a7cde421eef55f6dec8e
     name: bazel-cache
@@ -21,7 +21,7 @@ entries:
     version: 0.1.0
   cert-manager:
   - appVersion: v0.4.1
-    created: 2019-04-23T10:51:23.354861872+01:00
+    created: 2019-04-23T12:18:03.612636054+01:00
     description: A Helm chart for cert-manager
     digest: e69c331d1b506599a0122240ed94a7087b6c6a97cea11b224831d5c94074b1a4
     home: https://github.com/jetstack/cert-manager
@@ -40,7 +40,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-v0.4.1.tgz
     version: v0.4.1
   - appVersion: v0.4.0
-    created: 2019-04-23T10:51:23.354519199+01:00
+    created: 2019-04-23T12:18:03.612096902+01:00
     description: A Helm chart for cert-manager
     digest: 861c9f7143274255aabfd7d0c03bebeac1fa4955063bf006abdbae57adf32df7
     home: https://github.com/jetstack/cert-manager
@@ -59,7 +59,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-v0.4.0.tgz
     version: v0.4.0
   - appVersion: v0.3.2
-    created: 2019-04-23T10:51:23.354188735+01:00
+    created: 2019-04-23T12:18:03.611167382+01:00
     description: A Helm chart for cert-manager
     digest: 23c3e5b143c869d7ceab0de71eeb0229f5dec3f820098958a85cf27acdc11884
     home: https://github.com/jetstack/cert-manager
@@ -78,7 +78,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-v0.3.4.tgz
     version: v0.3.4
   - appVersion: 0.2.4
-    created: 2019-04-23T10:51:23.353874696+01:00
+    created: 2019-04-23T12:18:03.610803411+01:00
     description: A Helm chart for cert-manager
     digest: 7900b2961156e36ef19e8b36fb6c27328d0f26b63e102f50f96eecd53d785a8a
     home: https://github.com/jetstack/cert-manager
@@ -97,7 +97,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/cert-manager-0.2.9.tgz
     version: 0.2.9
   - appVersion: 0.2.3
-    created: 2019-04-23T10:51:23.353532499+01:00
+    created: 2019-04-23T12:18:03.610444647+01:00
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -118,7 +118,7 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: 2019-04-23T10:51:23.355639524+01:00
+    created: 2019-04-23T12:18:03.613053983+01:00
     description: Dex federated authentication service
     digest: 3ff21a77b93354bd07c21ef78ddb1c4c3f4028ad46a842c171dbfa7badfaf7a9
     icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
@@ -137,7 +137,7 @@ entries:
   dex-k8s-authenticator:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: 2019-04-23T10:51:23.356195274+01:00
+    created: 2019-04-23T12:18:03.613391855+01:00
     description: Authenticator for using Dex with Kubernetes
     digest: 9d339058a735eaeb290ef2cf8125f7392d327f23eef71876fb74e23326bcffb0
     maintainers:
@@ -154,7 +154,7 @@ entries:
   efs-provisioner:
   - apiVersion: v1
     appVersion: v0.1.2
-    created: 2019-04-23T10:51:23.356487488+01:00
+    created: 2019-04-23T12:18:03.613697101+01:00
     description: A Helm chart for the AWS EFS external storage provisioner
     digest: 86c46882a6e481d932218df4823fb8bdcac0238f981c10c0d1c257297e8f4356
     home: https://github.com/kubernetes-incubator/external-storage/tree/master/aws/efs
@@ -171,7 +171,7 @@ entries:
   elastic-stack:
   - apiVersion: v1
     appVersion: "6"
-    created: 2019-04-23T10:51:23.358459021+01:00
+    created: 2019-04-23T12:18:03.616126819+01:00
     description: A Helm chart for ELK
     digest: f603b156a2ca6e6fd4dfcee8c9e32712a7331805a9f5be25cc161690aba17d32
     home: https://www.elastic.co/products
@@ -189,7 +189,7 @@ entries:
     version: 0.9.0
   elasticsearch:
   - appVersion: 6.3.1
-    created: 2019-04-23T10:51:23.358923188+01:00
+    created: 2019-04-23T12:18:03.616705411+01:00
     description: Flexible and powerful open source, distributed real-time search and
       analytics engine.
     digest: 0c50c05f2c0bd43bcd44f23e29bc9b01b4ce6397dfcded0f422cbdaf76a04b8e
@@ -215,7 +215,7 @@ entries:
     version: 1.4.1
   fluentd-elasticsearch:
   - appVersion: 2.2.0
-    created: 2019-04-23T10:51:23.359326355+01:00
+    created: 2019-04-23T12:18:03.617269195+01:00
     description: A Fluentd Helm chart for Kubernetes with Elasticsearch output
     digest: 31620e91f73d457f39ef576931fdb04fc0e866ee2e4fbbd33b9d17d7f35912e0
     engine: gotpl
@@ -242,7 +242,7 @@ entries:
   gerrit:
   - apiVersion: v1
     appVersion: "2.16"
-    created: 2019-04-23T10:51:23.3632673+01:00
+    created: 2019-04-23T12:18:03.621734157+01:00
     description: Gerrit Code Review
     digest: 52b869c0a4aa036c92e57604a039a3ded72810f2928189a532f63134cb8937b3
     name: gerrit
@@ -251,7 +251,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "2.16"
-    created: 2019-04-23T10:51:23.363018591+01:00
+    created: 2019-04-23T12:18:03.621432417+01:00
     description: Gerrit Code Review
     digest: 9eff68bd25aaf9781d19da9d46eee3fbce91a7316f4dec18b17815bd00af0cbd
     name: gerrit
@@ -260,7 +260,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: 2.15.4
-    created: 2019-04-23T10:51:23.360334919+01:00
+    created: 2019-04-23T12:18:03.61843146+01:00
     description: Gerrit Code Review
     digest: 2783589d5a1888a4d7882a2a0ef72f96e7b632874af4aa147deda5b1b8ebe9aa
     name: gerrit
@@ -269,7 +269,7 @@ entries:
     version: 0.1.11
   - apiVersion: v1
     appVersion: 2.15.4
-    created: 2019-04-23T10:51:23.360071205+01:00
+    created: 2019-04-23T12:18:03.618121787+01:00
     description: Gerrit Code Review
     digest: e09d51ebe4abb638a1bdac55b63df2e02c85591cae6ab3e651b0efb8cb7b6618
     name: gerrit
@@ -278,7 +278,7 @@ entries:
     version: 0.1.10
   - apiVersion: v1
     appVersion: 2.15.3
-    created: 2019-04-23T10:51:23.362493993+01:00
+    created: 2019-04-23T12:18:03.621152497+01:00
     description: Gerrit Code Review
     digest: 564ce122d968aecfffb546951d33553ae9aab058039df1c290d858cfa9b2f79b
     name: gerrit
@@ -287,7 +287,7 @@ entries:
     version: 0.1.9
   - apiVersion: v1
     appVersion: 2.15.3
-    created: 2019-04-23T10:51:23.36183574+01:00
+    created: 2019-04-23T12:18:03.620885992+01:00
     description: Gerrit Code Review
     digest: 2f25ac7faf52c1d5cf7856ef44ddd49bf28e7becd1a8fa3d1201715ec060199c
     name: gerrit
@@ -296,7 +296,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: 2.15.2
-    created: 2019-04-23T10:51:23.361619601+01:00
+    created: 2019-04-23T12:18:03.620627285+01:00
     description: Gerrit Code Review
     digest: 5f56aef32b3d32d9b42bd278badd046eeef395c945f49f48b1a4bded527cc5aa
     name: gerrit
@@ -305,7 +305,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2019-04-23T10:51:23.361407597+01:00
+    created: 2019-04-23T12:18:03.620078855+01:00
     description: Gerrit Code Review
     digest: ceb5835d4b3ae7be8cd07a66679035066dbfcd7c3caa4d9b30fc9d99318025d0
     name: gerrit
@@ -314,7 +314,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 2.15.1
-    created: 2019-04-23T10:51:23.36119226+01:00
+    created: 2019-04-23T12:18:03.619498304+01:00
     description: Gerrit Code Review
     digest: 53e18bf3002f7b78c1a3b3f70b5cb21b0cdc120ac2a3980cc798165807d5b779
     name: gerrit
@@ -323,7 +323,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2019-04-23T10:51:23.360979801+01:00
+    created: 2019-04-23T12:18:03.619242337+01:00
     description: Gerrit Code Review
     digest: b4e9448abec76319c3249193301f6f46bb7fc5e4232e552e5f4256b6448020fe
     name: gerrit
@@ -332,7 +332,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2019-04-23T10:51:23.360763289+01:00
+    created: 2019-04-23T12:18:03.618969033+01:00
     description: Gerrit Code Review
     digest: 2e3e50e0de07e28e27401fd69767c1f64fbb31eafb0c7ea9845219df7225514f
     name: gerrit
@@ -341,7 +341,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2019-04-23T10:51:23.360556702+01:00
+    created: 2019-04-23T12:18:03.618686109+01:00
     description: Gerrit Code Review
     digest: 0e380612cf0fb19d1ce5851e513dc6d0adb3278101b8bc52f5cd8b25f35cb95b
     name: gerrit
@@ -350,7 +350,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2019-04-23T10:51:23.359801998+01:00
+    created: 2019-04-23T12:18:03.617784958+01:00
     description: Gerrit Code Review
     digest: fb5af4332a507524908ffc280ca77dac505f05f4a4a8caf364d843cef6cf6b1f
     name: gerrit
@@ -359,7 +359,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "2.15"
-    created: 2019-04-23T10:51:23.359578666+01:00
+    created: 2019-04-23T12:18:03.617530896+01:00
     description: Gerrit Code Review
     digest: fb5e951608730a918e90b4e2ebe59b81a60a5ab69d94f8cf98ac486293a5833a
     name: gerrit
@@ -369,7 +369,7 @@ entries:
   gradle-cache:
   - apiVersion: v1
     appVersion: "7.0"
-    created: 2019-04-23T10:51:23.363465762+01:00
+    created: 2019-04-23T12:18:03.622022629+01:00
     description: Gradle Build Cache Node
     digest: 9f03aa937e90e344e9d8135ceffb5476de93c1c0d357ed829418e2820dd1e0af
     name: gradle-cache
@@ -378,7 +378,7 @@ entries:
     version: 0.1.0
   jenkins:
   - appVersion: 2.121.2
-    created: 2019-04-23T10:51:23.365183259+01:00
+    created: 2019-04-23T12:18:03.624207373+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -398,7 +398,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.16.19.tgz
     version: 0.16.19
   - appVersion: 2.121.1
-    created: 2019-04-23T10:51:23.366426732+01:00
+    created: 2019-04-23T12:18:03.625617567+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -418,7 +418,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.16.6.tgz
     version: 0.16.6
   - appVersion: "2.107"
-    created: 2019-04-23T10:51:23.365795656+01:00
+    created: 2019-04-23T12:18:03.624921786+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -438,7 +438,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.16.3.tgz
     version: 0.16.3
   - appVersion: "2.107"
-    created: 2019-04-23T10:51:23.36459103+01:00
+    created: 2019-04-23T12:18:03.623447936+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -458,7 +458,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/jenkins-0.15.1.tgz
     version: 0.15.1
   - appVersion: "2.107"
-    created: 2019-04-23T10:51:23.36402785+01:00
+    created: 2019-04-23T12:18:03.622741632+01:00
     description: Open source continuous integration server. It supports multiple SCM
       tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
       Maven-based projects as well as arbitrary scripts.
@@ -479,7 +479,7 @@ entries:
     version: 0.14.3
   kube-prometheus:
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.373016428+01:00
+    created: 2019-04-23T12:18:03.633105285+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 49dc719634f211a86916c33139bb5a6319e6793d446e20ec8e25b3db213969fe
@@ -494,7 +494,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.105.tgz
     version: 0.0.105
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.37012411+01:00
+    created: 2019-04-23T12:18:03.629815278+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 8281e3e3033e790fb49310c7884d8bdc175ebbee96259c389f888e2f416920a8
@@ -509,7 +509,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.100.tgz
     version: 0.0.100
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.385803005+01:00
+    created: 2019-04-23T12:18:03.647138294+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 671062eae7f7d393b933bf4f6f5ee5c6d53d7bc880c5ab7eac6111590a42240c
@@ -524,7 +524,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.95.tgz
     version: 0.0.95
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.382121876+01:00
+    created: 2019-04-23T12:18:03.643590632+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 74e9a38aa19f7c6367527d19dd62f33457878f7cf4a8ff0b0ba193f3ebb0cc74
@@ -539,7 +539,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.66.tgz
     version: 0.0.66
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.379163159+01:00
+    created: 2019-04-23T12:18:03.639927378+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 57ed935c7a0b3203e68a542c3e055cd92321d170b097cbeab09ff6144d4432c9
@@ -556,7 +556,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.53.tgz
     version: 0.0.53
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.37639917+01:00
+    created: 2019-04-23T12:18:03.636845253+01:00
     description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
       cluster monitoring.
     digest: 0ae7068dcc30c2def8f952f404aea06ece5065958ab72b1b608db0d13c82670c
@@ -574,7 +574,7 @@ entries:
     version: 0.0.48
   kubernetes-dashboard:
   - appVersion: 1.8.3
-    created: 2019-04-23T10:51:23.386492078+01:00
+    created: 2019-04-23T12:18:03.647895188+01:00
     description: General-purpose web UI for Kubernetes clusters
     digest: f12c2c38aac84e1f5c161a7335afbfaedffc0b3b65bdfc9541afc1d3925c56bb
     home: https://github.com/kubernetes/dashboard
@@ -592,7 +592,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kubernetes-dashboard-0.7.1.tgz
     version: 0.7.1
   - appVersion: 1.8.3
-    created: 2019-04-23T10:51:23.386141356+01:00
+    created: 2019-04-23T12:18:03.647515337+01:00
     description: General-purpose web UI for Kubernetes clusters
     digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
     home: https://github.com/kubernetes/dashboard
@@ -611,7 +611,7 @@ entries:
     version: 0.6.3
   log-stack:
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.392652973+01:00
+    created: 2019-04-23T12:18:03.654616251+01:00
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: c0542a162fc7307963373c96becd0011aa55bbf8b1e465bf4998d4fae89fb4b4
     name: log-stack
@@ -619,7 +619,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.391155022+01:00
+    created: 2019-04-23T12:18:03.652467917+01:00
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: fd6ac9238cad139c7ea0b6c301ad0489a34fdee5833744c3f404ab96d53b14de
     name: log-stack
@@ -627,7 +627,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.38910606+01:00
+    created: 2019-04-23T12:18:03.65079725+01:00
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: 892fe3ff9c3e7c2324b2e5150d8bc2c775cc2b302b2b3461799a2bee9cff5503
     name: log-stack
@@ -635,7 +635,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.3876725+01:00
+    created: 2019-04-23T12:18:03.649208892+01:00
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: 11b297b7c13576e94ffe9e1882a09e861ee4a0aadaa3ba80bd6d3f2f30d56cfc
     name: log-stack
@@ -645,7 +645,7 @@ entries:
   mailu:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.395235136+01:00
+    created: 2019-04-23T12:18:03.657524383+01:00
     description: A Helm chart for Kubernetes
     digest: 117124f4c7ee8d851f4dcb666eab0658bc10229d431ffbf3ea702448e5c81f2c
     name: mailu
@@ -654,7 +654,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.39395752+01:00
+    created: 2019-04-23T12:18:03.656104623+01:00
     description: A Helm chart for Kubernetes
     digest: c1ab0934fac5f3463ce4746ab0cb52d9367ac552750585a40798d8bad97fd39e
     name: mailu
@@ -664,7 +664,7 @@ entries:
   nexus:
   - apiVersion: v1
     appVersion: 3.13.0
-    created: 2019-04-23T10:51:23.397214126+01:00
+    created: 2019-04-23T12:18:03.659709877+01:00
     description: The Nexus Repository Manager server
     digest: 0fd9af72f48cb359196fc3706111e4a3923dc1d44e6a20edbb2355f9787c53d0
     name: nexus
@@ -673,7 +673,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 3.13.0
-    created: 2019-04-23T10:51:23.396930524+01:00
+    created: 2019-04-23T12:18:03.659404358+01:00
     description: The Nexus Repository Manager server
     digest: edfb8b91688554056edbe1bf08f14b541164d5175f78a09f3eced9c820133a6d
     name: nexus
@@ -682,7 +682,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: 3.13.0-01
-    created: 2019-04-23T10:51:23.396655065+01:00
+    created: 2019-04-23T12:18:03.659097635+01:00
     description: The Nexus Repository Manager server
     digest: a9e2fee4d2b864d1b191357af59bf58a8dfcc0cd14f5a58472ae0ff2db462e56
     name: nexus
@@ -691,7 +691,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.12.1
-    created: 2019-04-23T10:51:23.39637468+01:00
+    created: 2019-04-23T12:18:03.658769919+01:00
     description: The Nexus Repository Manager server
     digest: dbe2e27c1182d7f3d43cec577623a5db23261ac7626602335d2cbd1e97eed7dd
     name: nexus
@@ -700,7 +700,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.10.0
-    created: 2019-04-23T10:51:23.396080342+01:00
+    created: 2019-04-23T12:18:03.658464352+01:00
     description: The Nexus Repository Manager server
     digest: 2de8f7fdb46b0c4e56676076cacf526c43a2260bde0767eb19d29423b5ab21fd
     name: nexus
@@ -709,7 +709,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2019-04-23T10:51:23.395799879+01:00
+    created: 2019-04-23T12:18:03.658158193+01:00
     description: The Nexus Repository Manager server
     digest: bf7a5a1ed5840dcb4d7eba1cfc402347124b783cb582de23b8ac968ec19bd66f
     name: nexus
@@ -718,7 +718,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.9.0
-    created: 2019-04-23T10:51:23.395522541+01:00
+    created: 2019-04-23T12:18:03.6578431+01:00
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -728,7 +728,7 @@ entries:
   nfs-client-provisioner:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.398018471+01:00
+    created: 2019-04-23T12:18:03.660144957+01:00
     description: A Helm chart for Kubernetes
     digest: 3502531d5c7439d115dbded32239ae97d013985f58ae093736bc77c8b17e048a
     name: nfs-client-provisioner
@@ -737,7 +737,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.39741185+01:00
+    created: 2019-04-23T12:18:03.659928893+01:00
     description: A Helm chart for Kubernetes
     digest: 5560b0933e98af761c0130c18e8a1615616bc60da67e86282aec337f2fc84e02
     name: nfs-client-provisioner
@@ -746,7 +746,7 @@ entries:
     version: 0.1.0
   nginx-ingress:
   - appVersion: 0.17.1
-    created: 2019-04-23T10:51:23.402056342+01:00
+    created: 2019-04-23T12:18:03.664939563+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: bc32406313e0a7a5dc6ca8e82619abaa7459e2747a9eb566de23a63ece670114
@@ -770,7 +770,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.25.0.tgz
     version: 0.25.0
   - appVersion: 0.15.0
-    created: 2019-04-23T10:51:23.401393826+01:00
+    created: 2019-04-23T12:18:03.664239569+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 649bf8aff9f754bbdf448cbf8ef69c8108ddca7d9cd52f2d4ef5de0ee98e6bc4
@@ -794,7 +794,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.23.0.tgz
     version: 0.23.0
   - appVersion: 0.15.0
-    created: 2019-04-23T10:51:23.400745062+01:00
+    created: 2019-04-23T12:18:03.66354646+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 830493d9f39c229628df47e13c1fd4d79ad01ff4bbf15f115f53ad062dd885fc
@@ -818,7 +818,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.22.1.tgz
     version: 0.22.1
   - appVersion: 0.13.0
-    created: 2019-04-23T10:51:23.40011667+01:00
+    created: 2019-04-23T12:18:03.662846733+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 06c049f6731c0668f920b9546955aa5849b08f282ad0076d91f3cf69d02328df
@@ -842,7 +842,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.17.1.tgz
     version: 0.17.1
   - appVersion: 0.12.0
-    created: 2019-04-23T10:51:23.399493794+01:00
+    created: 2019-04-23T12:18:03.662141222+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
@@ -866,7 +866,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/nginx-ingress-0.12.2.tgz
     version: 0.12.2
   - appVersion: 0.11.0
-    created: 2019-04-23T10:51:23.398857809+01:00
+    created: 2019-04-23T12:18:03.661071712+01:00
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
@@ -891,7 +891,7 @@ entries:
   prometheus-operator:
   - apiVersion: v1
     appVersion: 0.20.0
-    created: 2019-04-23T10:51:23.40406474+01:00
+    created: 2019-04-23T12:18:03.667142126+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: c0f44f01a108a16e5407bf36869eca610736cb928ed34c5f838aef004555b57d
@@ -911,7 +911,7 @@ entries:
     version: 0.0.29
   - apiVersion: v1
     appVersion: 0.20.0
-    created: 2019-04-23T10:51:23.403721727+01:00
+    created: 2019-04-23T12:18:03.666770146+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: 35a9d34c909f95fc1d909d959685fda9497436f9f655f1716e1015ccbb8e8a77
@@ -931,7 +931,7 @@ entries:
     version: 0.0.28
   - apiVersion: v1
     appVersion: 0.20.0
-    created: 2019-04-23T10:51:23.403377892+01:00
+    created: 2019-04-23T12:18:03.666387192+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: e7243df69ed22c47360994b91fccb000c4bc0d86d56772960ba074e9e7b75198
@@ -951,7 +951,7 @@ entries:
     version: 0.0.27
   - apiVersion: v1
     appVersion: 0.19.0
-    created: 2019-04-23T10:51:23.403036528+01:00
+    created: 2019-04-23T12:18:03.666004442+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: d88306ea4d12ef3e8096a273c394156040cf7f0071a7d2a576ca1535f72c1b5a
@@ -970,7 +970,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.24.tgz
     version: 0.0.24
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.402672116+01:00
+    created: 2019-04-23T12:18:03.665609898+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: acbb7ab23fcf3cc14a727ccda4af57a504f80b411388872becc2d88b439dd1c3
@@ -987,7 +987,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.17.tgz
     version: 0.0.17
   - apiVersion: v1
-    created: 2019-04-23T10:51:23.402369556+01:00
+    created: 2019-04-23T12:18:03.665275079+01:00
     description: Provides easy monitoring definitions for Kubernetes services, and
       deployment and management of Prometheus instances.
     digest: 404ee72040d31812c40fe6302aeac1e9e9e3158c8c98ea9489b2cc0108e2603d
@@ -1006,7 +1006,16 @@ entries:
   puppetserver:
   - apiVersion: v1
     appVersion: 6.3.0
-    created: 2019-04-23T10:51:23.40584526+01:00
+    created: 2019-04-23T12:18:03.670172558+01:00
+    description: A Helm chart for Kubernetes
+    digest: 48c22e78a8ec205c8f6e96498647ee20c34f14fa71ebe7b3f38546fc3ecfd289
+    name: puppetserver
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/puppetserver-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: 6.3.0
+    created: 2019-04-23T12:18:03.668349985+01:00
     description: A Helm chart for Kubernetes
     digest: 053f2815dcc3971610154a6363b2011b225595dd7305d29e2e9d9394d49b0a5a
     name: puppetserver
@@ -1015,7 +1024,7 @@ entries:
     version: 0.1.0
   rocketchat:
   - appVersion: 0.69.1
-    created: 2019-04-23T10:51:23.408445112+01:00
+    created: 2019-04-23T12:18:03.673005368+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 9f717b43ed76c78897f01e622d0ad95c7e13b65f4d3cf3f35f695fcde8c4cca1
@@ -1044,7 +1053,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.6.tgz
     version: 0.1.6
   - appVersion: "0.56"
-    created: 2019-04-23T10:51:23.40761493+01:00
+    created: 2019-04-23T12:18:03.672085747+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 38b1214279db1e7f2ef553e91781304f9490e949a953553a6a4b40e53cc32510
@@ -1072,7 +1081,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.5.tgz
     version: 0.1.5
   - appVersion: "0.56"
-    created: 2019-04-23T10:51:23.407038371+01:00
+    created: 2019-04-23T12:18:03.671418211+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 3106900a754926adae28b36d522d57071923f734d34470dd8651738ad29d48ea
@@ -1100,7 +1109,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/rocketchat-0.1.4.tgz
     version: 0.1.4
   - appVersion: "0.56"
-    created: 2019-04-23T10:51:23.406470398+01:00
+    created: 2019-04-23T12:18:03.670799289+01:00
     description: Prepare to take off with the ultimate chat platform, experience the
       next level of team communications
     digest: 46cffc9b56457cff2771036a4f7cc96c7fb2b5acb5c0cf26efd54c82abe12e83
@@ -1130,7 +1139,7 @@ entries:
   simple-manifests:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.408581965+01:00
+    created: 2019-04-23T12:18:03.673161119+01:00
     description: A Helm chart for Kubernetes
     digest: 69ff47ecc35158c4c12dd28d046dad95d603699ce2cf12f1b792c150b0f9d07f
     name: simple-manifests
@@ -1139,7 +1148,7 @@ entries:
     version: 0.1.0
   spotify-docker-gc:
   - appVersion: latest
-    created: 2019-04-23T10:51:23.408802081+01:00
+    created: 2019-04-23T12:18:03.673401963+01:00
     description: A simple Docker container and image garbage collection script.
     digest: ad48f3ff8ef708e977d1b151ca1964a4a4cdf7d72ef65c0c3492ea707faea7a7
     home: https://github.com/spotify/docker-gc
@@ -1155,7 +1164,7 @@ entries:
   taiga:
   - apiVersion: v1
     appVersion: 4.1.1
-    created: 2019-04-23T10:51:23.424179388+01:00
+    created: 2019-04-23T12:18:03.689976202+01:00
     description: A Helm chart for Kubernetes
     digest: 3b100e8897d1b03b296e774bd24e6768c4dbfc94ca781fdf261575dcfd2d0046
     name: taiga
@@ -1164,7 +1173,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: 4.1.1
-    created: 2019-04-23T10:51:23.421245784+01:00
+    created: 2019-04-23T12:18:03.686777835+01:00
     description: A Helm chart for Kubernetes
     digest: 67ac6230f0e1af840b22625b8722c0ff1d7afdf261c99f88d56a8f085196dc92
     name: taiga
@@ -1173,7 +1182,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: 4.1.1
-    created: 2019-04-23T10:51:23.418900874+01:00
+    created: 2019-04-23T12:18:03.684249766+01:00
     description: A Helm chart for Kubernetes
     digest: f8031cd5107476254f57fa9fee025f188ae13e23b364af70a56e326550ef2404
     name: taiga
@@ -1182,7 +1191,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: 4.1.1
-    created: 2019-04-23T10:51:23.416600134+01:00
+    created: 2019-04-23T12:18:03.681736575+01:00
     description: A Helm chart for Kubernetes
     digest: fc8e282b6f91ba33ba7f3dc654725da8dc94c5113cd15eabb0f42a9b098a16ae
     name: taiga
@@ -1191,7 +1200,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: 4.1.1
-    created: 2019-04-23T10:51:23.414266023+01:00
+    created: 2019-04-23T12:18:03.67922473+01:00
     description: A Helm chart for Kubernetes
     digest: 2c05ca6c6d726b633d8607e915fa6e9bbb904db68a7820b576f0c5f705217367
     name: taiga
@@ -1200,11 +1209,11 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-23T10:51:23.411119574+01:00
+    created: 2019-04-23T12:18:03.675942407+01:00
     description: A Helm chart for Kubernetes
     digest: 4d191760e4c6c6c853df9bff351e4b7b4e729bac918fbac377c1aec8bcd4c115
     name: taiga
     urls:
     - https://cgi-eoss.github.io/cgici-charts/taiga-0.1.0.tgz
     version: 0.1.0
-generated: 2019-04-23T10:51:23.352661966+01:00
+generated: 2019-04-23T12:18:03.609459997+01:00

@@ -48,3 +48,12 @@ Value for DNS_ALT_NAMES.
 {{- define "puppetserver.puppetdbDatabaseConnection" -}}
 {{- .Values.puppetdb.puppetdbDatabaseConnection | default ( printf "//%s:%d/%s" (printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-") (.Values.postgresql.service.port | int) (.Values.postgresql.postgresqlDatabase) ) -}}
 {{- end -}}
+
+{{- define "puppetserver.puppetdbServerUrls" -}}
+{{- $this := . -}}
+{{- $pdb := dict "servers" (list) -}}
+{{- range int .Values.puppetdb.replicaCount | until -}}
+{{- $noop := printf "https://%s-puppetdb-%d:8081" (include "puppetserver.fullname" $this ) . | append $pdb.servers | set $pdb "servers" -}}
+{{- end -}}
+{{- join "," $pdb.servers -}}
+{{- end -}}

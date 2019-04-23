@@ -52,6 +52,8 @@ spec:
           value: {{ .Values.autosign | quote }}
         - name: DNS_ALT_NAMES
           value: {{ include "puppetserver.dnsAltNames" . }}
+        - name: PUPPETDB_SERVER_URLS
+          value: {{ include "puppetserver.puppetdbServerUrls" . }}
         ports:
         - name: https
           containerPort: 8140
