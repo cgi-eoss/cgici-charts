@@ -11,6 +11,21 @@ images:
   tag: "1.6"
 
 certificateSecretName: mailu-certificates-all
+uiCertificateSecretName: mailui-tls
+
+configureExternalDns: true
+
+certificate:
+  enabled: true
+  acme:
+    config:
+    - dns01:
+        provider: cert-manager-provider
+      domains:
+      - mail.example.com
+  issuerRef:
+    kind: Issuer
+    name: issuer-name
 
 mailu:
   # Mount path of volumes
@@ -27,7 +42,11 @@ mailu:
   domain: example.com
 
   # Public hostname for this server - although Mailu supports multiple hostnames this chart expects a single value
+  # Used for `front` LoadBalancer service
   hostname: mail.example.com
+
+  # Used for UI ingresses
+  uiHostname: mailui.example.com
 
   # Postmaster local part (will append the main mail domain)
   postmaster: "admin"

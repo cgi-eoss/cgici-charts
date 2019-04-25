@@ -11,18 +11,13 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    {{/*nginx.nginx.ingress.kubernetes.io/configuration-snippet: |*/}}
-      {{/*proxy_set_header Host $http_host;*/}}
-      {{/*proxy_set_header X-Real-IP $remote_addr;*/}}
-      {{/*proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;*/}}
-      {{/*proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;*/}}
 spec:
   tls:
   - hosts:
-    - {{ .Values.mailu.hostname  }}
-    secretName: {{ .Values.certificateSecretName }}
+    - {{ .Values.mailu.uiHostname  }}
+    secretName: {{ .Values.uiCertificateSecretName }}
   rules:
-  - host: {{ .Values.mailu.hostname  }}
+  - host: {{ .Values.mailu.uiHostname  }}
     http:
       paths:
       - path: "/"

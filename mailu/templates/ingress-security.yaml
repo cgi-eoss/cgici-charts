@@ -18,10 +18,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ .Values.mailu.hostname  }}
-    secretName: {{ .Values.certificateSecretName }}
+    - {{ .Values.mailu.uiHostname  }}
+    secretName: {{ .Values.uiCertificateSecretName }}
   rules:
-  - host: {{ .Values.mailu.hostname  }}
+  - host: {{ .Values.mailu.uiHostname  }}
     http:
       paths:
       - path: "/admin/antispam"

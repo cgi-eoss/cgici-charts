@@ -11,15 +11,15 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/permanent-redirect: "https://{{ .Values.mailu.hostname }}/admin/ui/"
+    nginx.ingress.kubernetes.io/permanent-redirect: "https://{{ .Values.mailu.uiHostname }}/admin/ui/"
     ingress.kubernetes.io/follow-redirects: "true"
 spec:
   tls:
   - hosts:
-    - {{ .Values.mailu.hostname  }}
-    secretName: {{ .Values.certificateSecretName }}
+    - {{ .Values.mailu.uiHostname  }}
+    secretName: {{ .Values.uiCertificateSecretName }}
   rules:
-  - host: {{ .Values.mailu.hostname  }}
+  - host: {{ .Values.mailu.uiHostname  }}
     http:
       paths:
       - path: "/admin"
@@ -45,10 +45,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - {{ .Values.mailu.hostname  }}
-    secretName: {{ .Values.certificateSecretName }}
+      - {{ .Values.mailu.uiHostname  }}
+    secretName: {{ .Values.uiCertificateSecretName }}
   rules:
-  - host: {{ .Values.mailu.hostname  }}
+  - host: {{ .Values.mailu.uiHostname  }}
     http:
       paths:
       - path: "/admin/ui"
@@ -74,10 +74,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ .Values.mailu.hostname  }}
-    secretName: {{ .Values.certificateSecretName }}
+    - {{ .Values.mailu.uiHostname  }}
+    secretName: {{ .Values.uiCertificateSecretName }}
   rules:
-  - host: {{ .Values.mailu.hostname  }}
+  - host: {{ .Values.mailu.uiHostname  }}
     http:
       paths:
       - path: "/admin/static"
