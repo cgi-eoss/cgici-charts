@@ -14,18 +14,22 @@ PACKAGES=(
     'elasticsearch'
     'fluentd-elasticsearch'
     'gerrit'
+    'gradle-cache'
+    'jaeger-operator'
     'jenkins'
     'kube-prometheus'
     'kubernetes-dashboard'
     'log-stack'
+    'mailu'
     'nexus'
     'nfs-client-provisioner'
     'nginx-ingress'
     'prometheus-operator'
+    'puppetserver'
     'rocketchat'
     'simple-manifests'
     'spotify-docker-gc'
-	'taiga'
+    'taiga'
 )
 
 if [ -n "${1:-}" ]; then
