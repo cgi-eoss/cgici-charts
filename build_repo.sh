@@ -33,10 +33,10 @@ PACKAGES=(
 )
 
 if [ -n "${1:-}" ]; then
-    helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${1}"
+    helm package --destination=${REPO_PATH} "${CHART_BASE}/${1}"
 else
     for pkg in ${PACKAGES[@]}; do
-        helm package --destination=${REPO_PATH} --save=false "${CHART_BASE}/${pkg}"
+        helm package --destination=${REPO_PATH} "${CHART_BASE}/${pkg}"
     done
 fi
 

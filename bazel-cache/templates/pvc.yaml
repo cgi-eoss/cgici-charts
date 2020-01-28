@@ -1,0 +1,28 @@
+{{- if .Values.cache.persistentVolume.enabled -}}
+{{- if not .Values.cache.persistentVolume.existingClaim -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "bazel-cache.fullname" . }}
+  labels: {{ include "bazel-cache.labels" . | nindent 4 }}
+  {{- if .Values.cache.persistentVolume.annotations }}
+  annotations:
+    {{- toYaml .Values.cache.persistentVolume.annotations | indent 4 }}
+  {{- end }}
+spec:
+  accessModes: {{ toYaml .Values.cache.persistentVolume.accessModes | nindent 4 }}
+  {{- if .Values.cache.persistentVolume.storageClass }}
+  {{- if (eq "-" .Values.cache.persistentVolume.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{ .Values.cache.persistentVolume.storageClass }}"
+  {{- end }}
+  {{- end }}
+  {{- if .Values.cache.persistentVolume.volumeBindingMode }}
+  volumeBindingModeName: "{{ .Values.cache.persistentVolume.volumeBindingMode }}"
+  {{- end }}
+  resources:
+    requests:
+      storage: "{{ .Values.cache.persistentVolume.size }}"
+{{- end -}}
+{{- end -}}

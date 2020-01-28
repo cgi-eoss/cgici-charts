@@ -1,80 +1,171 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "bazel-cache.fullname" . }}
+  name: {{ include "bazel-cache.fullname" . }}
   labels:
-    app: {{ template "bazel-cache.name" . }}
-    chart: {{ template "bazel-cache.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "bazel-cache.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "bazel-cache.name" . }}
-      release: {{ .Release.Name }}
+      {{- include "bazel-cache.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.cache.replicaCount }}
+  {{- if .Values.cache.strategy }}
+  strategy:
+  {{- toYaml .Values.cache.strategy | indent 4 }}
+  {{- end }}
   template:
     metadata:
       labels:
-        app: {{ template "bazel-cache.name" . }}
-        release: {{ .Release.Name }}
+        {{- include "bazel-cache.selectorLabels" . | nindent 8 }}
     spec:
-      securityContext:
-        runAsUser: {{ .Values.service.runAsUser }}
-        fsGroup: {{ .Values.service.fsGroup }}
-      {{- if .Values.imagePullSecrets }}
+    {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "bazel-cache.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            - "--dir={{ .Values.dir }}"
-            - "--max_size={{ .Values.max_size }}"
-            - "--port={{ .Values.service.internalPort }}"
-{{- if .Values.extraArgs }}
-{{ toYaml .Values.extraArgs | indent 12 }}
-{{- end }}
+          {{- range $key, $value := .Values.cache.extraArgs }}
+            {{- if $value }}
+            - --{{ $key }}={{ $value }}
+            {{- else }}
+            - --{{ $key }}
+            {{- end }}
+          {{- end }}
+          env:
+            - name: BAZEL_REMOTE_DIR
+              value: {{ .Values.cache.persistentVolume.mountPath }}
+            - name: BAZEL_REMOTE_MAX_SIZE
+              value: {{ .Values.cache.maxSize | quote }}
+            - name: BAZEL_REMOTE_PORT
+              value: {{ .Values.cache.port | quote }}
+            - name: BAZEL_REMOTE_GRPC_PORT
+              value: {{ .Values.cache.grpcPort | quote }}
+            - name: BAZEL_REMOTE_PROFILE_HOST
+              value: {{ .Values.cache.profileHost | quote }}
+            - name: BAZEL_REMOTE_PROFILE_PORT
+              value: {{ .Values.cache.profilePort | quote }}
+            {{- if .Values.cache.idleTimeout }}
+            - name: BAZEL_REMOTE_IDLE_TIMEOUT
+              value: {{ .Values.cache.idleTimeout | quote }}
+            {{- end }}
+            {{- if .Values.cache.s3.endpoint }}
+            - name: BAZEL_REMOTE_S3_ENDPOINT
+              value: {{ .Values.cache.s3.endpoint | quote }}
+            - name: BAZEL_REMOTE_S3_BUCKET
+              value: {{ .Values.cache.s3.bucket | quote }}
+            - name: BAZEL_REMOTE_S3_PREFIX
+              value: {{ .Values.cache.s3.prefix | quote }}
+            - name: BAZEL_REMOTE_S3_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "bazel-cache.fullname" . }}
+                  key: s3-access-key-id
+            - name: BAZEL_REMOTE_S3_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "bazel-cache.fullname" . }}
+                  key: s3-secret-access-key
+            - name: BAZEL_REMOTE_S3_DISABLE_SSL
+              value: {{ .Values.cache.s3.disableSsl | quote }}
+            {{- end }}
+            - name: BAZEL_REMOTE_DISABLE_HTTP_AC_VALIDATION
+              value: {{ .Values.cache.disableHttpAcValidation | quote }}
+            {{- if .Values.cache.extraEnvs }}
+            {{- toYaml .Values.cache.extraEnvs | indent 12 }}
+            {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.internalPort }}
+              containerPort: {{ .Values.cache.port }}
               protocol: TCP
-          volumeMounts:
-            - name: bazel-cache-root
-              subPath: data
-              mountPath: {{ .Values.dir }}
-{{- if .Values.service.healthProbes }}
+            - name: grpc
+              containerPort: {{ .Values.cache.grpcPort }}
+              protocol: TCP
+            {{- if .Values.cache.profilePort }}
+            - name: profile
+              containerPort: {{ .Values.cache.profilePort }}
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             tcpSocket:
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: {{ .Values.service.healthProbesTimeout }}
+              port: http
           readinessProbe:
             tcpSocket:
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: {{ .Values.service.healthProbesTimeout }}
-{{- end }}
+              port: http
           resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: cache-volume
+              mountPath: {{ .Values.cache.persistentVolume.mountPath }}
+            {{- range .Values.cache.extraHostPathMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              subPath: {{ .subPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
+            {{- range .Values.cache.extraConfigmapMounts }}
+            - name: {{ template "bazel-cache.fullname" . }}-{{ .name }}
+              mountPath: {{ .mountPath }}
+              subPath: {{ .subPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
+            {{- range .Values.cache.extraSecretMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              subPath: {{ .subPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
+            {{- if .Values.cache.extraVolumeMounts }}
+              {{- toYaml .Values.cache.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
     {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
+        {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: bazel-cache-root
-        {{- if .Values.persistence.enabled }}
+        - name: cache-volume
+        {{- if .Values.cache.persistentVolume.enabled }}
           persistentVolumeClaim:
-            claimName: {{ .Values.persistence.existingClaim | default (include "bazel-cache.fullname" .) }}
+            claimName: {{ if .Values.cache.persistentVolume.existingClaim }}{{ .Values.cache.persistentVolume.existingClaim }}{{- else }}{{ template "bazel-cache.fullname" . }}{{- end }}
         {{- else }}
-          emptyDir: {}
+          emptyDir:
+            {{- if .Values.cache.emptyDir.sizeLimit }}
+              sizeLimit: {{ .Values.cache.emptyDir.sizeLimit }}
+            {{- else }}
+              {}
+            {{- end -}}
         {{- end -}}
-
+        {{- if .Values.cache.extraVolumes }}
+        {{- toYaml .Values.cache.extraVolumes | indent 8}}
+        {{- end }}
+        {{- range .Values.cache.extraHostPathMounts }}
+        - name: {{ .name }}
+          hostPath:
+            path: {{ .hostPath }}
+        {{- end }}
+        {{- range .Values.cache.extraConfigmapMounts }}
+        - name: {{ template "bazel-cache.fullname" . }}-{{ .name }}
+          configMap:
+            name: {{ .configMap }}
+        {{- end }}
+        {{- range .Values.cache.extraSecretMounts }}
+        - name: {{ .name }}
+          secret:
+            secretName: {{ .secretName }}
+        {{- end }}
