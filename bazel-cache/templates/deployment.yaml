@@ -9,10 +9,10 @@ spec:
   selector:
     matchLabels:
       {{- include "bazel-cache.selectorLabels" . | nindent 6 }}
-  replicas: {{ .Values.cache.replicaCount }}
-  {{- if .Values.cache.strategy }}
+  replicas: {{ .Values.replicaCount }}
+  {{- if .Values.strategy }}
   strategy:
-  {{- toYaml .Values.cache.strategy | indent 4 }}
+  {{- toYaml .Values.strategy | indent 4 }}
   {{- end }}
   template:
     metadata:
@@ -95,10 +95,12 @@ spec:
               protocol: TCP
             {{- end }}
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /status
               port: http
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /status
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

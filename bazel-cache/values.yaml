@@ -43,6 +43,8 @@ cache:
   extraSecretMounts: []
 
 replicaCount: 1
+#strategy:
+#  type: Recreate
 
 image:
   repository: buchgr/bazel-remote-cache
