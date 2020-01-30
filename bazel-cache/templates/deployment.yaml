@@ -9,10 +9,9 @@ spec:
   selector:
     matchLabels:
       {{- include "bazel-cache.selectorLabels" . | nindent 6 }}
-  replicas: {{ .Values.replicaCount }}
-  {{- if .Values.strategy }}
-  strategy:
-  {{- toYaml .Values.strategy | indent 4 }}
+  replicas: {{ .Values.cache.replicaCount }}
+  {{- if .Values.cache.strategy }}
+  strategy: {{- toYaml .Values.cache.strategy | nindent 4 }}
   {{- end }}
   template:
     metadata:

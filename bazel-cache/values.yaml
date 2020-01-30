@@ -18,8 +18,8 @@ cache:
   disableHttpAcValidation: "false"
 
   replicaCount: 1
-  #strategy:
-  #  type: Recreate
+  strategy:
+    type: Recreate
 
   # persistence configuration
   persistentVolume:
@@ -35,16 +35,12 @@ cache:
   emptyDir:
     sizeLimit: ""
 
-  extraArgs: []
+  extraArgs: {}
   extraEnvs: {}
   extraVolumes: []
   extraHostPathMounts: []
   extraConfigmapMounts: []
   extraSecretMounts: []
-
-replicaCount: 1
-#strategy:
-#  type: Recreate
 
 image:
   repository: buchgr/bazel-remote-cache
