@@ -2,7 +2,7 @@
 {{- $fullName := include "taiga.fullname" . -}}
 {{- $ingressPaths := .Values.ingress.paths -}}
 {{- $taigaEventsEnabled := .Values.taigaEventsEnabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}

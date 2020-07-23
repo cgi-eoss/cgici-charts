@@ -1,12 +1,12 @@
 dependencies:
 - name: postgresql
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 3.10.1
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.1.1
 - name: rabbitmq
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 4.2.0
+  repository: https://charts.bitnami.com/bitnami
+  version: 7.5.6
 - name: redis
-  repository: https://kubernetes-charts.storage.googleapis.com/
-  version: 6.0.1
-digest: sha256:2ef0eb0f8ffdd1e856986e3e27c7dd80cc8d5313383638f96a9eb6ad45585ff3
-generated: 2019-02-11T17:21:49.546911531Z
+  repository: https://charts.bitnami.com/bitnami
+  version: 10.7.11
+digest: sha256:6946bb40b93501bcf45e0b8420dbc1ac7aae509d1adbbc7aa675de6339ea0509
+generated: "2020-07-23T11:35:45.043362546+01:00"

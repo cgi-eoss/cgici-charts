@@ -119,14 +119,15 @@ postgresql:
 
 # Some defaults from the values-production.yaml config
 rabbitmq:
-  rabbitmq:
+  auth:
     username: "taiga"
     password: "taigaeventspass"
   service:
     port: 5672
-  requests:
-    memory: 128Mi
-    cpu: 100m
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
 
 # Small-scale single-node redis for celery task management
 redis:

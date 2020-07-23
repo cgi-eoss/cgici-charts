@@ -51,7 +51,7 @@ Create taiga URL string
 {{- end -}}
 
 {{- define "taiga.rabbitmqUrl" -}}
-{{- printf "amqp://%s:%s@%s-%s:%d//" .Values.rabbitmq.rabbitmq.username .Values.rabbitmq.rabbitmq.password .Release.Name ("rabbitmq" | trunc 63 | trimSuffix "-") (int .Values.rabbitmq.service.port) -}}
+{{- printf "amqp://%s:%s@%s-%s:%d//" .Values.rabbitmq.auth.username .Values.rabbitmq.auth.password .Release.Name ("rabbitmq" | trunc 63 | trimSuffix "-") (int .Values.rabbitmq.service.port) -}}
 {{- end -}}
 {{- define "taiga.redisUrl" -}}
 {{- printf "redis://%s-%s:%d/" .Release.Name ("redis-master" | trunc 63 | trimSuffix "-") (int .Values.redis.master.service.port) -}}
