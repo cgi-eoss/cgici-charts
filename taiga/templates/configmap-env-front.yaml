@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "common.names.fullname" . }}-env-front
+  labels:
+  {{- include "common.labels.standard" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  namespace: {{ .Release.Namespace }}
+data:
+  TAIGA_URL: {{ printf "%s://%s" (include "taiga.protocol" .) (include "taiga.host" .) }}
+  TAIGA_WEBSOCKETS_URL: {{ printf "%s://%s" "ws" (include "taiga.host" .) }}
+  PUBLIC_REGISTER_ENABLED: {{ .Values.taiga.publicRegisterEnabled | lower | quote }}
+  GITHUB_CLIENT_ID: {{ .Values.taiga.github.apiClientId | quote }}
+  GITLAB_CLIENT_ID: {{ .Values.taiga.gitlab.apiClientId | quote }}
+  GITLAB_URL: {{ .Values.taiga.gitlab.url | quote }}
+  ENABLE_GITHUB_IMPORTER: {{ .Values.taiga.githubImporter.enabled | lower | quote }}
+  ENABLE_JIRA_IMPORTER: {{ .Values.taiga.jiraImporter.enabled | lower | quote }}
+  ENABLE_TRELLO_IMPORTER: {{ .Values.taiga.trelloImporter.enabled | lower | quote }}

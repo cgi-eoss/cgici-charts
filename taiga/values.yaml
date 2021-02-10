@@ -2,108 +2,452 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
-taigaBackImage:
-  repository: cgici/taiga-back
-  tag: 4.1.1
-  pullPolicy: IfNotPresent
-
-taigaFrontImage:
-  repository: cgici/taiga-front
-  tag: 4.1.1
-  pullPolicy: IfNotPresent
-
-taigaEventsImage:
-  repository: cgici/taiga-events
-  tag: 4.1.1
-  pullPolicy: IfNotPresent
-
+imagePullSecrets: [ ]
 nameOverride: ""
 fullnameOverride: ""
 
-taigaBackServiceType: ClusterIP
-taigaBackServicePort: 8001
-taigaFrontServiceType: ClusterIP
-taigaFrontServicePort: 80
-taigaEventsServiceType: ClusterIP
-taigaEventsServicePort: 8888
+taiga:
+  # !! MANDATORY !! - TAIGA_SECRET_KEY environment variable, used by taiga-back and taiga-events to secure records
+  secretKey:
+  email:
+    enabled: false
+    backend: "django.core.mail.backends.smtp.EmailBackend"
+    defaultFromEmail: "no-reply@example.com"
+    useTls: "False"
+    useSsl: "False"
+    host: "smtp.host.example.com"
+    port: "587"
+    hostUser: "user"
+    hostPassword: "password"
+  publicRegisterEnabled: "False"
+  enableTelemetry: "False"
+  protectedMaxAge: "360"
+  github:
+    apiClientId: ""
+    apiClientSecret: "github-api-client-secret"
+  gitlab:
+    apiClientId: ""
+    apiClientSecret: "gitlab-api-client-secret"
+    url: "gitlab-url"
+  githubImporter:
+    enabled: "False"
+    clientId: ""
+    clientSecret: "client-secret-from-github"
+  jiraImporter:
+    enabled: "False"
+    consumerKey: "consumer-key-from-jira"
+    cert: "cert-from-jira"
+    pubCert: "pub-cert-from-jira"
+  trelloImporter:
+    enabled: "False"
+    apiKey: ""
+    secretKey: "secret-key-from-trello"
 
-ingress:
-  enabled: false
-  annotations:
-    # Websocket and large file upload support
-    nginx.ingress.kubernetes.io/proxy-send-timeout: '7d'
-    nginx.ingress.kubernetes.io/proxy-read-timeout: '7d'
-    nginx.ingress.kubernetes.io/proxy-body-size: '50M'
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - taiga.local
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - taiga.local
+taigaBack:
+  image:
+    registry: docker.io
+    repository: taigaio/taiga-back
+    tag: 6.0.2
+    pullPolicy: IfNotPresent
+  port: 8000
+  env: { }
+  resources: { }
+  #    requests:
+  #      memory: 128Mi
+  #      cpu: 250m
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 20
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 30
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 6
+    successThreshold: 1
+  startupProbe:
+    enabled: false
+    path: /api/v1/
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 1
+    successThreshold: 1
+
+taigaAsync:
+  env: { }
+  resources: { }
+
+#    requests:
+#      memory: 128Mi
+#      cpu: 250m
+taigaFront:
+  image:
+    registry: docker.io
+    repository: taigaio/taiga-front
+    tag: 6.0.3
+    pullPolicy: IfNotPresent
+  port: 80
+  env: { }
+  resources: { }
+  #    requests:
+  #      memory: 128Mi
+  #      cpu: 250m
+  livenessProbe:
+    enabled: true
+    path: "/"
+    initialDelaySeconds: 20
+    timeoutSeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    path: "/"
+    initialDelaySeconds: 5
+    timeoutSeconds: 3
+    periodSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+
+taigaEvents:
+  image:
+    registry: docker.io
+    repository: taigaio/taiga-events
+    tag: 6.0.1
+    pullPolicy: IfNotPresent
+  port: 8888
+  appPort: 3023
+  env: { }
+  resources: { }
+  #    requests:
+  #      memory: 128Mi
+  #      cpu: 250m
+  livenessProbe:
+    enabled: true
+    path: "/healthz"
+    initialDelaySeconds: 20
+    timeoutSeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    path: "/healthz"
+    initialDelaySeconds: 5
+    timeoutSeconds: 3
+    periodSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+
+taigaProtected:
+  image:
+    registry: docker.io
+    repository: taigaio/taiga-protected
+    tag: 6.0.0
+    pullPolicy: IfNotPresent
+  port: 8003
+  env: { }
+  resources: { }
+  #    requests:
+  #      memory: 128Mi
+  #      cpu: 250m
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 20
+    timeoutSeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    timeoutSeconds: 3
+    periodSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+
+taigaGateway:
+  image:
+    registry: docker.io
+    repository: nginx
+    tag: 1.19-alpine
+    pullPolicy: IfNotPresent
+  port: 8008
+  env: { }
+  resources: { }
+  service:
+    annotations: { }
+  #    requests:
+  #      memory: 128Mi
+  #      cpu: 250m
+  livenessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 20
+    timeoutSeconds: 5
+    periodSeconds: 10
+    failureThreshold: 6
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    path: /api/v1/
+    initialDelaySeconds: 5
+    timeoutSeconds: 3
+    periodSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+
+# Probably not a good idea to change this...
+replicaCount: 1
+
+## Deployment pod host aliases
+## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+##
+hostAliases: [ ]
+
+updateStrategy:
+  type: Recreate
+
+commonLabels: { }
+commonAnnotations: { }
+
+podLabels: { }
+podAnnotations: { }
+podSecurityContext: { }
+# fsGroup: 2000
 
 securityContext:
-  # Default ownership matching the service user inside the cgici/taiga-back and cgici/taiga-events images
-  runAsUser: 1000
-  fsGroup: 1000
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # Default ownership matching the service user inside the taigaio images
+  runAsNonRoot: true
+  runAsUser: 999
+  fsGroup: 999
 
-# TAIGA_HOSTNAME environment variable, used by taiga-back to construct URLs - should likely align with an ingress host
-taigaHostname: taiga.local
-# TAIGA_PROTOCOL environment variable, used by taiga-back to construct URLs - should be https if ingress TLS is enabled
-taigaProtocol: http
-# !! MANDATORY !! - TAIGA_SECRET_KEY environment variable, used by taiga-back and taiga-events to secure records
-# taigaSecretKey:
+## Primary service configuration, connected to taiga-gateway
+##
+service:
+  type: ClusterIP
 
-taigaEventsEnabled: false
-#taigaRabbitUrl:
-#taigaRedisUrl:
+  # HTTP Port
+  port: 80
 
-taigaEmailEnabled: false
-taigaEmailFrom: no-reply@taiga.local
-#taigaEmailHost: smtp.taiga.local
-#taigaEmailPort: 22
-#taigaEmailUser:
-#taigaEmailPass:
-taigaEmailTls: false
+  ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  # nodePort:
 
-frontResources:
-  requests:
-    memory: 64Mi
-    cpu: 100m
-backResources:
-  requests:
-    memory: 256Mi
-    cpu: 100m
-eventsResources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-#  memory: 128Mi
+  ## Provide any additional annotations which may be required. Evaluated as a template.
+  ##
+  annotations: { }
 
-nodeSelector: {}
+  ## Set the ClusterIP
+  # clusterIP:
 
-tolerations: []
+  ## Set the LoadBalancer service type to internal only.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+  ##
+  # loadBalancerIP:
+  ## Load Balancer sources. Evaluated as a template.
+  ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
+  ##
+  # loadBalancerSourceRanges:
+  # - 10.10.10.0/24
 
-affinity: {}
-
+## Taiga media/static data Persistent Volume Storage Class
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
 persistence:
   enabled: true
+  ## Taiga Data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
-  # existingClaim:
-  annotations: {}
+  ##
   accessMode: ReadWriteOnce
-  size: 10Gi
+  size: 8Gi
+
+  ## A manually managed Persistent Volume Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  ##
+  # existingClaim:
+
+  ## If defined, the taiga-data volume will mount to the specified hostPath.
+  ## Requires persistence.enabled: true
+  ## Requires persistence.existingClaim: nil|false
+  ## Default: nil.
+  ##
+  hostPath:
+
+## Configure the ingress resource that allows you to access the
+## Taiga installation. Set up the URL
+## ref: http://kubernetes.io/docs/user-guide/ingress/
+##
+ingress:
+  ## Set to true to enable ingress record generation
+  ##
+  enabled: false
+
+  ## Set this to true in order to add the corresponding annotations for cert-manager
+  ##
+  certManager: false
+
+  ## When the ingress is enabled, a host pointing to this will be created
+  ##
+  hostname: taiga.local
+
+  ## Ingress Path type
+  ##
+  pathType: ImplementationSpecific
+
+  ## Ingress annotations done as key:value pairs
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ##
+  ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
+  ## If certManager is set to true, annotation kubernetes.io/tls-acme: "true" will automatically be set
+  ##
+  annotations: { }
+  #  kubernetes.io/ingress.class: nginx
+
+  ## Enable TLS configuration for the hostname defined at ingress.hostname parameter
+  ## TLS certificates will be retrieved from a TLS secret with name: {{- printf "%s-tls" .Values.ingress.hostname }}
+  ## You can use the ingress.secrets parameter to create this TLS secret, relay on cert-manager to create it, or
+  ## let the chart create self-signed certificates for you
+  ##
+  tls: false
+
+  ## The list of additional hostnames to be covered with this ingress record.
+  ## Most likely the hostname above will be enough, but in the event more hosts are needed, this is an array
+  ## Example:
+  ## extraHosts:
+  ## - name: taiga.local
+  ##   path: /
+  ##
+  extraHosts:
+
+  ## The tls configuration for additional hostnames to be covered with this ingress record.
+  ## see: https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
+  ## Example:
+  ## extraTls:
+  ## - hosts:
+  ##     - taiga.local
+  ##   secretName: taiga.local-tls
+  ##
+  extraTls: [ ]
+
+  secrets:
+  ## If you're providing your own certificates, please use this to add the certificates as secrets
+  ## key and certificate should start with -----BEGIN CERTIFICATE----- or -----BEGIN RSA PRIVATE KEY-----
+  ## name should line up with a secretName set further up
+  ##
+  ## If it is not set and you're using cert-manager, this is unneeded, as it will create the secret for you
+  ## If it is not set and you're NOT using cert-manager either, self-signed certificates will be created
+  ## It is also possible to create and manage the certificates outside of this helm chart
+  ## Please see README.md for more information
+  ##
+  # - name: taiga.local-tls
+  #   key:
+  #   certificate:
+
+## An array to add extra env vars
+## For example:
+##
+extraEnvVars: [ ]
+#  - name: BEARER_AUTH
+#    value: true
+
+## ConfigMap with extra environment variables
+##
+extraEnvVarsCM:
+
+## Secret with extra environment variables
+##
+extraEnvVarsSecret:
+
+## Extra volumes to add to the deployment
+##
+extraVolumes: [ ]
+
+## Extra volume mounts to add to the container
+##
+extraVolumeMounts: [ ]
+
+## Extra init containers to add to the deployment
+##
+initContainers: [ ]
+
+## Extra sidecar containers to add to the deployment
+##
+sidecars: [ ]
+
+## Pod affinity preset
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+## Allowed values: soft, hard
+##
+podAffinityPreset: ""
+
+## Pod anti-affinity preset
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+## Allowed values: soft, hard
+##
+podAntiAffinityPreset: soft
+
+## Node affinity preset
+## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+## Allowed values: soft, hard
+##
+nodeAffinityPreset:
+  ## Node affinity type
+  ## Allowed values: soft, hard
+  ##
+  type: ""
+  ## Node label key to match
+  ## E.g.
+  ## key: "kubernetes.io/e2e-az-name"
+  ##
+  key: ""
+  ## Node label values to match
+  ## E.g.
+  ## values:
+  ##   - e2e-az1
+  ##   - e2e-az2
+  ##
+  values: [ ]
+
+## Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
+##
+affinity: { }
+
+## Node labels for pod assignment. Evaluated as a template.
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: { }
+
+## Tolerations for pod assignment. Evaluated as a template.
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: [ ]
 
 postgresql:
   postgresqlUsername: "taiga"
@@ -112,33 +456,38 @@ postgresql:
   # Specify the TCP port that PostgreSQL should use
   service:
     port: 5432
-  resources:
-    requests:
-      memory: 128Mi
-      cpu: 250m
+  resources: { }
 
-# Some defaults from the values-production.yaml config
-rabbitmq:
+rabbitmqasync:
   auth:
     username: "taiga"
-    password: "taigaeventspass"
+    password: "taiga"
+    # erlangCookie: CONFIGURE THIS
+  extraConfiguration: |-
+    default_vhost = taiga
+    default_permissions.configure = .*
+    default_permissions.read = .*
+    default_permissions.write = .*
   service:
+    type: ClusterIP
     port: 5672
-  resources:
-    requests:
-      memory: 128Mi
-      cpu: 100m
-
-# Small-scale single-node redis for celery task management
-redis:
-  cluster:
+  resources: { }
+  persistence:
     enabled: false
-  master:
-    service:
-      port: 6379
-    persistence:
-      enabled: false
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: 100m
+
+rabbitmqevents:
+  auth:
+    username: "taiga"
+    password: "taiga"
+    # erlangCookie: CONFIGURE THIS
+  extraConfiguration: |-
+    default_vhost = taiga
+    default_permissions.configure = .*
+    default_permissions.read = .*
+    default_permissions.write = .*
+  service:
+    type: ClusterIP
+    port: 5672
+  resources: { }
+  persistence:
+    enabled: false

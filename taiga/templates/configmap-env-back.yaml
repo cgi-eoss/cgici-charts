@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "common.names.fullname" . }}-env-back
+  labels:
+  {{- include "common.labels.standard" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  namespace: {{ .Release.Namespace }}
+data:
+  POSTGRES_DB: {{ .Values.postgresql.postgresqlDatabase | quote }}
+  POSTGRES_USER: {{ .Values.postgresql.postgresqlUsername | quote }}
+  POSTGRES_HOST: {{ template "common.names.fullname" . }}-postgresql
+  # Taiga settings
+  TAIGA_SITES_DOMAIN: {{ include "taiga.host" $ | quote }}
+  TAIGA_SITES_SCHEME: {{ include "taiga.protocol" $ | quote }}
+  {{- if .Values.taiga.email.enabled }}
+  # Email settings
+  EMAIL_BACKEND: {{ .Values.taiga.email.backend | quote }}
+  DEFAULT_FROM_EMAIL: {{ .Values.taiga.email.defaultFromEmail | quote }}
+  EMAIL_USE_TLS: {{ .Values.taiga.email.useTls | quote }}
+  EMAIL_USE_SSL: {{ .Values.taiga.email.useSsl | quote }}
+  EMAIL_HOST: {{ .Values.taiga.email.host | quote }}
+  EMAIL_PORT: {{ .Values.taiga.email.port | quote }}
+  EMAIL_HOST_USER: {{ .Values.taiga.email.hostUser | quote }}
+  {{- end }}
+  # Registration
+  PUBLIC_REGISTER_ENABLED: {{ .Values.taiga.publicRegisterEnabled | quote }}
+  # Telemetry
+  ENABLE_TELEMETRY: {{ .Values.taiga.enableTelemetry | quote }}
+  # Rabbitmq settings
+  RABBITMQ_USER: {{ .Values.rabbitmqasync.auth.username | quote }}
+  # Github settings
+  # Get these in your profile https://github.com/settings/apps
+  # or in your organization profile https://github.com/organizations/{ORGANIZATION-SLUG}/settings/applications
+  GITHUB_API_CLIENT_ID: {{ .Values.taiga.github.apiClientId | quote }}
+  # Gitlab settings
+  # Get these in your profile https://{YOUR-GITLAB}/profile/applications
+  # or in your organization profile https://{YOUR-GITLAB}/admin/applications
+  GITLAB_API_CLIENT_ID: {{ .Values.taiga.gitlab.apiClientId | quote }}
+  GITLAB_URL: {{ .Values.taiga.gitlab.url | quote }}
+  # IMPORTERS
+  ENABLE_GITHUB_IMPORTER: {{ .Values.taiga.githubImporter.enabled | quote }}
+  GITHUB_IMPORTER_CLIENT_ID: {{ .Values.taiga.githubImporter.clientId | quote }}
+  ENABLE_JIRA_IMPORTER: {{ .Values.taiga.jiraImporter.enabled | quote }}
+  JIRA_IMPORTER_CERT: {{ .Values.taiga.jiraImporter.cert | quote }}
+  JIRA_IMPORTER_PUB_CERT: {{ .Values.taiga.jiraImporter.pubCert | quote }}
+  ENABLE_TRELLO_IMPORTER: {{ .Values.taiga.trelloImporter.enabled | quote }}
+  TRELLO_IMPORTER_API_KEY: {{ .Values.taiga.trelloImporter.apiKey | quote }}

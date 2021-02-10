@@ -1,230 +1,377 @@
+{{/*apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}*/}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "taiga.fullname" . }}
-  labels:
-    app.kubernetes.io/name: {{ include "taiga.name" . }}
-    helm.sh/chart: {{ include "taiga.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  name: {{ include "common.names.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+  {{- if .Values.commonLabels }}
+  {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+  {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ include "taiga.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
-  strategy:
-    type: Recreate
+    matchLabels: {{- include "common.labels.matchLabels" . | nindent 6 }}
+  {{- if .Values.updateStrategy }}
+  strategy: {{- toYaml .Values.updateStrategy | nindent 4 }}
+  {{- end }}
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
-      labels:
-        app.kubernetes.io/name: {{ include "taiga.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+      labels: {{- include "common.labels.standard" . | nindent 8 }}
+      {{- if .Values.commonLabels }}
+      {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.podLabels }}
+      {{- include "common.tplvalues.render" (dict "value" .Values.podLabels "context" $) | nindent 8 }}
+      {{- end }}
+      annotations:
+      {{- if .Values.podAnnotations }}
+      {{- include "common.tplvalues.render" (dict "value" .Values.podAnnotations "context" $) | nindent 8 }}
+      {{- end }}
     spec:
+      {{- include "taiga.imagePullSecrets" . | nindent 6 }}
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .Values.affinity }}
+      affinity: {{- include "common.tplvalues.render" (dict "value" .Values.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAffinityPreset "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.podAntiAffinityPreset "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.nodeAffinityPreset.type "key" .Values.nodeAffinityPreset.key "values" .Values.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{- include "common.tplvalues.render" (dict "value" .Values.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.hostAliases }}
+      # yamllint disable rule:indentation
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
+      # yamllint enable rule:indentation
+      {{- end }}
       initContainers:
-        - name: {{ .Chart.Name }}-init-taiga
-          image: "{{ .Values.taigaBackImage.repository }}:{{ .Values.taigaBackImage.tag }}"
-          imagePullPolicy: {{ .Values.taigaBackImage.pullPolicy }}
-          securityContext:
-            runAsUser: {{ .Values.securityContext.runAsUser }}
-            runAsGroup: {{ .Values.securityContext.fsGroup }}
-          command: ["/taiga/init.sh"]
+        - name: taiga-manage
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaBack.image) }}
+          command: ["/bin/sh", "-c", "cd /taiga-back && /opt/venv/bin/python manage.py"]
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-back
+            - secretRef:
+                name: {{ template "common.names.fullname" . }}-env-back
           env:
-            - name: TAIGA_HOSTNAME
-              value: {{ .Values.taigaHostname }}
-            - name: TAIGA_PROTOCOL
-              value: {{ .Values.taigaProtocol }}
-            - name: TAIGA_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "taiga.fullname" . }}
-                  key: taiga-secret-key
-            {{- if .Values.taigaEventsEnabled }}
-            - name: TAIGA_RABBIT_URL
-              value: {{ template "taiga.rabbitmqUrl" . }}
-            - name: TAIGA_REDIS_URL
-              value: {{ template "taiga.redisUrl" . }}
-            {{- end }}
-            - name: TAIGA_ENABLE_EMAIL
-              value: {{ .Values.taigaEmailEnabled | quote }}
-            {{- if .Values.taigaEmailEnabled }}
-            - name: TAIGA_EMAIL_FROM
-              value: {{ .Values.taigaEmailFrom }}
-            - name: TAIGA_EMAIL_USE_TLS
-              value: {{ .Values.taigaEmailTls | quote }}
-            - name: TAIGA_EMAIL_HOST
-              value: {{ .Values.taigaEmailHost | quote }}
-            - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPort | quote }}
-            - name: TAIGA_EMAIL_USER
-              value: {{ .Values.taigaEmailUser | quote }}
-            {{- if .Values.taigaEmailPass }}
-            - name: TAIGA_EMAIL_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "taiga.fullname" . }}
-                  key: taiga-email-pass
-            {{- end }}
-            {{- end }}
-            - name: TAIGA_DB_HOST
-              value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
-            - name: TAIGA_DB_NAME
-              value: {{ .Values.postgresql.postgresqlDatabase }}
-            - name: TAIGA_DB_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
-            - name: TAIGA_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{- else }} {{ template "postgresql.fullname" .}} {{- end }}
-                  key: postgresql-password
+          {{- if .Values.taigaBack.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaBack.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
-            - name: taiga
+            - name: taiga-data
+              mountPath: /taiga-back/static
               subPath: static
-              mountPath: /taiga/taiga-back/static
-            - name: taiga
+            - name: taiga-data
+              mountPath: /taiga-back/media
               subPath: media
-              mountPath: /taiga/taiga-back/media
-          resources:
-            {{- toYaml .Values.backResources | nindent 12 }}
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+
+        {{- if .Values.initContainers }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.initContainers "context" $) | nindent 8 }}
+        {{- end }}
       containers:
-        - name: {{ .Chart.Name }}-back
-          image: "{{ .Values.taigaBackImage.repository }}:{{ .Values.taigaBackImage.tag }}"
-          imagePullPolicy: {{ .Values.taigaBackImage.pullPolicy }}
-          securityContext:
-            runAsUser: {{ .Values.securityContext.runAsUser }}
-            runAsGroup: {{ .Values.securityContext.fsGroup }}
-          command: ["/taiga/run.sh"]
+        - name: taiga-back
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaBack.image) }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-back
+            - secretRef:
+                name: {{ template "common.names.fullname" . }}-env-back
+          env:
+          {{- if .Values.taigaBack.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaBack.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
           ports:
             - name: http-back
-              containerPort: 8001
-              protocol: TCP
+              containerPort: {{ .Values.taigaBack.port }}
+          {{- if .Values.taigaBack.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /api/v1/
+              path: {{ .Values.taigaBack.livenessProbe.path }}
               port: http-back
+            initialDelaySeconds: {{ .Values.taigaBack.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaBack.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaBack.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaBack.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaBack.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaBack.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /api/v1/
+              path: {{ .Values.taigaBack.readinessProbe.path }}
               port: http-back
-          env:
-            - name: TAIGA_HOSTNAME
-              value: {{ .Values.taigaHostname }}
-            - name: TAIGA_PROTOCOL
-              value: {{ .Values.taigaProtocol }}
-            - name: TAIGA_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "taiga.fullname" . }}
-                  key: taiga-secret-key
-            {{- if .Values.taigaEventsEnabled }}
-            - name: TAIGA_RABBIT_URL
-              value: {{ template "taiga.rabbitmqUrl" . }}
-            - name: TAIGA_REDIS_URL
-              value: {{ template "taiga.redisUrl" . }}
-            {{- end }}
-            - name: TAIGA_ENABLE_EMAIL
-              value: {{ .Values.taigaEmailEnabled | quote }}
-                  {{- if .Values.taigaEmailEnabled }}
-            - name: TAIGA_EMAIL_FROM
-              value: {{ .Values.taigaEmailFrom }}
-            - name: TAIGA_EMAIL_USE_TLS
-              value: {{ .Values.taigaEmailTls | quote }}
-            - name: TAIGA_EMAIL_HOST
-              value: {{ .Values.taigaEmailHost | quote }}
-            - name: TAIGA_EMAIL_PORT
-              value: {{ .Values.taigaEmailPort | quote }}
-            - name: TAIGA_EMAIL_USER
-              value: {{ .Values.taigaEmailUser | quote }}
-            {{- if .Values.taigaEmailPass }}
-            - name: TAIGA_EMAIL_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "taiga.fullname" . }}
-                  key: taiga-email-pass
-            {{- end }}
-            {{- end }}
-            - name: TAIGA_DB_HOST
-              value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
-            - name: TAIGA_DB_NAME
-              value: {{ .Values.postgresql.postgresqlDatabase }}
-            - name: TAIGA_DB_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
-            - name: TAIGA_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{- if .Values.postgresql.existingSecret }} {{ .Values.postgresql.existingSecret }} {{- else }} {{ template "postgresql.fullname" .}} {{- end }}
-                  key: postgresql-password
+            initialDelaySeconds: {{ .Values.taigaBack.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaBack.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaBack.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaBack.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaBack.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaBack.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.taigaBack.startupProbe.path }}
+              port: http-back
+            initialDelaySeconds: {{ .Values.taigaBack.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaBack.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaBack.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaBack.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaBack.startupProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaBack.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaBack.resources "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
-            - name: taiga
+            - name: taiga-data
+              mountPath: /taiga-back/static
               subPath: static
-              mountPath: /taiga/taiga-back/static
-            - name: taiga
+            - name: taiga-data
+              mountPath: /taiga-back/media
               subPath: media
-              mountPath: /taiga/taiga-back/media
-          resources:
-              {{- toYaml .Values.backResources | nindent 12 }}
-        - name: {{ .Chart.Name }}-front
-          image: "{{ .Values.taigaFrontImage.repository }}:{{ .Values.taigaFrontImage.tag }}"
-          imagePullPolicy: {{ .Values.taigaFrontImage.pullPolicy }}
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+
+        - name: taiga-async
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaBack.image) }}
+          command: ["/taiga-back/docker/async_entrypoint.sh"]
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-back
+            - secretRef:
+                name: {{ template "common.names.fullname" . }}-env-back
+          env:
+          {{- if .Values.taigaAsync.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaAsync.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.taigaAsync.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaAsync.resources "context" $) | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: taiga-data
+              mountPath: /taiga-back/static
+              subPath: static
+            - name: taiga-data
+              mountPath: /taiga-back/media
+              subPath: media
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+
+        - name: taiga-front
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaFront.image) }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-front
+          env:
+          {{- if .Values.taigaFront.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaFront.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.taigaFront.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaFront.resources "context" $) | nindent 12 }}
+          {{- end }}
           ports:
             - name: http-front
-              containerPort: 80
-              protocol: TCP
+              containerPort: {{ .Values.taigaFront.port }}
+          {{- if .Values.taigaFront.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.taigaFront.livenessProbe.path }}
               port: http-front
+            initialDelaySeconds: {{ .Values.taigaFront.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaFront.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaFront.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaFront.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaFront.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaFront.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.taigaFront.readinessProbe.path }}
               port: http-front
-          volumeMounts:
-            - name: taiga
-              subPath: static
-              mountPath: /usr/share/nginx/html/static
-            - name: taiga
-              subPath: media
-              mountPath: /usr/share/nginx/html/media
-            - name: taiga-configmaps
-              subPath: taiga-front-conf-json
-              mountPath: /usr/share/nginx/html/conf.json
-          resources:
-            {{- toYaml .Values.frontResources | nindent 12 }}
-        {{- if .Values.taigaEventsEnabled }}
-        - name: {{ .Chart.Name }}-events
-          image: "{{ .Values.taigaEventsImage.repository }}:{{ .Values.taigaEventsImage.tag }}"
-          imagePullPolicy: {{ .Values.taigaEventsImage.pullPolicy }}
+            initialDelaySeconds: {{ .Values.taigaFront.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaFront.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaFront.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaFront.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaFront.readinessProbe.failureThreshold }}
+          {{- end }}
+
+
+
+        - name: taiga-events
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaEvents.image) }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-events
+            - secretRef:
+                name: {{ template "common.names.fullname" . }}-env-events
+          env:
+          {{- if .Values.taigaEvents.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaEvents.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.taigaEvents.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaEvents.resources "context" $) | nindent 12 }}
+          {{- end }}
           ports:
-            - name: http-events
-              containerPort: 8888
-              protocol: TCP
+            - name: ws-events
+              containerPort: {{ .Values.taigaEvents.port }}
+            - name: app-events
+              containerPort: {{ .Values.taigaEvents.appPort }}
+          {{- if .Values.taigaEvents.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.taigaEvents.readinessProbe.path }}
+              port: app-events
+            initialDelaySeconds: {{ .Values.taigaEvents.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaEvents.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaEvents.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaEvents.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaEvents.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaEvents.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.taigaEvents.readinessProbe.path }}
+              port: app-events
+            initialDelaySeconds: {{ .Values.taigaEvents.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaEvents.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaEvents.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaEvents.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaEvents.readinessProbe.failureThreshold }}
+          {{- end }}
+
+
+        - name: taiga-protected
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaProtected.image) }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "common.names.fullname" . }}-env-protected
+            - secretRef:
+                name: {{ template "common.names.fullname" . }}-env-protected
+          env:
+          {{- if .Values.taigaProtected.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaProtected.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.taigaProtected.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaProtected.resources "context" $) | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http-protected
+              containerPort: {{ .Values.taigaProtected.port }}
+          {{- if .Values.taigaProtected.livenessProbe.enabled }}
+          livenessProbe:
+            tcpSocket:
+              port: http-protected
+            initialDelaySeconds: {{ .Values.taigaProtected.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaProtected.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaProtected.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaProtected.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaProtected.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaProtected.readinessProbe.enabled }}
+          readinessProbe:
+            tcpSocket:
+              port: http-protected
+            initialDelaySeconds: {{ .Values.taigaProtected.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaProtected.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaProtected.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaProtected.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaProtected.readinessProbe.failureThreshold }}
+          {{- end }}
+
+        - name: taiga-gateway
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.taigaGateway.image) }}
+          env:
+          {{- if .Values.taigaGateway.env }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.taigaGateway.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.taigaGateway.resources }}
+          resources: {{- include "common.tplvalues.render" (dict "value" .Values.taigaGateway.resources "context" $) | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http-gateway
+              containerPort: {{ .Values.taigaGateway.port }}
+          {{- if .Values.taigaGateway.livenessProbe.enabled }}
+          livenessProbe:
+            tcpSocket:
+              port: http-gateway
+            initialDelaySeconds: {{ .Values.taigaGateway.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaGateway.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaGateway.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaGateway.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaGateway.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.taigaGateway.readinessProbe.enabled }}
+          readinessProbe:
+            tcpSocket:
+              port: http-gateway
+            initialDelaySeconds: {{ .Values.taigaGateway.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.taigaGateway.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.taigaGateway.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.taigaGateway.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.taigaGateway.readinessProbe.failureThreshold }}
+          {{- end }}
           volumeMounts:
-            - name: taiga-configmaps
-              subPath: taiga-events-config-json
-              mountPath: /taiga/taiga-events/config.json
-          resources:
-            {{- toYaml .Values.eventsResources | nindent 12 }}
-        {{- end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+            - name: taiga-data
+              mountPath: /taiga/static
+              subPath: static
+            - name: taiga-data
+              mountPath: /taiga/media
+              subPath: media
+            - name: taiga-gateway-nginx-conf
+              mountPath: /etc/nginx/conf.d
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+
+          {{- if .Values.sidecars }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.sidecars "context" $) | nindent 8 }}
+          {{- end }}
+
       volumes:
-        - name: taiga
+      - name: taiga-data
         {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim:
-            claimName: {{ .Values.persistence.existingClaim | default (include "taiga.fullname" .) }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default (printf "%s-taiga" (include "common.names.fullname" .)) }}
         {{- else }}
-          emptyDir: {}
+        emptyDir: {}
         {{- end }}
-        - name: taiga-configmaps
-          configMap:
-            name: {{ template "taiga.fullname" . }}-configuration
+      - name: taiga-gateway-nginx-conf
+        configMap:
+          name: {{ template "common.names.fullname" . }}-gateway-nginx-conf
+      {{- if .Values.extraVolumes }}
+      {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+      {{- end }}
