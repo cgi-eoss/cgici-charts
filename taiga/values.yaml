@@ -47,7 +47,7 @@ taigaBack:
   image:
     registry: docker.io
     repository: taigaio/taiga-back
-    tag: 6.0.2
+    tag: 6.0.3
     pullPolicy: IfNotPresent
   port: 8000
   env: { }

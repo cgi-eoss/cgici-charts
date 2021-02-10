@@ -95,3 +95,7 @@ When using Ingress, it will be set to the Ingress hostname.
 {{- define "taiga.protocol" -}}
 {{ ternary "https" "http" .Values.ingress.tls }}
 {{- end -}}
+
+{{- define "taiga.wsProtocol" -}}
+{{ ternary "wss" "ws" .Values.ingress.tls }}
+{{- end -}}
