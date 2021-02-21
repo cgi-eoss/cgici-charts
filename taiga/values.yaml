@@ -47,7 +47,7 @@ taigaBack:
   image:
     registry: docker.io
     repository: taigaio/taiga-back
-    tag: 6.0.3
+    tag: 6.0.5
     pullPolicy: IfNotPresent
   port: 8000
   env: { }
@@ -91,7 +91,7 @@ taigaFront:
   image:
     registry: docker.io
     repository: taigaio/taiga-front
-    tag: 6.0.3
+    tag: 6.0.5
     pullPolicy: IfNotPresent
   port: 80
   env: { }
@@ -120,7 +120,7 @@ taigaEvents:
   image:
     registry: docker.io
     repository: taigaio/taiga-events
-    tag: 6.0.1
+    tag: 6.0.2
     pullPolicy: IfNotPresent
   port: 8888
   appPort: 3023

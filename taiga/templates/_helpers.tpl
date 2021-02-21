@@ -99,3 +99,7 @@ When using Ingress, it will be set to the Ingress hostname.
 {{- define "taiga.wsProtocol" -}}
 {{ ternary "wss" "ws" .Values.ingress.tls }}
 {{- end -}}
+
+{{- define "taiga.asyncBrokerUrl" -}}
+{{- printf "amqp://%s:%s@%s:%s/taiga" .Values.rabbitmqasync.auth.username .Values.rabbitmqasync.auth.password "taiga-async-rabbitmq" (.Values.rabbitmqasync.service.port | toString) -}}
+{{- end -}}
