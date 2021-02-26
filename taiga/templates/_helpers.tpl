@@ -100,6 +100,10 @@ When using Ingress, it will be set to the Ingress hostname.
 {{ ternary "wss" "ws" .Values.ingress.tls }}
 {{- end -}}
 
-{{- define "taiga.asyncBrokerUrl" -}}
+{{- define "taiga.celeryBrokerUrl" -}}
 {{- printf "amqp://%s:%s@%s:%s/taiga" .Values.rabbitmqasync.auth.username .Values.rabbitmqasync.auth.password "taiga-async-rabbitmq" (.Values.rabbitmqasync.service.port | toString) -}}
+{{- end -}}
+
+{{- define "taiga.eventsPushBackendUrl" -}}
+{{- printf "amqp://%s:%s@%s:%s/taiga" .Values.rabbitmqevents.auth.username .Values.rabbitmqevents.auth.password "taiga-events-rabbitmq" (.Values.rabbitmqevents.service.port | toString) -}}
 {{- end -}}
