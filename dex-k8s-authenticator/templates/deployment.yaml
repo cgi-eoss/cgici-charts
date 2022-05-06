@@ -27,12 +27,18 @@ spec:
         app: {{ template "dex-k8s-authenticator.name" . }}
         env: {{ default "dev" .Values.global.deployEnv }}
         release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args: [ "--config", "config.yaml" ]
+        {{- with .Values.envFrom }}
+        envFrom:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         ports:
         - name: http
           containerPort: {{ default "5555" .Values.dexK8sAuthenticator.port }}
@@ -60,16 +66,20 @@ spec:
 {{ toYaml .Values.resources | indent 10 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 6 }}
+{{ toYaml . | indent 8 }}
     {{- end }}
     {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 6 }}
+{{ toYaml . | indent 8 }}
     {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 6 }}
+{{ toYaml . | indent 8 }}
     {{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       volumes:
       - name: config
         configMap:

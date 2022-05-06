@@ -70,6 +70,8 @@ ingress:
 
   path: /
 
+  pathType: Prefix
+
   #tls:
     # Secrets must be manually created in the namespace.
     # - secretName: gerrit-tls

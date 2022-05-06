@@ -27,7 +27,7 @@ dexK8sAuthenticator:
   debug: false
   web_path_prefix: /
   #logoUrl: http://<path-to-your-logo.png>
-  #kubectl_version: v1.11.2
+  #kubectl_version: v1.16.2
   #tlsCert: /path/to/dex-client.crt
   #tlsKey: /path/to/dex-client.key
   clusters:
@@ -44,6 +44,7 @@ dexK8sAuthenticator:
 service:
   type: ClusterIP
   port: 5555
+  # loadBalancerIP: 127.0.0.1
 
 ingress:
   enabled: false

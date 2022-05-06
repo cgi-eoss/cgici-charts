@@ -3,7 +3,7 @@ entries:
   bazel-cache:
   - apiVersion: v2
     appVersion: latest
-    created: "2021-02-26T10:47:39.963132417Z"
+    created: "2022-05-06T16:17:57.153217443+01:00"
     description: A Helm chart for Kubernetes
     digest: a0f932735a4d276b93524bced32a90f0df3ffa3002bd76f14d0b452ae4d0b2f5
     name: bazel-cache
@@ -13,7 +13,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: latest
-    created: "2021-02-26T10:47:39.962509572Z"
+    created: "2022-05-06T16:17:57.152957827+01:00"
     description: A Helm chart for Kubernetes
     digest: f8a70031bc5531c0eea718acd69cd38f2c5e9760fdbcc32158cc85c0bb3e2a21
     name: bazel-cache
@@ -23,7 +23,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: latest
-    created: "2021-02-26T10:47:39.961899716Z"
+    created: "2022-05-06T16:17:57.152685701+01:00"
     description: A Helm chart for Kubernetes
     digest: af8f6a0797a21fd01dda33669eccfcd91b5c748d126d897ea38ae92eee913b83
     name: bazel-cache
@@ -33,7 +33,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: latest
-    created: "2021-02-26T10:47:39.961295017Z"
+    created: "2022-05-06T16:17:57.152395235+01:00"
     description: Bazel Remote Cache
     digest: 3d73122d9dd95f74eb1ed7369b33e85cc75f5459dec480cf786232949f856d04
     name: bazel-cache
@@ -42,7 +42,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: latest
-    created: "2021-02-26T10:47:39.960777395Z"
+    created: "2022-05-06T16:17:57.152183658+01:00"
     description: Bazel Remote Cache
     digest: 09ae4793d49e95893001b6b2d2294df0152c2d6b7f46a7cde421eef55f6dec8e
     name: bazel-cache
@@ -52,7 +52,7 @@ entries:
   cert-manager:
   - apiVersion: v1
     appVersion: v0.4.1
-    created: "2021-02-26T10:47:39.966021656Z"
+    created: "2022-05-06T16:17:57.154382027+01:00"
     description: A Helm chart for cert-manager
     digest: e69c331d1b506599a0122240ed94a7087b6c6a97cea11b224831d5c94074b1a4
     home: https://github.com/jetstack/cert-manager
@@ -72,7 +72,7 @@ entries:
     version: v0.4.1
   - apiVersion: v1
     appVersion: v0.4.0
-    created: "2021-02-26T10:47:39.96541715Z"
+    created: "2022-05-06T16:17:57.154148+01:00"
     description: A Helm chart for cert-manager
     digest: 861c9f7143274255aabfd7d0c03bebeac1fa4955063bf006abdbae57adf32df7
     home: https://github.com/jetstack/cert-manager
@@ -92,7 +92,7 @@ entries:
     version: v0.4.0
   - apiVersion: v1
     appVersion: v0.3.2
-    created: "2021-02-26T10:47:39.964830235Z"
+    created: "2022-05-06T16:17:57.153909234+01:00"
     description: A Helm chart for cert-manager
     digest: 23c3e5b143c869d7ceab0de71eeb0229f5dec3f820098958a85cf27acdc11884
     home: https://github.com/jetstack/cert-manager
@@ -112,7 +112,7 @@ entries:
     version: v0.3.4
   - apiVersion: v1
     appVersion: 0.2.4
-    created: "2021-02-26T10:47:39.964259572Z"
+    created: "2022-05-06T16:17:57.153671407+01:00"
     description: A Helm chart for cert-manager
     digest: 7900b2961156e36ef19e8b36fb6c27328d0f26b63e102f50f96eecd53d785a8a
     home: https://github.com/jetstack/cert-manager
@@ -132,7 +132,7 @@ entries:
     version: 0.2.9
   - apiVersion: v1
     appVersion: 0.2.3
-    created: "2021-02-26T10:47:39.963717373Z"
+    created: "2022-05-06T16:17:57.1534404+01:00"
     description: A Helm chart for cert-manager
     digest: 6a35aafd9926a83c4d3d178e09ba15190f6294e7a9791f37e19a52e0d248d073
     home: https://github.com/jetstack/cert-manager
@@ -153,7 +153,7 @@ entries:
   dex:
   - apiVersion: v1
     appVersion: 2.9.0
-    created: "2021-02-26T10:47:39.966818668Z"
+    created: "2022-05-06T16:17:57.155352563+01:00"
     description: Dex federated authentication service
     digest: 3ff21a77b93354bd07c21ef78ddb1c4c3f4028ad46a842c171dbfa7badfaf7a9
     icon: https://github.com/coreos/dex/blob/master/Documentation/logos/dex-horizontal-color.png
@@ -171,8 +171,22 @@ entries:
     version: 0.2.2
   dex-k8s-authenticator:
   - apiVersion: v1
+    appVersion: v1.4.0
+    created: "2022-05-06T16:17:57.156039184+01:00"
+    description: Authenticator for using Dex with Kubernetes
+    digest: f8ec166eafd7ecad162f2848d07be81bb3b9fc15f7f8dfe5fdac8ad331305b18
+    maintainers:
+    - email: nbadger@mintel.com
+      name: Nick Badger
+    name: dex-k8s-authenticator
+    sources:
+    - https://github.com/mintel/dex-k8s-authenticator
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/dex-k8s-authenticator-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v1
     appVersion: v0.1.0
-    created: "2021-02-26T10:47:39.967453788Z"
+    created: "2022-05-06T16:17:57.155726808+01:00"
     description: Authenticator for using Dex with Kubernetes
     digest: 9d339058a735eaeb290ef2cf8125f7392d327f23eef71876fb74e23326bcffb0
     maintainers:
@@ -189,7 +203,7 @@ entries:
   efs-provisioner:
   - apiVersion: v1
     appVersion: v0.1.2
-    created: "2021-02-26T10:47:39.968050896Z"
+    created: "2022-05-06T16:17:57.156276391+01:00"
     description: A Helm chart for the AWS EFS external storage provisioner
     digest: 86c46882a6e481d932218df4823fb8bdcac0238f981c10c0d1c257297e8f4356
     home: https://github.com/kubernetes-incubator/external-storage/tree/master/aws/efs
@@ -206,7 +220,7 @@ entries:
   elastic-stack:
   - apiVersion: v1
     appVersion: "6"
-    created: "2021-02-26T10:47:39.973015323Z"
+    created: "2022-05-06T16:17:57.158543209+01:00"
     dependencies:
     - name: elasticsearch
       repository: https://kubernetes-charts-incubator.storage.googleapis.com/
@@ -252,8 +266,9 @@ entries:
   elasticsearch:
   - apiVersion: v1
     appVersion: 6.3.1
-    created: "2021-02-26T10:47:39.973966529Z"
-    description: Flexible and powerful open source, distributed real-time search and analytics engine.
+    created: "2022-05-06T16:17:57.158972883+01:00"
+    description: Flexible and powerful open source, distributed real-time search and
+      analytics engine.
     digest: 0c50c05f2c0bd43bcd44f23e29bc9b01b4ce6397dfcded0f422cbdaf76a04b8e
     home: https://www.elastic.co/products/elasticsearch
     icon: https://static-www.elastic.co/assets/blteb1c97719574938d/logo-elastic-elasticsearch-lt.svg
@@ -278,7 +293,7 @@ entries:
   fluentd-elasticsearch:
   - apiVersion: v1
     appVersion: 2.2.0
-    created: "2021-02-26T10:47:39.975027803Z"
+    created: "2022-05-06T16:17:57.159526655+01:00"
     description: A Fluentd Helm chart for Kubernetes with Elasticsearch output
     digest: 31620e91f73d457f39ef576931fdb04fc0e866ee2e4fbbd33b9d17d7f35912e0
     home: https://www.fluentd.org/
@@ -304,7 +319,16 @@ entries:
   gerrit:
   - apiVersion: v1
     appVersion: "2.16"
-    created: "2021-02-26T10:47:39.983086228Z"
+    created: "2022-05-06T16:17:57.163595928+01:00"
+    description: Gerrit Code Review
+    digest: b8f57908dbf40c681a60c12796542a5ad66f8c89a0373d0ed9912abbda0e1d8a
+    name: gerrit
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/gerrit-0.3.2.tgz
+    version: 0.3.2
+  - apiVersion: v1
+    appVersion: "2.16"
+    created: "2022-05-06T16:17:57.163341271+01:00"
     description: Gerrit Code Review
     digest: cece2979fff536049ca3212cd15ec62d56e3f07fda751ab74a3918e2b10a4358
     name: gerrit
@@ -313,7 +337,7 @@ entries:
     version: 0.3.1
   - apiVersion: v1
     appVersion: "2.16"
-    created: "2021-02-26T10:47:39.98225132Z"
+    created: "2022-05-06T16:17:57.163095385+01:00"
     description: Gerrit Code Review
     digest: 52b869c0a4aa036c92e57604a039a3ded72810f2928189a532f63134cb8937b3
     name: gerrit
@@ -322,7 +346,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: "2.16"
-    created: "2021-02-26T10:47:39.981389473Z"
+    created: "2022-05-06T16:17:57.162841649+01:00"
     description: Gerrit Code Review
     digest: 9eff68bd25aaf9781d19da9d46eee3fbce91a7316f4dec18b17815bd00af0cbd
     name: gerrit
@@ -331,7 +355,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: 2.15.4
-    created: "2021-02-26T10:47:39.977140671Z"
+    created: "2022-05-06T16:17:57.161007874+01:00"
     description: Gerrit Code Review
     digest: 2783589d5a1888a4d7882a2a0ef72f96e7b632874af4aa147deda5b1b8ebe9aa
     name: gerrit
@@ -340,7 +364,7 @@ entries:
     version: 0.1.11
   - apiVersion: v1
     appVersion: 2.15.4
-    created: "2021-02-26T10:47:39.976553176Z"
+    created: "2022-05-06T16:17:57.160155806+01:00"
     description: Gerrit Code Review
     digest: e09d51ebe4abb638a1bdac55b63df2e02c85591cae6ab3e651b0efb8cb7b6618
     name: gerrit
@@ -349,7 +373,7 @@ entries:
     version: 0.1.10
   - apiVersion: v1
     appVersion: 2.15.3
-    created: "2021-02-26T10:47:39.980842507Z"
+    created: "2022-05-06T16:17:57.162603772+01:00"
     description: Gerrit Code Review
     digest: 564ce122d968aecfffb546951d33553ae9aab058039df1c290d858cfa9b2f79b
     name: gerrit
@@ -358,7 +382,7 @@ entries:
     version: 0.1.9
   - apiVersion: v1
     appVersion: 2.15.3
-    created: "2021-02-26T10:47:39.980391701Z"
+    created: "2022-05-06T16:17:57.162420714+01:00"
     description: Gerrit Code Review
     digest: 2f25ac7faf52c1d5cf7856ef44ddd49bf28e7becd1a8fa3d1201715ec060199c
     name: gerrit
@@ -367,7 +391,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: 2.15.2
-    created: "2021-02-26T10:47:39.979929359Z"
+    created: "2022-05-06T16:17:57.162228847+01:00"
     description: Gerrit Code Review
     digest: 5f56aef32b3d32d9b42bd278badd046eeef395c945f49f48b1a4bded527cc5aa
     name: gerrit
@@ -376,7 +400,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 2.15.1
-    created: "2021-02-26T10:47:39.979475813Z"
+    created: "2022-05-06T16:17:57.16203114+01:00"
     description: Gerrit Code Review
     digest: ceb5835d4b3ae7be8cd07a66679035066dbfcd7c3caa4d9b30fc9d99318025d0
     name: gerrit
@@ -385,7 +409,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 2.15.1
-    created: "2021-02-26T10:47:39.979023123Z"
+    created: "2022-05-06T16:17:57.161827183+01:00"
     description: Gerrit Code Review
     digest: 53e18bf3002f7b78c1a3b3f70b5cb21b0cdc120ac2a3980cc798165807d5b779
     name: gerrit
@@ -394,7 +418,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "2.15"
-    created: "2021-02-26T10:47:39.978557956Z"
+    created: "2022-05-06T16:17:57.161633645+01:00"
     description: Gerrit Code Review
     digest: b4e9448abec76319c3249193301f6f46bb7fc5e4232e552e5f4256b6448020fe
     name: gerrit
@@ -403,7 +427,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "2.15"
-    created: "2021-02-26T10:47:39.978103278Z"
+    created: "2022-05-06T16:17:57.161435078+01:00"
     description: Gerrit Code Review
     digest: 2e3e50e0de07e28e27401fd69767c1f64fbb31eafb0c7ea9845219df7225514f
     name: gerrit
@@ -412,7 +436,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: "2.15"
-    created: "2021-02-26T10:47:39.977619028Z"
+    created: "2022-05-06T16:17:57.161226191+01:00"
     description: Gerrit Code Review
     digest: 0e380612cf0fb19d1ce5851e513dc6d0adb3278101b8bc52f5cd8b25f35cb95b
     name: gerrit
@@ -421,7 +445,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "2.15"
-    created: "2021-02-26T10:47:39.975938259Z"
+    created: "2022-05-06T16:17:57.15990502+01:00"
     description: Gerrit Code Review
     digest: fb5af4332a507524908ffc280ca77dac505f05f4a4a8caf364d843cef6cf6b1f
     name: gerrit
@@ -430,7 +454,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "2.15"
-    created: "2021-02-26T10:47:39.975473391Z"
+    created: "2022-05-06T16:17:57.159715262+01:00"
     description: Gerrit Code Review
     digest: fb5e951608730a918e90b4e2ebe59b81a60a5ab69d94f8cf98ac486293a5833a
     name: gerrit
@@ -440,7 +464,7 @@ entries:
   gradle-cache:
   - apiVersion: v1
     appVersion: "7.0"
-    created: "2021-02-26T10:47:39.98366106Z"
+    created: "2022-05-06T16:17:57.163798365+01:00"
     description: Gradle Build Cache Node
     digest: 9f03aa937e90e344e9d8135ceffb5476de93c1c0d357ed829418e2820dd1e0af
     name: gradle-cache
@@ -450,7 +474,7 @@ entries:
   jaeger-operator:
   - apiVersion: v1
     appVersion: 1.13.1
-    created: "2021-02-26T10:47:39.984496582Z"
+    created: "2022-05-06T16:17:57.164038472+01:00"
     description: jaeger-operator Helm chart for Kubernetes
     digest: 530d33645b5b3fd152537c4b3f3f8e333679e626b3e2c1023eb1a6214ba0a7b1
     home: https://www.jaegertracing.io/
@@ -467,8 +491,10 @@ entries:
   jenkins:
   - apiVersion: v1
     appVersion: 2.121.2
-    created: "2021-02-26T10:47:39.989516143Z"
-    description: Open source continuous integration server. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+    created: "2022-05-06T16:17:57.16560683+01:00"
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
     digest: 73206182c06413105aa05f96854b20deda360cdb6d6bcbb4d7d5a6e01ec69db4
     home: https://jenkins.io/
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
@@ -486,8 +512,10 @@ entries:
     version: 0.16.19
   - apiVersion: v1
     appVersion: 2.121.1
-    created: "2021-02-26T10:47:39.991701831Z"
-    description: Open source continuous integration server. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+    created: "2022-05-06T16:17:57.167311706+01:00"
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
     digest: e58ad3ad6e779581b8cffca146fb780cfb5a2fe786cb23443c62a207f6208fc6
     home: https://jenkins.io/
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
@@ -505,8 +533,10 @@ entries:
     version: 0.16.6
   - apiVersion: v1
     appVersion: "2.107"
-    created: "2021-02-26T10:47:39.99059934Z"
-    description: Open source continuous integration server. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+    created: "2022-05-06T16:17:57.166679055+01:00"
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
     digest: cf88ffb27d21b742ed9de4463968e01a6b4b6731845039a7d38af2e95f6156b8
     home: https://jenkins.io/
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
@@ -524,8 +554,10 @@ entries:
     version: 0.16.3
   - apiVersion: v1
     appVersion: "2.107"
-    created: "2021-02-26T10:47:39.988149369Z"
-    description: Open source continuous integration server. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+    created: "2022-05-06T16:17:57.165046688+01:00"
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
     digest: 7a976d25f496a382b3812ef8faaa276c3032e95bd3cc8dc32beb2214ad0515fd
     home: https://jenkins.io/
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
@@ -543,8 +575,10 @@ entries:
     version: 0.15.1
   - apiVersion: v1
     appVersion: "2.107"
-    created: "2021-02-26T10:47:39.986131952Z"
-    description: Open source continuous integration server. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+    created: "2022-05-06T16:17:57.164530605+01:00"
+    description: Open source continuous integration server. It supports multiple SCM
+      tools including CVS, Subversion and Git. It can execute Apache Ant and Apache
+      Maven-based projects as well as arbitrary scripts.
     digest: 7d9313739aea4d5a0c29ff7b6bf752288f475fdcd142e66b7d14e8ee2b6d08c6
     home: https://jenkins.io/
     icon: https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png
@@ -562,8 +596,9 @@ entries:
     version: 0.14.3
   kube-prometheus:
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.002995822Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.173135594+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 49dc719634f211a86916c33139bb5a6319e6793d446e20ec8e25b3db213969fe
     maintainers:
     - email: gianrubio@gmail.com
@@ -575,8 +610,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.105.tgz
     version: 0.0.105
   - apiVersion: v1
-    created: "2021-02-26T10:47:39.998244132Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.169937779+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 8281e3e3033e790fb49310c7884d8bdc175ebbee96259c389f888e2f416920a8
     maintainers:
     - email: gianrubio@gmail.com
@@ -588,8 +624,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.100.tgz
     version: 0.0.100
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.024332822Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.183977652+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 671062eae7f7d393b933bf4f6f5ee5c6d53d7bc880c5ab7eac6111590a42240c
     maintainers:
     - email: gianrubio@gmail.com
@@ -601,8 +638,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.95.tgz
     version: 0.0.95
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.019460305Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.180630049+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 74e9a38aa19f7c6367527d19dd62f33457878f7cf4a8ff0b0ba193f3ebb0cc74
     maintainers:
     - email: gianrubio@gmail.com
@@ -614,8 +652,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.66.tgz
     version: 0.0.66
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.012665591Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.178242762+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 57ed935c7a0b3203e68a542c3e055cd92321d170b097cbeab09ff6144d4432c9
     maintainers:
     - email: mgoodness@gmail.com
@@ -629,8 +668,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/kube-prometheus-0.0.53.tgz
     version: 0.0.53
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.008067265Z"
-    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes cluster monitoring.
+    created: "2022-05-06T16:17:57.175335373+01:00"
+    description: Manifests, dashboards, and alerting rules for end-to-end Kubernetes
+      cluster monitoring.
     digest: 0ae7068dcc30c2def8f952f404aea06ece5065958ab72b1b608db0d13c82670c
     maintainers:
     - email: mgoodness@gmail.com
@@ -646,7 +686,7 @@ entries:
   kubernetes-dashboard:
   - apiVersion: v1
     appVersion: 1.8.3
-    created: "2021-02-26T10:47:40.025635221Z"
+    created: "2022-05-06T16:17:57.184547374+01:00"
     description: General-purpose web UI for Kubernetes clusters
     digest: f12c2c38aac84e1f5c161a7335afbfaedffc0b3b65bdfc9541afc1d3925c56bb
     home: https://github.com/kubernetes/dashboard
@@ -665,7 +705,7 @@ entries:
     version: 0.7.1
   - apiVersion: v1
     appVersion: 1.8.3
-    created: "2021-02-26T10:47:40.024976997Z"
+    created: "2022-05-06T16:17:57.184265888+01:00"
     description: General-purpose web UI for Kubernetes clusters
     digest: d018ac6b60c29ecad0e6bd2e9da97c52490c0d5580658d23d4d74f17f172c2c2
     home: https://github.com/kubernetes/dashboard
@@ -684,7 +724,7 @@ entries:
     version: 0.6.3
   log-stack:
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.036222868Z"
+    created: "2022-05-06T16:17:57.191105691+01:00"
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: c0542a162fc7307963373c96becd0011aa55bbf8b1e465bf4998d4fae89fb4b4
     name: log-stack
@@ -692,7 +732,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.033417259Z"
+    created: "2022-05-06T16:17:57.18838612+01:00"
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: fd6ac9238cad139c7ea0b6c301ad0489a34fdee5833744c3f404ab96d53b14de
     name: log-stack
@@ -700,7 +740,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.030873479Z"
+    created: "2022-05-06T16:17:57.187078478+01:00"
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: 892fe3ff9c3e7c2324b2e5150d8bc2c775cc2b302b2b3461799a2bee9cff5503
     name: log-stack
@@ -708,7 +748,7 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/log-stack-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.027864283Z"
+    created: "2022-05-06T16:17:57.185745317+01:00"
     description: A Helm chart for a fluentd-elasticsearch-kibana logging stack
     digest: 11b297b7c13576e94ffe9e1882a09e861ee4a0aadaa3ba80bd6d3f2f30d56cfc
     name: log-stack
@@ -718,7 +758,7 @@ entries:
   mailu:
   - apiVersion: v1
     appVersion: "1.6"
-    created: "2021-02-26T10:47:40.044699475Z"
+    created: "2022-05-06T16:17:57.195329702+01:00"
     dependencies:
     - name: redis
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -731,7 +771,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.042111748Z"
+    created: "2022-05-06T16:17:57.193988481+01:00"
     dependencies:
     - name: redis
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -744,7 +784,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.03875571Z"
+    created: "2022-05-06T16:17:57.19264195+01:00"
     dependencies:
     - name: redis
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -758,7 +798,16 @@ entries:
   nexus:
   - apiVersion: v1
     appVersion: 3.13.0
-    created: "2021-02-26T10:47:40.049176652Z"
+    created: "2022-05-06T16:17:57.198825543+01:00"
+    description: The Nexus Repository Manager server
+    digest: 5a6debf729c483a262e3991c6f2554f32a427c741376e7b96e14a33025061a95
+    name: nexus
+    urls:
+    - https://cgi-eoss.github.io/cgici-charts/nexus-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v1
+    appVersion: 3.13.0
+    created: "2022-05-06T16:17:57.198491468+01:00"
     description: The Nexus Repository Manager server
     digest: e32bdb20db198a733f9d2d962efb75b8bae45af2182ebbb396b85c5db1bf6898
     name: nexus
@@ -767,7 +816,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 3.13.0
-    created: "2021-02-26T10:47:40.048720356Z"
+    created: "2022-05-06T16:17:57.198163983+01:00"
     description: The Nexus Repository Manager server
     digest: 0fd9af72f48cb359196fc3706111e4a3923dc1d44e6a20edbb2355f9787c53d0
     name: nexus
@@ -776,7 +825,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 3.13.0
-    created: "2021-02-26T10:47:40.048138859Z"
+    created: "2022-05-06T16:17:57.197814307+01:00"
     description: The Nexus Repository Manager server
     digest: edfb8b91688554056edbe1bf08f14b541164d5175f78a09f3eced9c820133a6d
     name: nexus
@@ -785,7 +834,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: 3.13.0-01
-    created: "2021-02-26T10:47:40.047574642Z"
+    created: "2022-05-06T16:17:57.197514312+01:00"
     description: The Nexus Repository Manager server
     digest: a9e2fee4d2b864d1b191357af59bf58a8dfcc0cd14f5a58472ae0ff2db462e56
     name: nexus
@@ -794,7 +843,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.12.1
-    created: "2021-02-26T10:47:40.047063534Z"
+    created: "2022-05-06T16:17:57.197182216+01:00"
     description: The Nexus Repository Manager server
     digest: dbe2e27c1182d7f3d43cec577623a5db23261ac7626602335d2cbd1e97eed7dd
     name: nexus
@@ -803,7 +852,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.10.0
-    created: "2021-02-26T10:47:40.046484321Z"
+    created: "2022-05-06T16:17:57.196823762+01:00"
     description: The Nexus Repository Manager server
     digest: 2de8f7fdb46b0c4e56676076cacf526c43a2260bde0767eb19d29423b5ab21fd
     name: nexus
@@ -812,7 +861,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.9.0
-    created: "2021-02-26T10:47:40.045902453Z"
+    created: "2022-05-06T16:17:57.196441547+01:00"
     description: The Nexus Repository Manager server
     digest: bf7a5a1ed5840dcb4d7eba1cfc402347124b783cb582de23b8ac968ec19bd66f
     name: nexus
@@ -821,7 +870,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.9.0
-    created: "2021-02-26T10:47:40.045290769Z"
+    created: "2022-05-06T16:17:57.196042932+01:00"
     description: The Nexus Repository Manager server
     digest: fe383d78dca333427eff72d6981089393f90435d2cddf6f36b090b261e22aa22
     name: nexus
@@ -831,7 +880,7 @@ entries:
   nfs-client-provisioner:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.050025763Z"
+    created: "2022-05-06T16:17:57.199415365+01:00"
     description: A Helm chart for Kubernetes
     digest: 3502531d5c7439d115dbded32239ae97d013985f58ae093736bc77c8b17e048a
     name: nfs-client-provisioner
@@ -840,7 +889,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.04960668Z"
+    created: "2022-05-06T16:17:57.199123619+01:00"
     description: A Helm chart for Kubernetes
     digest: 5560b0933e98af761c0130c18e8a1615616bc60da67e86282aec337f2fc84e02
     name: nfs-client-provisioner
@@ -850,8 +899,9 @@ entries:
   nginx-ingress:
   - apiVersion: v1
     appVersion: 0.17.1
-    created: "2021-02-26T10:47:40.058058898Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.205335752+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: bc32406313e0a7a5dc6ca8e82619abaa7459e2747a9eb566de23a63ece670114
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
@@ -873,8 +923,9 @@ entries:
     version: 0.25.0
   - apiVersion: v1
     appVersion: 0.15.0
-    created: "2021-02-26T10:47:40.056737352Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.204595782+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: 649bf8aff9f754bbdf448cbf8ef69c8108ddca7d9cd52f2d4ef5de0ee98e6bc4
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
@@ -896,8 +947,9 @@ entries:
     version: 0.23.0
   - apiVersion: v1
     appVersion: 0.15.0
-    created: "2021-02-26T10:47:40.055425857Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.203288221+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: 830493d9f39c229628df47e13c1fd4d79ad01ff4bbf15f115f53ad062dd885fc
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
@@ -919,8 +971,9 @@ entries:
     version: 0.22.1
   - apiVersion: v1
     appVersion: 0.13.0
-    created: "2021-02-26T10:47:40.054095917Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.202270385+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: 06c049f6731c0668f920b9546955aa5849b08f282ad0076d91f3cf69d02328df
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
@@ -942,8 +995,9 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.12.0
-    created: "2021-02-26T10:47:40.052281656Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.20120158+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: 28fd5624e19a4dd8d499cef10593a8bdb4849ab3e63d8f79a6600cc033e4ce03
     home: https://github.com/kubernetes/ingress-nginx
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
@@ -965,8 +1019,9 @@ entries:
     version: 0.12.2
   - apiVersion: v1
     appVersion: 0.11.0
-    created: "2021-02-26T10:47:40.051130649Z"
-    description: An nginx Ingress controller that uses ConfigMap to store the nginx configuration.
+    created: "2022-05-06T16:17:57.200380881+01:00"
+    description: An nginx Ingress controller that uses ConfigMap to store the nginx
+      configuration.
     digest: 97eb2e092be05a5c322e7891f073911293ae130cd19bd49157f01de2c4f9b6b9
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
     keywords:
@@ -988,8 +1043,9 @@ entries:
   prometheus-operator:
   - apiVersion: v1
     appVersion: 0.20.0
-    created: "2021-02-26T10:47:40.061638097Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.20686963+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: c0f44f01a108a16e5407bf36869eca610736cb928ed34c5f838aef004555b57d
     home: https://github.com/coreos/prometheus-operator
     keywords:
@@ -1006,8 +1062,9 @@ entries:
     version: 0.0.29
   - apiVersion: v1
     appVersion: 0.20.0
-    created: "2021-02-26T10:47:40.061050199Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.206606304+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: 35a9d34c909f95fc1d909d959685fda9497436f9f655f1716e1015ccbb8e8a77
     home: https://github.com/coreos/prometheus-operator
     keywords:
@@ -1024,8 +1081,9 @@ entries:
     version: 0.0.28
   - apiVersion: v1
     appVersion: 0.20.0
-    created: "2021-02-26T10:47:40.060407285Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.206345968+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: e7243df69ed22c47360994b91fccb000c4bc0d86d56772960ba074e9e7b75198
     home: https://github.com/coreos/prometheus-operator
     keywords:
@@ -1042,8 +1100,9 @@ entries:
     version: 0.0.27
   - apiVersion: v1
     appVersion: 0.19.0
-    created: "2021-02-26T10:47:40.059749364Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.206081261+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: d88306ea4d12ef3e8096a273c394156040cf7f0071a7d2a576ca1535f72c1b5a
     home: https://github.com/coreos/prometheus-operator
     keywords:
@@ -1059,8 +1118,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.24.tgz
     version: 0.0.24
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.059177173Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.205814635+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: acbb7ab23fcf3cc14a727ccda4af57a504f80b411388872becc2d88b439dd1c3
     maintainers:
     - email: mgoodness@gmail.com
@@ -1074,8 +1134,9 @@ entries:
     - https://cgi-eoss.github.io/cgici-charts/prometheus-operator-0.0.17.tgz
     version: 0.0.17
   - apiVersion: v1
-    created: "2021-02-26T10:47:40.058646003Z"
-    description: Provides easy monitoring definitions for Kubernetes services, and deployment and management of Prometheus instances.
+    created: "2022-05-06T16:17:57.205579718+01:00"
+    description: Provides easy monitoring definitions for Kubernetes services, and
+      deployment and management of Prometheus instances.
     digest: 404ee72040d31812c40fe6302aeac1e9e9e3158c8c98ea9489b2cc0108e2603d
     maintainers:
     - email: mgoodness@gmail.com
@@ -1091,7 +1152,7 @@ entries:
   puppetserver:
   - apiVersion: v1
     appVersion: 6.3.0
-    created: "2021-02-26T10:47:40.066800427Z"
+    created: "2022-05-06T16:17:57.209196408+01:00"
     dependencies:
     - condition: puppetdb.enabled
       name: postgresql
@@ -1105,7 +1166,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 6.3.0
-    created: "2021-02-26T10:47:40.063735713Z"
+    created: "2022-05-06T16:17:57.208090493+01:00"
     dependencies:
     - condition: puppetdb.enabled
       name: postgresql
@@ -1120,12 +1181,13 @@ entries:
   rocketchat:
   - apiVersion: v1
     appVersion: 0.69.1
-    created: "2021-02-26T10:47:40.073345754Z"
+    created: "2022-05-06T16:17:57.212117157+01:00"
     dependencies:
     - name: mongodb
       repository: https://kubernetes-charts.storage.googleapis.com/
       version: 4.3.x
-    description: Prepare to take off with the ultimate chat platform, experience the next level of team communications
+    description: Prepare to take off with the ultimate chat platform, experience the
+      next level of team communications
     digest: 9f717b43ed76c78897f01e622d0ad95c7e13b65f4d3cf3f35f695fcde8c4cca1
     home: https://rocket.chat/
     icon: https://cdn-www.rocket.chat/images/logo/logo.svg
@@ -1152,12 +1214,13 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: "0.56"
-    created: "2021-02-26T10:47:40.071582313Z"
+    created: "2022-05-06T16:17:57.211367277+01:00"
     dependencies:
     - name: mongodb
       repository: https://kubernetes-charts.storage.googleapis.com/
       version: 0.4.15
-    description: Prepare to take off with the ultimate chat platform, experience the next level of team communications
+    description: Prepare to take off with the ultimate chat platform, experience the
+      next level of team communications
     digest: 38b1214279db1e7f2ef553e91781304f9490e949a953553a6a4b40e53cc32510
     home: https://rocket.chat/
     icon: https://cdn-www.rocket.chat/images/logo/logo.svg
@@ -1183,12 +1246,13 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: "0.56"
-    created: "2021-02-26T10:47:40.069973987Z"
+    created: "2022-05-06T16:17:57.210777685+01:00"
     dependencies:
     - name: mongodb
       repository: https://kubernetes-charts.storage.googleapis.com/
       version: 0.4.15
-    description: Prepare to take off with the ultimate chat platform, experience the next level of team communications
+    description: Prepare to take off with the ultimate chat platform, experience the
+      next level of team communications
     digest: 3106900a754926adae28b36d522d57071923f734d34470dd8651738ad29d48ea
     home: https://rocket.chat/
     icon: https://cdn-www.rocket.chat/images/logo/logo.svg
@@ -1214,12 +1278,13 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: "0.56"
-    created: "2021-02-26T10:47:40.06836133Z"
+    created: "2022-05-06T16:17:57.209816349+01:00"
     dependencies:
     - name: mongodb
       repository: https://kubernetes-charts.storage.googleapis.com/
       version: 0.4.15
-    description: Prepare to take off with the ultimate chat platform, experience the next level of team communications
+    description: Prepare to take off with the ultimate chat platform, experience the
+      next level of team communications
     digest: 46cffc9b56457cff2771036a4f7cc96c7fb2b5acb5c0cf26efd54c82abe12e83
     home: https://rocket.chat/
     icon: https://cdn-www.rocket.chat/images/logo/logo.svg
@@ -1246,7 +1311,7 @@ entries:
   simple-manifests:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.07364202Z"
+    created: "2022-05-06T16:17:57.212210525+01:00"
     description: A Helm chart for Kubernetes
     digest: 69ff47ecc35158c4c12dd28d046dad95d603699ce2cf12f1b792c150b0f9d07f
     name: simple-manifests
@@ -1256,7 +1321,7 @@ entries:
   spotify-docker-gc:
   - apiVersion: v1
     appVersion: latest
-    created: "2021-02-26T10:47:40.074202676Z"
+    created: "2022-05-06T16:17:57.212376083+01:00"
     description: A simple Docker container and image garbage collection script.
     digest: ad48f3ff8ef708e977d1b151ca1964a4a4cdf7d72ef65c0c3492ea707faea7a7
     home: https://github.com/spotify/docker-gc
@@ -1272,7 +1337,7 @@ entries:
   taiga:
   - apiVersion: v2
     appVersion: 6.0.5
-    created: "2021-02-26T10:47:40.206041745Z"
+    created: "2022-05-06T16:17:57.262771346+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1299,7 +1364,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 6.0.5
-    created: "2021-02-26T10:47:40.18799598Z"
+    created: "2022-05-06T16:17:57.257706947+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1326,7 +1391,7 @@ entries:
     version: 2.0.3
   - apiVersion: v2
     appVersion: 6.0.3
-    created: "2021-02-26T10:47:40.171210286Z"
+    created: "2022-05-06T16:17:57.253517586+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1353,7 +1418,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 6.0.3
-    created: "2021-02-26T10:47:40.153787776Z"
+    created: "2022-05-06T16:17:57.247235644+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1380,7 +1445,7 @@ entries:
     version: 2.0.1
   - apiVersion: v2
     appVersion: 6.0.3
-    created: "2021-02-26T10:47:40.14454328Z"
+    created: "2022-05-06T16:17:57.241757741+01:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1407,7 +1472,7 @@ entries:
     version: 2.0.0
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.135365848Z"
+    created: "2022-05-06T16:17:57.236463705+01:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -1428,7 +1493,7 @@ entries:
     version: 1.0.5
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.122982807Z"
+    created: "2022-05-06T16:17:57.231321877+01:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -1449,7 +1514,7 @@ entries:
     version: 1.0.4
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.110433351Z"
+    created: "2022-05-06T16:17:57.226179559+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1470,7 +1535,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.104370735Z"
+    created: "2022-05-06T16:17:57.224066089+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1491,7 +1556,7 @@ entries:
     version: 1.0.2
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.098501437Z"
+    created: "2022-05-06T16:17:57.221395936+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1512,7 +1577,7 @@ entries:
     version: 1.0.1
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.091467119Z"
+    created: "2022-05-06T16:17:57.219290026+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1533,7 +1598,7 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: 4.1.1
-    created: "2021-02-26T10:47:40.085884206Z"
+    created: "2022-05-06T16:17:57.217208505+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1554,7 +1619,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-02-26T10:47:40.080212329Z"
+    created: "2022-05-06T16:17:57.214555673+01:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -1573,4 +1638,4 @@ entries:
     urls:
     - https://cgi-eoss.github.io/cgici-charts/taiga-0.1.0.tgz
     version: 0.1.0
-generated: "2021-02-26T10:47:39.958340877Z"
+generated: "2022-05-06T16:17:57.151882112+01:00"

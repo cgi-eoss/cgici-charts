@@ -20,9 +20,15 @@ data:
     {{- if .idpCaURI }}
     idp_ca_uri: {{ .idpCaURI }}
     {{- end }}
+    {{- if .idpCaPem }}
+    idp_ca_pem: {{ toYaml .idpCaPem | indent 4 }}
+    {{- end }}
     {{- if and .tlsCert .tlsKey }} 
     tls_cert: "{{ .tlsCert }}"
     tls_key: "{{ .tlsKey }}"
+    {{- end }}
+    {{- if .trusted_root_ca }}
+    trusted_root_ca: {{ toYaml .trusted_root_ca | indent 4 }}
     {{- end }}
     clusters:
 {{ toYaml .clusters | indent 4 }}
