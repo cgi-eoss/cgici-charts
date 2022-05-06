@@ -21,8 +21,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
+              service:
+                name: {{ $serviceName }}
+                port:
+                  number: {{ $servicePort }}
+            path: /
+            pathType: Prefix
     {{- end -}}
     {{- range .Values.ingress.additionalRules }}
     - host: {{ .host }}
@@ -32,7 +36,8 @@ spec:
           - backend:
               service:
                 name: {{ .serviceName | default $serviceName }}
-                port: {{ .servicePort }}
+                port:
+                  number: {{ .servicePort }}
           {{- if .path }}
             path: {{ .path }}
             pathType: {{ .pathType | default "ImplementationSpecific" }}
