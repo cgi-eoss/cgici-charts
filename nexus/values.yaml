@@ -5,7 +5,7 @@ replicaCount: 1
 
 image:
   repository: cgici/nexus3-cgici
-  tag: 3.13.0
+  tag: 3.39.0
   pullPolicy: IfNotPresent
 
 securityContext:
